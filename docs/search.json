@@ -7,34 +7,6 @@
     "text": "Hello! My name is Kimberly Perez and I am a first year PhD student in Environmental Health Science under the advisement of Dr. Erin Lipp. My current research focuses on Salmonella in wildlife. While most folks associate Salmonella with raw poultry or even peanut butter, a rising subset of cases is actually linked to environmental factors. From my one semester as a PhD student (and my research so far) I offer everyone two pieces of advise don’t kiss your chickens and wash your hands after handling bird feeders…"
   },
   {
-    "objectID": "coding_exercise.html",
-    "href": "coding_exercise.html",
-    "title": "R Coding Exercise",
-    "section": "",
-    "text": "Placeholder file for the future R coding exercise."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "My website and data analysis portfolio",
-    "section": "",
-    "text": "Hello\n\nAnd hello again\nWelcome to my website and data analysis portfolio.\n\nPlease use the Menu Bar above to look around.\nHave fun!"
-  },
-  {
-    "objectID": "tidytuesday_exercise.html",
-    "href": "tidytuesday_exercise.html",
-    "title": "Tidy Tuesday Exercise",
-    "section": "",
-    "text": "Placeholder file for the future Tidy Tuesday exercise."
-  },
-  {
-    "objectID": "visualization_exercise.html",
-    "href": "visualization_exercise.html",
-    "title": "Visualization Exercise",
-    "section": "",
-    "text": "Placeholder file for the future visualization exercise."
-  },
-  {
     "objectID": "aboutme.html#course-goals",
     "href": "aboutme.html#course-goals",
     "title": "About Me",
@@ -54,5 +26,33 @@
     "title": "About Me",
     "section": "Not So Standard Deviations Podcast",
     "text": "Not So Standard Deviations Podcast\nI am a big podcast fan and try to find new ones to listen to while I do my lab work. Not So Standard Deviations is my latest find. The hosts Roger and Hilary discuss all things data science and analysis. Besides this, I cannot provide much more insight as I am only a couple episodes in. However, I am pretty intrigued so far and think this will be my go to podcast this semester. Enjoy!"
+  },
+  {
+    "objectID": "coding_exercise.html",
+    "href": "coding_exercise.html",
+    "title": "R Coding Exercise",
+    "section": "",
+    "text": "Placeholder file for the future R coding exercise."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Kimberly Perez’s Website and Data Analysis Portfolio",
+    "section": "",
+    "text": "Here is where you can get to know me and my ongoing research; as well as track my MADA 2023 journey.\n\nPlease use the Menu Bar above to navigate throughout my site.\nHave fun!"
+  },
+  {
+    "objectID": "tidytuesday_exercise.html",
+    "href": "tidytuesday_exercise.html",
+    "title": "Tidy Tuesday Exercise",
+    "section": "",
+    "text": "Placeholder file for the future Tidy Tuesday exercise."
+  },
+  {
+    "objectID": "visualization_exercise.html",
+    "href": "visualization_exercise.html",
+    "title": "Visualization Exercise",
+    "section": "",
+    "text": "Placeholder file for the future visualization exercise."
   }
 ]
