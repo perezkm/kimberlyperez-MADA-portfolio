@@ -1,0 +1,8 @@
+---
+title: "About me"
+output: 
+  html_document:
+      toc: FALSE
+---
+
+Add some text and a figure describing myself.

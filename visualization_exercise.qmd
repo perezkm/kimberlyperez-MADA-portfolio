@@ -1,0 +1,8 @@
+---
+title: "Visualization Exercise"
+output:
+  html_document:
+    toc: FALSE
+---
+
+Placeholder file for the future visualization exercise.

@@ -1,0 +1,8 @@
+---
+title: "R Coding Exercise"
+output:
+  html_document:
+    toc: FALSE
+---
+
+Placeholder file for the future R coding exercise.

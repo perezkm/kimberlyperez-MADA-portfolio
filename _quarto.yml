@@ -1,0 +1,30 @@
+project: 
+  type: website
+  output-dir: docs
+
+website:
+  title: "My Data Analysis Portfolio"
+  navbar:
+    left:
+      - text: "About Me"
+        href: ./aboutme.html
+      - text: "Projects"
+        menu:
+          - text: "R Coding Exercise"
+            href: ./coding_exercise.html
+          - text: "Visualization Exercise"
+            href: ./visualization_exercise.html
+          - text: "Tidy Tuesday Exercise"
+            href: ./tidytuesday_exercise.html
+    right:
+      - icon: github 
+        href: URL-TO-THIS-REPOSITORY-HERE        
+
+format:
+  html:
+    theme: cosmo
+    highlight: zenburn
+    css: styles.css
+    toc: FALSE
+
+
