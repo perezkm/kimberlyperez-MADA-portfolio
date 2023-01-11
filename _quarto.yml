@@ -18,11 +18,11 @@ website:
             href: ./tidytuesday_exercise.html
     right:
       - icon: github 
-        href: URL-TO-THIS-REPOSITORY-HERE        
+        href: https://github.com/perezkm/kimberlyperez-MADA-portfolio        
 
 format:
   html:
-    theme: cosmo
+    theme: journal
     highlight: zenburn
     css: styles.css
     toc: FALSE

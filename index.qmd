@@ -1,16 +1,13 @@
 ---
-title: "My website and data analysis portfolio"
+title: "Kimberly Perez's Website and Data Analysis Portfolio"
 output: 
   html_document:
     toc: FALSE
 ---
 
-# Hello
+## Welcome to my data analysis portfolio.
 
-### And hello again
+Here is where you can get to know me and my ongoing research; as well as track my MADA 2023 journey.
 
-Welcome to **my website** and _data analysis portfolio._ 
-
-
-* Please use the `Menu Bar` above to look around.
-* Have fun!
+-   Please use the `Menu Bar` above to navigate throughout my site.
+-   Have fun!

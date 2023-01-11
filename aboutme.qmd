@@ -1,8 +1,26 @@
 ---
-title: "About me"
+title: "About Me"
 output: 
   html_document:
       toc: FALSE
 ---
 
-Add some text and a figure describing myself.
+## Get to Know Me
+
+![](KP.png)
+
+Hello! My name is Kimberly Perez and I am a first year PhD student in Environmental Health Science under the advisement of Dr. Erin Lipp. My current research focuses on *Salmonella* in wildlife. While most folks associate *Salmonella* with raw poultry or even peanut butter, a rising subset of cases is actually linked to environmental factors. From my one semester as a PhD student (and my research so far) I offer everyone two pieces of advise **don't kiss your chickens and wash your hands after handling bird feeders...**
+
+## Course Goals
+
+My first introduction to programming was during the first semester of my MPH. My class learned how to run a few lines of code using STATA. I also learned some basic functions on SAS. However, the bulk of my experience comes from Dr. Bahl's EPID 7500 class. That was my first true introduction to R. While that semester was a whirlwind of Googling, I was happy with the content I created.
+
+From this course I hope to gain a **greater understanding of the R language and the packages** that will help me analyze my data, **appropriate statistical models to run** based on specific data, and how to better **interpret** results.
+
+## Fun Fact
+
+I am a licensed USSF soccer coach and would one day like to pursue my "Pro" license.
+
+## *Not So Standard Deviations* Podcast
+
+I am a big podcast fan and try to find new ones to listen to while I do my lab work. [***Not So Standard Deviations***](https://nssdeviations.com/) is my latest find. The hosts Roger and Hilary discuss all things data science and analysis. Besides this, I cannot provide much more insight as I am only a couple episodes in. However, I am pretty intrigued so far and think this will be my go to podcast this semester. Enjoy!

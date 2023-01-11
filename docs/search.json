@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "aboutme.html",
+    "href": "aboutme.html",
+    "title": "About Me",
+    "section": "",
+    "text": "Hello! My name is Kimberly Perez and I am a first year PhD student in Environmental Health Science under the advisement of Dr. Erin Lipp. My current research focuses on Salmonella in wildlife. While most folks associate Salmonella with raw poultry or even peanut butter, a rising subset of cases is actually linked to environmental factors. From my one semester as a PhD student (and my research so far) I offer everyone two pieces of advise don’t kiss your chickens and wash your hands after handling bird feeders…"
+  },
+  {
+    "objectID": "coding_exercise.html",
+    "href": "coding_exercise.html",
+    "title": "R Coding Exercise",
+    "section": "",
+    "text": "Placeholder file for the future R coding exercise."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "My website and data analysis portfolio",
+    "section": "",
+    "text": "Hello\n\nAnd hello again\nWelcome to my website and data analysis portfolio.\n\nPlease use the Menu Bar above to look around.\nHave fun!"
+  },
+  {
+    "objectID": "tidytuesday_exercise.html",
+    "href": "tidytuesday_exercise.html",
+    "title": "Tidy Tuesday Exercise",
+    "section": "",
+    "text": "Placeholder file for the future Tidy Tuesday exercise."
+  },
+  {
+    "objectID": "visualization_exercise.html",
+    "href": "visualization_exercise.html",
+    "title": "Visualization Exercise",
+    "section": "",
+    "text": "Placeholder file for the future visualization exercise."
+  },
+  {
+    "objectID": "aboutme.html#course-goals",
+    "href": "aboutme.html#course-goals",
+    "title": "About Me",
+    "section": "Course Goals",
+    "text": "Course Goals\nMy first introduction to programming was during the first semester of my MPH. My class learned how to run a few lines of code using STATA. I also learned some basic functions on SAS. However, the bulk of my experience comes from Dr. Bahl’s EPID 7500 class. That was my first true introduction to R. While that semester was a whirlwind of Googling, I was happy with the content I created.\nFrom this course I hope to gain a greater understanding of the R language and the packages that will help me analyze my data, appropriate statistical models to run based on specific data, and how to better interpret results."
+  },
+  {
+    "objectID": "aboutme.html#fun-fact",
+    "href": "aboutme.html#fun-fact",
+    "title": "About Me",
+    "section": "Fun Fact",
+    "text": "Fun Fact\nI am a licensed USSF soccer coach and would one day like to pursue my “Pro” license."
+  },
+  {
+    "objectID": "aboutme.html#not-so-standard-deviations-podcast",
+    "href": "aboutme.html#not-so-standard-deviations-podcast",
+    "title": "About Me",
+    "section": "Not So Standard Deviations Podcast",
+    "text": "Not So Standard Deviations Podcast\nI am a big podcast fan and try to find new ones to listen to while I do my lab work. Not So Standard Deviations is my latest find. The hosts Roger and Hilary discuss all things data science and analysis. Besides this, I cannot provide much more insight as I am only a couple episodes in. However, I am pretty intrigued so far and think this will be my go to podcast this semester. Enjoy!"
+  }
+]
