@@ -1,8 +1,118 @@
 ---
-title: "R Coding Exercise"
+title: "**R Coding Exercise**"
 output:
   html_document:
     toc: FALSE
 ---
 
-Placeholder file for the future R coding exercise.
+#### This is the beginning of the loading and checking data exercise where I will install, load, and explore the dslabs package!
+
+#### **NOTE: Use `library()` to list all of the packages installed on my system**
+
+# **Installing packages**
+install.packages("dslabs")
+
+install.packages("dplyr")
+
+
+# **Loading packages**
+
+```{r}
+library ("dplyr") 
+
+library("dslabs")
+```
+
+# ***What Does the gapminder Dataset Contain?***
+
+#### Look at help file to see what the dataset gapminder contains `help(gapminder)`. Gapminder includes health and income outcomes for 184 countries from 1960 to 2016.
+
+```{r}
+help(gapminder)
+```
+
+# **Overview of data structure**
+
+```{r}
+str(gapminder)
+```
+
+# **Summary of data**
+
+```{r}
+summary(gapminder)
+```
+
+# **Determining the type of object gapminder is via `class()`**
+
+```{r}
+class(gapminder)
+```
+
+# **Assigning**
+
+#### I want to create an object (or dataframe) called africadata using an existing dataframe, `gapminder`, then subset gapminder dataframe using the continent column calling Africa (character string to find)
+
+```{r}
+africadata<- gapminder %>% subset(continent=="Africa")
+
+str(africadata)
+
+summary (africadata)
+```
+
+# **Creating new objects**
+
+#### I want to create an object (df) called imle using an existing df, `africadata`, then select 2 columns LE and IM
+
+```{r}
+imle<-africadata %>% select(c("life_expectancy", "infant_mortality"))
+
+ple<- africadata %>% select(c("life_expectancy", "population"))
+
+str(imle) 
+summary(imle)
+
+str(ple) 
+summary(ple)
+```
+
+# **Plotting**
+
+```{r}
+plot_1<- plot(life_expectancy~infant_mortality, data=imle, main="Exercise: Plot 1", ylab= "Life Expectancy", xlab="Infant Mortality")
+
+plot_2<- plot(life_expectancy~population, data=ple, main="Exercise: Plot 2", ylab= "Life Expectancy", xlab="Population", log='x')
+```
+
+# **Question on data**
+
+#### Based on the `africadata` we generated the "clusters" or "streaks" of data seem to be a population in the the same region of Africa over time. Public health strategies that were implemented (e.g., vaccines, clean water, etc.) may have contributed to the increase in life expectancy and a growing population.
+
+# **More Data Processing**
+
+```{r}
+imna<-africadata[is.na(africadata$infant_mortality),]
+unique(imna$year)
+y2k<- africadata[which(africadata$year=="2000"),]
+str(y2k)
+summary(y2k)
+```
+# **More Plotting**
+```{r}
+plot_1<- plot(life_expectancy~infant_mortality, data=y2k, main="Africa's LE and IM for the Year 2000", ylab= "Life Expectancy", xlab="Infant Mortality")
+
+plot_y2k2<- plot(life_expectancy~population, data=y2k, main="Africa's LE and Population for the Year 2000", ylab= "Life Expectancy", xlab="Population", log='x')
+```
+# **A Simple Fit**
+```{r}
+
+fit1<-lm(life_expectancy~infant_mortality, data=y2k)
+summary(fit1)
+
+fit2<-lm(life_expectancy~population, data=y2k)
+summary(fit2)
+```
+# ***What do the p-values tell us?***
+#### Based on the p-values for the given fits, IM as a predictor of LE is said to be statistically significant whereas population as a predictor of LE is said to not statistically significant. But p-values?...   
+
