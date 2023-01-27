@@ -21,6 +21,7 @@ install.packages("dplyr")
 library ("dplyr") 
 
 library("dslabs")
+library(ggplot2) 
 ```
 
 # ***What Does the gapminder Dataset Contain?***
@@ -116,3 +117,21 @@ summary(fit2)
 # ***What do the p-values tell us?***
 #### Based on the p-values for the given fits, IM as a predictor of LE is said to be statistically significant whereas population as a predictor of LE is said to not statistically significant. But p-values?...   
 
+# **Section by Leah Lariscy** 
+#### I want to see how LE differs between regions in Africa in 2000. I am going to create a boxplot using `y2k` with `region` on the x-axis and `life_expectancy` on the y-axis
+```{r}
+ggplot(data = y2k) + geom_boxplot(aes(region, life_expectancy))
+```
+#### From the plot above, I can tell the life expectancy is significantly higher in Northern Africa than in the rest of the continent. Now I am going to plot `region` vs `gdp` to see if there is a similar trend happening
+```{r}
+ggplot(data = y2k) + geom_boxplot(aes(region, gdp))
+```
+#### Looking at both of these plots, I am hypothesizing that gdp and life expectancy have a positive correlation aka that gdp is a good predictor for life expectancy. I am now going to plot log10(gdp) vs LE and use `lm`.
+```{r}
+ggplot(data = y2k, aes(log10(gdp), life_expectancy)) + geom_point() + geom_smooth(method = "lm")
+```
+```{r}
+y2k_lm <- lm(formula = log10(gdp)~life_expectancy, data = y2k)
+summary(y2k_lm)
+```
+#### There is some correlation between gdp and LE across Africa in 2000, but not a strong enough correlation for me to think it is significant. 
