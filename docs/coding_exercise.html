@@ -232,7 +232,8 @@ Attaching package: 'dplyr'</code></pre>
 
     intersect, setdiff, setequal, union</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dslabs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dslabs"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="what-does-the-gapminder-dataset-contain" class="level1">
@@ -539,6 +540,66 @@ F-statistic: 0.2549 on 1 and 49 DF,  p-value: 0.6159</code></pre>
 <h1><strong><em>What do the p-values tell us?</em></strong></h1>
 <section id="based-on-the-p-values-for-the-given-fits-im-as-a-predictor-of-le-is-said-to-be-statistically-significant-whereas-population-as-a-predictor-of-le-is-said-to-not-statistically-significant.-but-p-values" class="level4">
 <h4 class="anchored" data-anchor-id="based-on-the-p-values-for-the-given-fits-im-as-a-predictor-of-le-is-said-to-be-statistically-significant-whereas-population-as-a-predictor-of-le-is-said-to-not-statistically-significant.-but-p-values">Based on the p-values for the given fits, IM as a predictor of LE is said to be statistically significant whereas population as a predictor of LE is said to not statistically significant. But p-values?…</h4>
+</section>
+</section>
+<section id="section-by-leah-lariscy" class="level1">
+<h1><strong>Section by Leah Lariscy</strong></h1>
+<section id="i-want-to-see-how-le-differs-between-regions-in-africa-in-2000.-i-am-going-to-create-a-boxplot-using-y2k-with-region-on-the-x-axis-and-life_expectancy-on-the-y-axis" class="level4">
+<h4 class="anchored" data-anchor-id="i-want-to-see-how-le-differs-between-regions-in-africa-in-2000.-i-am-going-to-create-a-boxplot-using-y2k-with-region-on-the-x-axis-and-life_expectancy-on-the-y-axis">I want to see how LE differs between regions in Africa in 2000. I am going to create a boxplot using <code>y2k</code> with <code>region</code> on the x-axis and <code>life_expectancy</code> on the y-axis</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> y2k) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(region, life_expectancy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="coding_exercise_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="from-the-plot-above-i-can-tell-the-life-expectancy-is-significantly-higher-in-northern-africa-than-in-the-rest-of-the-continent.-now-i-am-going-to-plot-region-vs-gdp-to-see-if-there-is-a-similar-trend-happening" class="level4">
+<h4 class="anchored" data-anchor-id="from-the-plot-above-i-can-tell-the-life-expectancy-is-significantly-higher-in-northern-africa-than-in-the-rest-of-the-continent.-now-i-am-going-to-plot-region-vs-gdp-to-see-if-there-is-a-similar-trend-happening">From the plot above, I can tell the life expectancy is significantly higher in Northern Africa than in the rest of the continent. Now I am going to plot <code>region</code> vs <code>gdp</code> to see if there is a similar trend happening</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> y2k) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(region, gdp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="coding_exercise_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="looking-at-both-of-these-plots-i-am-hypothesizing-that-gdp-and-life-expectancy-have-a-positive-correlation-aka-that-gdp-is-a-good-predictor-for-life-expectancy.-i-am-now-going-to-plot-log10gdp-vs-le-and-use-lm." class="level4">
+<h4 class="anchored" data-anchor-id="looking-at-both-of-these-plots-i-am-hypothesizing-that-gdp-and-life-expectancy-have-a-positive-correlation-aka-that-gdp-is-a-good-predictor-for-life-expectancy.-i-am-now-going-to-plot-log10gdp-vs-le-and-use-lm.">Looking at both of these plots, I am hypothesizing that gdp and life expectancy have a positive correlation aka that gdp is a good predictor for life expectancy. I am now going to plot log10(gdp) vs LE and use <code>lm</code>.</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> y2k, <span class="fu">aes</span>(<span class="fu">log10</span>(gdp), life_expectancy)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="coding_exercise_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>y2k_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> <span class="fu">log10</span>(gdp)<span class="sc">~</span>life_expectancy, <span class="at">data =</span> y2k)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(y2k_lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log10(gdp) ~ life_expectancy, data = y2k)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.38394 -0.31214  0.00911  0.46180  1.58235 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      8.07684    0.59019  13.685   &lt;2e-16 ***
+life_expectancy  0.02596    0.01036   2.507   0.0156 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.6196 on 49 degrees of freedom
+Multiple R-squared:  0.1137,    Adjusted R-squared:  0.09556 
+F-statistic: 6.283 on 1 and 49 DF,  p-value: 0.01556</code></pre>
+</div>
+</div>
+</section>
+<section id="there-is-some-correlation-between-gdp-and-le-across-africa-in-2000-but-not-a-strong-enough-correlation-for-me-to-think-it-is-significant." class="level4">
+<h4 class="anchored" data-anchor-id="there-is-some-correlation-between-gdp-and-le-across-africa-in-2000-but-not-a-strong-enough-correlation-for-me-to-think-it-is-significant.">There is some correlation between gdp and LE across Africa in 2000, but not a strong enough correlation for me to think it is significant.</h4>
 
 
 </section>
