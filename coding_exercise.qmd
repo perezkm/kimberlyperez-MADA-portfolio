@@ -10,10 +10,10 @@ output:
 #### **NOTE: Use `library()` to list all of the packages installed on my system**
 
 # **Installing packages**
+
 install.packages("dslabs")
 
 install.packages("dplyr")
-
 
 # **Loading packages**
 
@@ -99,13 +99,17 @@ y2k<- africadata[which(africadata$year=="2000"),]
 str(y2k)
 summary(y2k)
 ```
+
 # **More Plotting**
+
 ```{r}
 plot_1<- plot(life_expectancy~infant_mortality, data=y2k, main="Africa's LE and IM for the Year 2000", ylab= "Life Expectancy", xlab="Infant Mortality")
 
 plot_y2k2<- plot(life_expectancy~population, data=y2k, main="Africa's LE and Population for the Year 2000", ylab= "Life Expectancy", xlab="Population", log='x')
 ```
+
 # **A Simple Fit**
+
 ```{r}
 
 fit1<-lm(life_expectancy~infant_mortality, data=y2k)
@@ -114,24 +118,93 @@ summary(fit1)
 fit2<-lm(life_expectancy~population, data=y2k)
 summary(fit2)
 ```
-# ***What do the p-values tell us?***
-#### Based on the p-values for the given fits, IM as a predictor of LE is said to be statistically significant whereas population as a predictor of LE is said to not statistically significant. But p-values?...   
 
-# **Section by Leah Lariscy** 
+# ***What do the p-values tell us?***
+
+#### Based on the p-values for the given fits, IM as a predictor of LE is said to be statistically significant whereas population as a predictor of LE is said to not statistically significant. But p-values?...
+
+# **Section by Leah Lariscy**
+
 #### I want to see how LE differs between regions in Africa in 2000. I am going to create a boxplot using `y2k` with `region` on the x-axis and `life_expectancy` on the y-axis
+
 ```{r}
 ggplot(data = y2k) + geom_boxplot(aes(region, life_expectancy))
 ```
+
 #### From the plot above, I can tell the life expectancy is significantly higher in Northern Africa than in the rest of the continent. Now I am going to plot `region` vs `gdp` to see if there is a similar trend happening
+
 ```{r}
 ggplot(data = y2k) + geom_boxplot(aes(region, gdp))
 ```
+
 #### Looking at both of these plots, I am hypothesizing that gdp and life expectancy have a positive correlation aka that gdp is a good predictor for life expectancy. I am now going to plot log10(gdp) vs LE and use `lm`.
+
 ```{r}
 ggplot(data = y2k, aes(log10(gdp), life_expectancy)) + geom_point() + geom_smooth(method = "lm")
 ```
+
 ```{r}
 y2k_lm <- lm(formula = log10(gdp)~life_expectancy, data = y2k)
 summary(y2k_lm)
 ```
-#### There is some correlation between gdp and LE across Africa in 2000, but not a strong enough correlation for me to think it is significant. 
+
+#### There is some correlation between gdp and LE across Africa in 2000, but not a strong enough correlation for me to think it is significant.
+
+# -------------------------------------------- 
+# This section added by RAQUEL FRANCISCO
+
+#### Install need packages needed and open library
+
+```{r}
+#install.packages('broom')
+#install.packages("tidymodels")
+library(broom)
+library(tidymodels)
+```
+
+#### Use broom package to look at stats differently
+
+### Life Exp Vs Infant Mortality
+```{r}
+augment(fit1)
+
+glance(fit1)
+
+tidy(fit1)
+```
+
+#### Plot by region
+```{r}
+ggplot(y2k, aes(life_expectancy,       infant_mortality, color=region)) + geom_point() + stat_smooth(method = "lm", col = "green")
+```
+
+### Life Exp Vs Population
+```{r}
+augment(fit2)
+
+glance(fit2)
+
+tidy(fit2)
+```
+
+#### Plot by region
+```{r}
+ggplot(y2k, aes(life_expectancy,log10(population), color=region)) + geom_point() + stat_smooth(method = "lm", col = "blue")
+```
+
+#### If you look at this raw data it appears that the North African data may be skewing the results. Now lets remove the North African data and see if we get as strong of a correlation...
+
+```{r}
+y2kNONA <- y2k %>%
+  filter(region == 'Eastern Africa' | region == 'Middle Africa' | region == 'Southern Africa' | region == 'Western Africa')
+```
+
+#### Data Plots
+
+```{r}
+ggplot(y2kNONA, aes(life_expectancy, infant_mortality, color=region)) + geom_point() + stat_smooth(method = "lm", col = "green")
+
+ggplot(y2kNONA, aes(life_expectancy,log10(population), color=region)) + geom_point() + stat_smooth(method = "lm", col = "blue")
+```
+
+#### Now with Northern Africa removed from the model there does appear a negative relationship between life expectancy and population size, similar to what is seen before and after the removal of Northern Africa from the data when evaluating life expectancy and infant mortality.
