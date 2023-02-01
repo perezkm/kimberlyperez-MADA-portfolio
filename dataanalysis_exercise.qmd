@@ -1,0 +1,47 @@
+# **Botulism Data**
+#### The data set selected for this exercise was retrieved from the [***CDC***](https://data.cdc.gov/) data page and contains historic data on Botulism cases throughout the United States by year, case count, "BotType" (source), and "ToxinType" (strain). The raw data contains 2280 observations of 5 variables. Instead of utilizing an "NA" for missing data, "Unknown" was used. For the purpose of this exercise, I altered the "Unknown" character to reflect "NA" and omitted the NAs (a total of 403 rows were omitted). I also standardized the column name "BotType" and "ToxinType" to "Source" and "Strain", respectively. To parce the data down even further, I selected two states to evalutate; California and Georgia. 
+
+## **Loading packages** 
+```{r}
+library(readr)
+library(tidyverse)
+```
+
+## **Loading data into R**
+```{r}
+botulism <- read_csv("dataanalysis-exercise/rawdata/Botulism.csv")
+```
+
+## **Exploring Botulism data**
+```{r}
+str(botulism)
+summary(botulism)
+class(botulism)
+#Overall, the data loaded into R is fairly tidy
+```
+
+## **Replacing "Unknowns" with NAs**
+```{r}
+botulism [botulism == "Unknown"] <- NA
+str(botulism)
+```
+## **Removing NAs from data set**
+```{r}
+botulism_na<-na.omit(botulism)
+```
+
+## **Renaming columns**
+```{r}
+botulism_na <- botulism_na %>%
+  rename("Source"="BotType",
+         "Strain"="ToxinType")
+```
+
+
+## **Selecting data by state (CA and GA)**
+```{r}
+condensed_bot<- dplyr::filter(botulism_na, State %in% 
+                                c("California", "Georgia"))
+
+summary(condensed_bot)
+```
