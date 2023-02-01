@@ -51,3 +51,11 @@ summary(condensed_bot)
 saveRDS(condensed_bot, file="dataanalysis-exercise/Data/Clean Data/Botulism.RDS")
 ```
 
+## **Saving summary table as RDS**
+```{r}
+sumtab_bot= data.frame(do.call(cbind, lapply(condensed_bot, summary)))
+print(sumtab_bot)
+
+saveRDS(sumtab_bot, file= "dataanalysis-exercise/Data/Summary Table/botsumtable.RDS")
+```
+
