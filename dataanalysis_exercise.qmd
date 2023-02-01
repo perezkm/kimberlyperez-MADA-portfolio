@@ -45,3 +45,9 @@ condensed_bot<- dplyr::filter(botulism_na, State %in%
 
 summary(condensed_bot)
 ```
+
+## **Saving as RDS**
+```{r}
+saveRDS(condensed_bot, file="dataanalysis-exercise/Data/Clean Data/Botulism.RDS")
+```
+
