@@ -59,3 +59,95 @@ print(sumtab_bot)
 saveRDS(sumtab_bot, file= "dataanalysis-exercise/Data/Summary Table/botsumtable.RDS")
 ```
 
+# This section added by Nathan Greenslit
+
+
+## **Load Data**
+```{r}
+data<- readRDS("dataanalysis-exercise/Data/Clean Data/Botulism.RDS") #Loading in condensed_bot data from Kim
+```
+
+## **Wrangle Data**
+```{r}
+data2<- data %>%
+  select(Year, Count,State, Source) #Getting rid of Strains
+
+case_tot<- data2 %>% #This creates a column with the total counts per year instead of separating it by strain. This omits the issue of having multiples of the same year for counts. 
+  group_by(Year, State, Source) %>%
+  summarize_if(is.numeric, sum) %>%
+  ungroup()
+```
+
+## **Create California and Georgia Specific Dataframes**
+```{r}
+ga<- case_tot %>%
+  filter(State %in% "Georgia")
+
+ca<- case_tot %>%
+  filter(State %in% "California")
+
+
+```
+
+## **Botulism Cases By State and Source**
+```{r}
+case_tot %>% ggplot() +geom_line(
+  aes(x = Year,
+      y = Count,
+      color = Source,
+      linetype = State)) +
+  theme_bw() +
+  labs(x = "Year",
+       y = "Case Counts",
+       title = "Botulism Cases (1916-2017)") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+*California appears to have a wider range of data collected (across years and different sources). Let's focus on this State*
+
+## **Let's look at Botulism counts in California by Source**
+```{r}
+ca %>% ggplot() +geom_line(
+  aes(x = Year,
+      y = Count,
+      color = Source)) +
+  theme_bw() +
+  labs(x = "Year",
+       y = "Case Counts",
+       title = "Botulism Cases in California (1916-2017)") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+*It wasn't until the 1970's that other sources of botulism, such as infant cases, were being detected (Rosow,2015) Let's look at 1980-2020*
+
+## **Botulism Cases in California (1980-2017)**
+```{r}
+ca %>% filter(Year %in% (1980:2020)) %>%
+  
+ggplot() +geom_boxplot(
+  aes(x = Source,
+      y = Count,
+      color = Source)) +
+  theme_bw() +
+  labs(y = "Case Counts",
+       title = "Botulism Cases in California (1980-2017)") +
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position = "none")
+```
+*Infant cases seem to be the most common. Looking into this, infants are at a higher risk due to their weakened immune system, lack of gastric acidity, and a diminished bacterial flora(Van Horn, 2022). Let's go back to the strain data and see which strains are most common in infants*
+ 
+## **Infant Botulism Cases in California by Strain (1980-2017)**
+```{r}
+data %>% filter(Year %in% (1980:2020),
+                Source %in% "Infant") %>% #Taking original dataset and filtering for 1980-2017 and for infant sources
+  
+ggplot() +geom_boxplot(
+  aes(x = Strain,
+      y = Count,
+      color = Strain)) +
+  theme_bw() +
+  labs(y = "Case Counts",
+       title = "Infant Botulism Cases in California by Strain (1980-2017)") +
+  theme(plot.title = element_text(hjust = 0.5),
+       legend.position = "none")
+```
+**Strain A seems to be the most prevalent in infants followed by Strain B. This can be confirmed at https://www.infantbotulism.org/readings/ib_chapter_6th_edition.pdf **
+
