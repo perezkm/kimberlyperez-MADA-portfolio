@@ -207,10 +207,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>#The Data</p>
+<section id="the-data" class="level1">
+<h1>The Data</h1>
 <p>The graph I attempted to reproduce below was retrieved from a FiveThirtyEight article <a href="https://fivethirtyeight.com/features/the-national-parks-have-never-been-more-popular/">“The National Parks Have Never Been More Popular”</a>, by Andrew Flowers, that visualizes the rise in popularity of the US’s national parks throughout the years. The graph was created from annual visitor counts that date back to 1904. Based on these visitor counts, Flowers then ranked the national parks (e.g., park with most visitor count ranked highest). The National Park Services (NPS) have several detailed data sets that can be found <a href="https://irma.nps.gov/STATS/Reports/National">here</a>. The data set I utilized for this visualization exercise can be found on the aforementioned NPS page under the “Annual Visitation and Record Year by Park (1904-Last Calendar Year)”. You will be prompted to a page with three drop down menus. For”Region(s)” check “(Select All)”. Next, for “Park(s)” check “(Select All)”. Finally, for “Park Type”, scroll and check “National Park”. This will then return the data needed to replicate the graph below.</p>
 <p><img src="national-parks-map.png" class="img-fluid"></p>
-<p>#Loading R Libraries</p>
+</section>
+<section id="loading-r-libraries" class="level1">
+<h1>Loading R Libraries</h1>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -245,7 +248,9 @@ The following objects are masked from 'package:stats':
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>#Data Loading, Exploring, and Cleaning</p>
+</section>
+<section id="data-loading-exploring-and-cleaning" class="level1">
+<h1>Data Loading, Exploring, and Cleaning</h1>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>orig_nps<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"data/NPS Visitation Data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -930,7 +935,9 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">park_name =</span> <span class="st">`</span><span class="at">Park Name</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>#Beginning Data Visualization</p>
+</section>
+<section id="beginning-data-visualization" class="level1">
+<h1>Beginning Data Visualization</h1>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -950,8 +957,10 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <p><img src="visualization_exercise_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>I think I bit off a bit more than I could chew with this graph. But, I am pretty proud of how far I got with it. To make things a little more cohesive, I overrode the color to grey. I plan on continuing work on it tonight with the hopes of adding the 11 parks in color. It is definitely a work in progress!</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

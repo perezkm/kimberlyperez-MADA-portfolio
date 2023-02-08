@@ -5,13 +5,13 @@ output:
     toc: FALSE
 ---
 
-#The Data
+# The Data
 
 The graph I attempted to reproduce below was retrieved from a FiveThirtyEight article ["The National Parks Have Never Been More Popular"](https://fivethirtyeight.com/features/the-national-parks-have-never-been-more-popular/), by Andrew Flowers, that visualizes the rise in popularity of the US's national parks throughout the years. The graph was created from annual visitor counts that date back to 1904. Based on these visitor counts, Flowers then ranked the national parks (e.g., park with most visitor count ranked highest). The National Park Services (NPS) have several detailed data sets that can be found [here](https://irma.nps.gov/STATS/Reports/National). The data set I utilized for this visualization exercise can be found on the aforementioned NPS page under the "Annual Visitation and Record Year by Park (1904-Last Calendar Year)". You will be prompted to a page with three drop down menus. For"Region(s)" check "(Select All)". Next, for "Park(s)" check "(Select All)". Finally, for "Park Type", scroll and check "National Park". This will then return the data needed to replicate the graph below.
 
 ![](national-parks-map.png)
 
-#Loading R Libraries
+# Loading R Libraries
 
 ```{r}
 library(readr)
@@ -23,7 +23,7 @@ library(janitor)
 library(tibble)
 ```
 
-#Data Loading, Exploring, and Cleaning
+# Data Loading, Exploring, and Cleaning
 
 ```{r}
 orig_nps<-read_csv("data/NPS Visitation Data.csv")
@@ -60,7 +60,7 @@ nps_clean<- nps5 %>% #Ranking the parks
   rename(park_name = `Park Name`)
 ```
 
-#Beginning Data Visualization
+# Beginning Data Visualization
 ```{r}
 library(ggthemes)
 
@@ -77,8 +77,4 @@ nps_clean %>% ggplot() +geom_line( #
   labs(title= "The most popular national parks",
        subtitle= "National parks ranked by number of visitors in a given year")
 ```
-
-
-
-
-
+I think I bit off a bit more than I could chew with this graph. But, I am pretty proud of how far I got with it. To make things a little more cohesive, I overrode the color to grey. I plan on continuing work on it tonight with the hopes of adding the 11 parks in color. It is definitely a work in progress!
