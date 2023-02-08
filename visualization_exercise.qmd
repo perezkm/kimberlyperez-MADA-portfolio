@@ -5,4 +5,98 @@ output:
     toc: FALSE
 ---
 
-Placeholder file for the future visualization exercise.
+#The Data
+
+The graph I attempted to reproduce below was retrieved from a FiveThirtyEight article ["The National Parks Have Never Been More Popular"](https://fivethirtyeight.com/features/the-national-parks-have-never-been-more-popular/), by Andrew Flowers, that visualizes the rise in popularity of the US's national parks throughout the years. The graph was created from annual visitor counts that date back to 1904. Based on these visitor counts, Flowers then ranked the national parks (e.g., park with most visitor count ranked highest). The National Park Services (NPS) have several detailed data sets that can be found [here](https://irma.nps.gov/STATS/Reports/National). The data set I utilized for this visualization exercise can be found on the aforementioned NPS page under the "Annual Visitation and Record Year by Park (1904-Last Calendar Year)". You will be prompted to a page with three drop down menus. For"Region(s)" check "(Select All)". Next, for "Park(s)" check "(Select All)". Finally, for "Park Type", scroll and check "National Park". This will then return the data needed to replicate the graph below.
+
+![](national-parks-map.png)
+
+```{r}
+install.packages("ggthemes")
+install.packages("janitor")
+```
+
+#Loading R Libraries
+
+```{r}
+library(readr)
+library(tidyverse)
+library(fivethirtyeight)
+library(ggthemes)
+library(dplyr)
+library(janitor)
+library(tibble)
+```
+
+#Data Loading, Exploring, and Cleaning
+
+```{r}
+orig_nps<-read_csv("data/NPS Visitation Data.csv")
+
+str(orig_nps) #Exploring the NPS data a bit with these commands
+summary(orig_nps)
+class(orig_nps)
+names(orig_nps) #Exploring columns names, they look to be all numbers
+
+nps1<-orig_nps[-c(1,3,6, 118:122)] #Here I will remove the columns that I do not need by selecting the column number
+nps2<-nps1[-c(1,2,65),] #I am going to clean the data a bit more by removing the two rows at the top of the dataset
+print(nps2) #Much more succinct
+```
+
+While our dataset is cleaner and more succinct, there are no column or row names
+
+```{r}
+nps3<- nps2 %>% #Using first row of dataset for column names 
+    row_to_names(row_number=1)
+
+nps4<- nps3[!is.na(nps3$`Park Name`),] #Removing NA from Park Name column
+
+nps5<- nps4 %>% #Converting dataset from wide to long 
+  pivot_longer(
+    cols = c(-`Park Name`), 
+    names_to = "year", 
+    values_to = "visitors",
+    values_drop_na = TRUE)
+
+nps_clean<- nps5 %>% #Ranking the parks 
+    group_by(year) %>%
+    mutate(Rank = order(order(visitors, decreasing=FALSE))) %>%
+    ungroup() %>%
+  rename(park_name = `Park Name`)
+```
+
+#Beginning Data Visualization
+
+```{r}
+nps_clean %>% ggplot() +geom_line(
+  aes(x = year,
+      y = Rank,
+      color = "Park Name")) +
+  theme_bw() +
+  labs(x = "Year",
+       y = "Case Counts",
+       title = "Botulism Cases in California (1916-2017)") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+```{r}
+library(ggthemes)
+
+nps_clean$year<-as.numeric(as.character(nps_clean$year))
+
+nps_clean %>% ggplot() +geom_line(
+  aes(x = year, y = Rank, color = park_name, group = park_name), color="grey") +
+  theme_fivethirtyeight() +
+  theme(legend.position = "none") + 
+
+  scale_y_reverse(breaks=seq(50,1,-25), limits=c(62,0)) + 
+  scale_x_continuous(breaks=seq(1925,2000,25),limits=c(1904,2016)) +
+  xlab("Year") + 
+  ylab("Rank") +
+  labs(title= "The most popular national parks",
+       subtitle= "National parks ranked by number of visitors in a given year")
+```
+
+
+
+
+
