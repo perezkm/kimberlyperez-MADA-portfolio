@@ -66,30 +66,17 @@ nps_clean<- nps5 %>% #Ranking the parks
 ```
 
 #Beginning Data Visualization
-
-```{r}
-nps_clean %>% ggplot() +geom_line(
-  aes(x = year,
-      y = Rank,
-      color = "Park Name")) +
-  theme_bw() +
-  labs(x = "Year",
-       y = "Case Counts",
-       title = "Botulism Cases in California (1916-2017)") +
-  theme(plot.title = element_text(hjust = 0.5))
-```
 ```{r}
 library(ggthemes)
 
-nps_clean$year<-as.numeric(as.character(nps_clean$year))
+nps_clean$year<-as.numeric(as.character(nps_clean$year)) #Making year numeric
 
-nps_clean %>% ggplot() +geom_line(
+nps_clean %>% ggplot() +geom_line( #
   aes(x = year, y = Rank, color = park_name, group = park_name), color="grey") +
   theme_fivethirtyeight() +
   theme(legend.position = "none") + 
-
-  scale_y_reverse(breaks=seq(50,1,-25), limits=c(62,0)) + 
-  scale_x_continuous(breaks=seq(1925,2000,25),limits=c(1904,2016)) +
+  scale_y_reverse(breaks=seq(50,1,-25), limits=c(62,0)) + #setting y axis
+  scale_x_continuous(breaks=seq(1925,2000,25),limits=c(1904,2016)) + #setting y axis 
   xlab("Year") + 
   ylab("Rank") +
   labs(title= "The most popular national parks",
