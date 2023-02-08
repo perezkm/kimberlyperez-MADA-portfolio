@@ -11,11 +11,6 @@ The graph I attempted to reproduce below was retrieved from a FiveThirtyEight ar
 
 ![](national-parks-map.png)
 
-```{r}
-install.packages("ggthemes")
-install.packages("janitor")
-```
-
 #Loading R Libraries
 
 ```{r}
