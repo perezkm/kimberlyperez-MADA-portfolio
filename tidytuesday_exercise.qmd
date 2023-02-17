@@ -5,4 +5,76 @@ output:
     toc: FALSE
 ---
 
-Placeholder file for the future Tidy Tuesday exercise.
+# Loading Libraries
+
+```{r}
+library(ggplot2) #Loading some libraries I may use for this exercise
+library(tidyverse)
+library(ggthemes)
+library(dplyr)
+library(janitor)
+library(tibble)
+```
+
+# "Getting the Data" Manually
+
+```{r}
+age_gaps <-  readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-02-14/age_gaps.csv') #Here I manually read in the csv used for this weeks TidyTuesday
+
+str(age_gaps)
+glimpse(age_gaps)#Gives me a snapshot of the columns in the df
+```
+
+# Data Wrangling
+
+From the glimpse function, we can see that we have a lot of data- 13 columns and 1,155 rows. To parse this dataset down, I will first perform some data wrangling where I will remove unneeded columns.
+
+Given the theme of this weeks Tidy Tuesday, I am interested in exploring trends in actor age difference throughout the years from movies released in the 60s and 70s versus the 2018-2022. I am also interested in comparing the age difference of actors that stared in my favorite director's movies (e.g., Wes Anderson and Alfred Hitchcock).
+
+```{r}
+age_gaps1<-age_gaps[-c(3,5:13)] #Removing columns I do not need for my specific data visualization [Age Difference in lead actors from 1960-1980 vs. 2018-2022]
+
+age_gaps_2_yr<- age_gaps1 %>% filter(   #Selecting the years I want to keep in my dataset 
+  release_year %in% c("1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970","1971","1972","1973","1974", "1975","1976","1977","1978","1979","2018", "2019", "2020", "2021", "2022"))
+
+
+```
+
+# Data Visualization
+```{r}
+library(plotly)
+
+#Utilizing Plotly for interaction: Age Difference of Lead Actors in movies by year between 1960-1979 and post Me too Movement 2018-2022
+gaps <- plot_ly(
+  type='scatter', 
+  mode='markers',
+  age_gaps_2_yr, 
+  x=~release_year, 
+  y=~age_difference,
+  textposition= "auto",
+  hoverinfo= "text",
+  hovertext= paste("Movie Name :", age_gaps_2_yr$movie_name),
+  yaxis= list(title='Lead Actors Age Difference')) %>%
+  layout(title = "Age Difference of Lead Actors (Male/Female) in Movies from 1960-1970 and 2018-2022", xaxis=list(title= 'Movie Release Year'), yaxis= list(title='Lead Actors Age Difference'))
+
+gaps
+```
+
+The largest age difference in actors occurred in the 1970 in the movie *Harold and Maude*.The age difference for actors looks to be similar in the years visualized for this exercise.
+
+# More Data Visualization by director
+```{r}
+age_gaps3dir<-age_gaps[-c(5:13)] #Here I will remove columns I do not need
+
+dir<-age_gaps3dir %>% filter(   #Selecting the directors I want to keep in my dataset Hitchcock and Anderson are my two favorite! 
+  director %in% c( "Wes Anderson", "Alfred Hitchcock"))
+
+dad<- ggplot(dir, aes(x = release_year, y = age_difference)) +
+    geom_point(aes(color = factor(director)))
+
+dad + labs( x= "Movie Release Year",
+    y= "Actor Age Difference",
+    color= "Director",
+    title= "Actor Age Difference in Alfred Hitchcock and Wes Anderson Films")
+```
+From the graph, it looks like Alfred Hitchcock had more actors with larger age differences than Wes Anderson.
