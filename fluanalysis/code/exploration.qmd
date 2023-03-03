@@ -1,0 +1,172 @@
+---
+title: "Brian McKay's Flu Analysis Data: Exploration"
+editor: visual
+---
+
+# Let's Begin with some Data Exploration
+
+**But first let's load some packages...**
+
+```{r}
+library(gtsummary)
+library(here)
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+```
+
+**And Load the Data...**
+
+```{r}
+flu<-readRDS(here("fluanalysis","processed_data", "SympAct_cleaned.rds")) #Loading in the data
+
+glimpse(flu) #Looking at the Data 
+```
+
+# Let's Begin Data Exploration by Creating Summary Tables
+
+Here I will create summary statistic tables starting with the dataset as a whole and then the important variables
+
+```{r}
+fulldat<- tbl_summary(flu) #Prefer gtsummary to create summary tables over rstatix so i use the tbl_summary function for the whole dataset
+fulldat
+
+#NOTE for KP: Use flextable for customization epiRhandbook
+```
+
+**Summary Tables for Body Temperature**
+
+```{r}
+summary (flu$BodyTemp) #Quick and basic overview 
+
+bodtemp<- flu %>% tbl_summary(BodyTemp) #Breaking things down a bit more- interesting when broken down by temp group 
+bodtemp
+```
+
+**Summary Tables for Nausea**
+
+```{r}
+summary (flu$Nausea) #Quick and basic overview 
+
+naus<- flu %>% tbl_summary(Nausea) #Breaking things down a bit more
+naus
+```
+
+# **Histogram/Density Plot for our Continuous Variable- Body Temperature**
+
+```{r}
+#Basic histogram
+cv<- ggplot(flu, aes(x=BodyTemp)) +geom_histogram() #Basic histogram
+
+#Updated histogram
+cvup<- flu %>%
+  ggplot(aes(x=BodyTemp)) +     geom_histogram(binwidth=0.5, fill="#F08080",color= "#FAF0E6", alpha=0.9) +
+  ggtitle("Body Temperature Histogram") +
+  xlab("Body Temperature (in *F)") +
+  ylab("Number of Individuals")
+  
+cvup
+ 
+cvd<- flu %>% #Density plot
+  ggplot(aes(x=BodyTemp)) +   
+  geom_density(fill="#808000",color= "#FAF0E6",
+  alpha=0.9) +
+  ggtitle("Body Temperature Histogram") +
+  xlab("Body Temperature (in *F)") +
+  ylab("Number of Individuals")
+
+cvd 
+```
+
+# **Predictor Variables and Continuous Outcome of Interest**
+
+```{r}
+#Subjective Fever and Body Temperature
+pvoi0<-flu %>%
+  ggplot()+geom_boxplot(aes(
+                        x=SubjectiveFever,
+                        y=BodyTemp)) + labs(x="Subjective Fever", y="Body Temperature (in *F)", title="Subjective Fever and Body Temperature")
+
+pvoi0
+
+
+#Swollen Lymph Nodes and Body Temperature
+pvoi1<-flu %>%
+  ggplot()+geom_boxplot(aes(
+                        x=SwollenLymphNodes,
+                        y=BodyTemp)) + labs(x="Swollen Lymph Nodes Present", y="Body Temperature (in *F)", title="Swollen Lymph Nodes and Body Temperature")
+
+pvoi1
+
+#Myalgia and Body Temperature 
+pvoi2<-flu %>%
+  ggplot()+geom_boxplot(aes(
+                        x=Myalgia,
+                        y=BodyTemp)) + labs(x="Severity of Myalgia", y="Body Temperature (in *F)", title="Myalgia and Body Temperature")
+
+pvoi2
+
+# Pharyngitis and Body Temperature
+pvoi3<-flu %>%
+  ggplot()+geom_boxplot(aes(
+                        x=Pharyngitis,
+                        y=BodyTemp)) + labs(x="Pharyngitis", y="Body Temperature (in *F)", title="Pharyngitis and Body Temperature")
+
+pvoi3
+
+#Diarrhea and Body Temperature
+pvoi4<-flu %>%
+  ggplot()+geom_boxplot(aes(
+                        x=Diarrhea,
+                        y=BodyTemp)) + labs(x="Diarrhea", y="Body Temperature (in *F)", title="Diarrhea and Body Temperature")
+
+pvoi4
+```
+
+Given the chosen predictor variables, it seems as those who experience the selected predictor variables (e.g., swollen lymph nodes) had slightly lower or similar mean body temperatures. Those with myalgia and subjective fever had higher body temperatures. Thus, for this exercise, I will select subjective temperature as a predictor variable for body temperature.
+
+# **Predictor Variables and Categorical Outcome of Interest**
+
+```{r}
+#Myalgia and Nausea 
+pvoi5<-flu %>%
+  ggplot()+geom_count(aes(
+                        x=Nausea,
+                        y=Myalgia)) + labs(x="Nausea", y="Myalgia", title="Myalgia and Nausea")
+
+pvoi5
+
+# Diarrhea and Nausea
+pvoi6<-flu %>%
+  ggplot()+geom_count(aes(
+                        x=Nausea,
+                        y=Diarrhea)) + labs(x="Nausea", y="Diarrhea", title="Diarrhea and Nausea")
+
+pvoi6
+
+# Swollen Lymph Nodes and Nausea
+pvoi7<-flu %>%
+  ggplot()+geom_count(aes(
+                        x=Nausea,
+                        y=SwollenLymphNodes)) + labs(x="Nausea", y="Swollen Lymph Nodes", title="Swollen Lymph Nodes and Nausea")
+
+pvoi7
+
+# Cough Intensity and Nausea
+pvoi8<-flu %>%
+  ggplot()+geom_count(aes(
+                        x=Nausea,
+                        y=CoughIntensity)) + labs(x="Nausea", y="Cough Intensity", title="Cough Intensity and Nausea")
+
+pvoi8
+
+#Subjective Fever and Nauesea
+pvoi10<-flu %>%
+  ggplot()+geom_count(aes(
+                        x=Nausea,
+                        y=SubjectiveFever)) + labs(x="Nausea", y="Subjective Fever", title="Subjective Fever and Nausea")
+
+pvoi10
+```
+
+Given the chosen predictor variables, it seems as though there was no significant positive relationship with the selected predictor variables (e.g., swollen lymph nodes) and the categorical outcome of interest.

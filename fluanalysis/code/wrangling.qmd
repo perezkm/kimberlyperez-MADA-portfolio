@@ -1,0 +1,41 @@
+---
+title: "Brian McKay's Flu Analysis Data: Wrangling"
+editor: visual
+---
+
+# Let's Begin with some Data Wrangling
+
+**But first let's load some packages...**
+
+```{r}
+library(here)
+library(dplyr)
+library(tidyverse)
+```
+
+**And Load the Data...**
+
+```{r}
+fluog<-readRDS(here("fluanalysis","raw_data", "SympAct_Any_Pos.Rda")) #Loading in the data
+
+glimpse(fluog) #Looking at the Data 
+```
+
+# Now to the Wrangling
+
+**Removing Variables**
+
+```{r}
+flu_1<- fluog %>%
+  select(-contains(c("Activity","Dxname", "FluA", "FluB", "Score", "Total", "Unique.Visit"))) %>%  #Removing variables
+  drop_na() #With the pipe function I will tack on the removal of NAs 
+
+glimpse(flu_1) #Cleaned data
+         
+```
+
+**Saving the Cleaned Data**
+
+```{r}
+saveRDS(flu_1, file=here("fluanalysis","processed_data", "SympAct_cleaned.rds")) #I will save this to my processed data folder, code is similar to that of loading code 
+```

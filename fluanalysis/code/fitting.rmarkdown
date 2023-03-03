@@ -1,0 +1,194 @@
+---
+title: "Brian McKay's Flu Analysis Data: Fitting"
+editor: visual
+---
+
+
+# Let's Begin with some Data Fitting
+
+**But first let's load some packages...**
+
+
+```{r}
+library(gtsummary) #To create tables will include
+library(tidyr) #Helps with data wrangling
+library(here) #Setting paths
+library(dplyr) #Data wrangling 
+library(tidyverse) #Data transformation
+library(vip) #Model interpretation
+library(performance) #Performance 
+library(ggplot2) #Graphs/Visualization
+library(tidymodels) #For modeling
+library(jtools)
+library(broom)
+```
+
+
+# **1. Loading Cleaned Data**
+
+
+```{r}
+flu<-readRDS(here("fluanalysis","processed_data", "SympAct_cleaned.rds")) #Loading in the data
+
+glimpse(flu) #Looking at the Data 
+```
+
+
+# **2. Fitting a Linear Model to Body Temperature (Continuous Outcome) using the Main Predictor (Runny Nose)**
+
+**Let's begin...**
+
+
+```{r}
+lmog<- linear_reg() %>%
+  set_engine("lm") #We need to set the engine commands for this to work
+```
+
+
+**Now let's train it to the data**
+
+
+```{r}
+lmfit<- lmog %>%
+  fit(BodyTemp~RunnyNose, data=flu)
+lmfit
+```
+
+
+**Now that training is complete, let's check-out what we have so far (summary statistics) a couple of different ways...**
+
+
+```{r}
+glimpse(lmfit) #not glimpse for this...use glance
+glance(lmfit) #Way 1; multiple ways to skin a cat
+tidy(lmfit) #Way 2; just presented slightly different
+```
+
+```{r}
+plot_summs(lmfit) #https://jtools.jacob-long.com/articles/summ.html
+```
+
+
+# **3. Fitting Another Linear Model to Body Temperature (Continuous Outcome) using ALL Important Predictors**
+
+**Let's follow the same process as above but make a few alterations**
+
+
+```{r}
+lmog<- linear_reg() %>%
+  set_engine("lm") #Same as above-we need to set the engine commands for this to work
+```
+
+
+**Now let's train it to the data**
+
+
+```{r}
+lmall<- lmog %>% #Here we are going to omit the RunnyNose variable and replace it with . to select all for important predictors
+  fit(BodyTemp~., data=flu)
+lmall
+```
+
+**Now that training is complete, let's check-out what we have so far (summary statistics) a couple of different ways...**
+
+
+```{r}
+glance(lmall) #Way 1; multiple ways to skin a cat
+tidy(lmall) #Way 2; just presented slightly different
+```
+
+```{r}
+plot_summs(lmall, robust=TRUE)
+```
+
+# **4. Comparing the Models Created Above with the Main Predictor (Runny Nose) and all Important Predictors**
+
+**Let's first check the performance...there is a package for that.**
+
+
+```{r}
+compare_performance(lmfit, lmall)
+```
+
+
+**Now let's check the performance of the models.**
+
+
+```{r}
+check_model(lmfit$fit) #1st Model
+```
+
+```{r}
+check_model(lmall$fit) #2nd Model
+```
+
+
+# **5. Fitting a Logistic Model to the Categorical Outcome (Nausea) using ONLY the Main Predictor (Runny Nose) of Interest**
+
+
+```{r}
+logog<- logistic_reg() %>%
+  set_engine("glm") #Same as above-we need to set the engine commands for this to work
+```
+
+```{r}
+logfit<- logog %>% 
+  fit(Nausea~RunnyNose, data=flu)
+logfit
+
+tidy(logfit)
+```
+
+Let's Plot
+
+```{r}
+plot_summs(lmfit)
+```
+
+# **6. Fitting a Logistic Model to the Categorical Outcome (Nausea) using ALL Important Predictors of Interest**
+
+**Let's follow the same process as above but make a few alterations**
+
+
+```{r}
+logallog<- logistic_reg()%>%
+  set_engine("glm") #Same as above-we need to set the engine commands for this to work
+```
+
+
+**Again, let's train it to the data**
+
+
+```{r}
+logall<- logallog %>% #Here we are going to omit the RunnyNose variable and replace it with . to select all for important predictors
+  fit(Nausea~., data=flu)
+logall
+
+tidy(logall)
+```
+
+**Let's Plot**
+
+```{r}
+plot_summs(logall, robust=TRUE)
+```
+
+# **7. Compares Model Results for the Categorical Model with the Main Predictor (Runny Nose) and ALL Predictors** 
+
+**Comparing**
+
+```{r}
+compare_performance(logfit, logall)
+```
+
+**Let's Visualize these Comparisons**
+
+
+```{r}
+check_model(logfit$fit) #Model 1
+```
+
+```{r}
+check_model(logall$fit) #Model 2
+```
+

@@ -8,6 +8,14 @@ website:
     left:
       - text: "About Me"
         href: ./aboutme.html
+      - text: "Flu Analysis"
+        menu:
+          - text: "Wrangling"
+            href: ./wrangling.html
+          - text: "Exploration"
+            href: ./exploration.html
+          - text: "Fitting"
+            href: ./fitting.html
       - text: "Projects"
         menu:
           - text: "R Coding Exercise"
