@@ -11,11 +11,11 @@ website:
       - text: "Flu Analysis"
         menu:
           - text: "Wrangling"
-            href: ./wrangling.html
+            href: ./fluanalysis/code/wrangling.html
           - text: "Exploration"
-            href: ./exploration.html
+            href: ./fluanalysis/code/exploration.html
           - text: "Fitting"
-            href: ./fitting.html
+            href: ./fluanalysis/code/fitting.html
       - text: "Projects"
         menu:
           - text: "R Coding Exercise"
