@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.313">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>My Data Analysis Portfolio - Brian McKay’s Flu Analysis Data: Fitting</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">My Data Analysis Portfolio</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../.././aboutme.html">
+ <span class="menu-text">About Me</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-flu-analysis" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Flu Analysis</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-flu-analysis">    
+        <li>
+    <a class="dropdown-item" href="../.././wrangling.html">
+ <span class="dropdown-text">Wrangling</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../.././exploration.html">
+ <span class="dropdown-text">Exploration</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../.././fitting.html">
+ <span class="dropdown-text">Fitting</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-projects" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Projects</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
+        <li>
+    <a class="dropdown-item" href="../.././coding_exercise.html">
+ <span class="dropdown-text">R Coding Exercise</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../.././visualization_exercise.html">
+ <span class="dropdown-text">Visualization Exercise</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../.././tidytuesday_exercise.html">
+ <span class="dropdown-text">Tidy Tuesday Exercise</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../.././dataanalysis_exercise.html">
+ <span class="dropdown-text">Data Analysis Exercise</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/perezkm/kimberlyperez-MADA-portfolio"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Brian McKay’s Flu Analysis Data: Fitting</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="lets-begin-with-some-data-fitting" class="level1">
+<h1>Let’s Begin with some Data Fitting</h1>
+<p><strong>But first let’s load some packages…</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary) <span class="co">#To create tables will include</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>#Uighur</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr) <span class="co">#Helps with data wrangling</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here) <span class="co">#Setting paths</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>here() starts at C:/GitHub/MADA/kimberlyperez-MADA-portfolio</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co">#Data wrangling </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co">#Data transformation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching packages
+───────────────────────────────────────
+tidyverse 1.3.2 ──</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ ggplot2 3.4.0     ✔ purrr   1.0.1
+✔ tibble  3.1.8     ✔ stringr 1.5.0
+✔ readr   2.1.3     ✔ forcats 0.5.2
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vip) <span class="co">#Model interpretation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'vip'
+
+The following object is masked from 'package:utils':
+
+    vi</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance) <span class="co">#Performance </span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co">#Graphs/Visualization</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels) <span class="co">#For modeling</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching packages ────────────────────────────────────── tidymodels 1.0.0 ──
+✔ broom        1.0.2     ✔ rsample      1.1.1
+✔ dials        1.1.0     ✔ tune         1.0.1
+✔ infer        1.0.4     ✔ workflows    1.1.2
+✔ modeldata    1.1.0     ✔ workflowsets 1.0.0
+✔ parsnip      1.0.3     ✔ yardstick    1.1.0
+✔ recipes      1.0.4     
+── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──
+✖ recipes::all_double()  masks gtsummary::all_double()
+✖ recipes::all_factor()  masks gtsummary::all_factor()
+✖ recipes::all_integer() masks gtsummary::all_integer()
+✖ recipes::all_logical() masks gtsummary::all_logical()
+✖ recipes::all_numeric() masks gtsummary::all_numeric()
+✖ scales::discard()      masks purrr::discard()
+✖ dplyr::filter()        masks stats::filter()
+✖ recipes::fixed()       masks stringr::fixed()
+✖ dplyr::lag()           masks stats::lag()
+✖ yardstick::mae()       masks performance::mae()
+✖ yardstick::rmse()      masks performance::rmse()
+✖ yardstick::spec()      masks readr::spec()
+✖ recipes::step()        masks stats::step()
+• Use tidymodels_prefer() to resolve common conflicts.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jtools)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'jtools'
+
+The following object is masked from 'package:yardstick':
+
+    get_weights</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="loading-cleaned-data" class="level1">
+<h1><strong>1. Loading Cleaned Data</strong></h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>flu<span class="ot">&lt;-</span><span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"fluanalysis"</span>,<span class="st">"processed_data"</span>, <span class="st">"SympAct_cleaned.rds"</span>)) <span class="co">#Loading in the data</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(flu) <span class="co">#Looking at the Data </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 730
+Columns: 32
+$ SwollenLymphNodes &lt;fct&gt; Yes, Yes, Yes, Yes, Yes, No, No, No, Yes, No, Yes, Y…
+$ ChestCongestion   &lt;fct&gt; No, Yes, Yes, Yes, No, No, No, Yes, Yes, Yes, Yes, Y…
+$ ChillsSweats      &lt;fct&gt; No, No, Yes, Yes, Yes, Yes, Yes, Yes, Yes, No, Yes, …
+$ NasalCongestion   &lt;fct&gt; No, Yes, Yes, Yes, No, No, No, Yes, Yes, Yes, Yes, Y…
+$ CoughYN           &lt;fct&gt; Yes, Yes, No, Yes, No, Yes, Yes, Yes, Yes, Yes, No, …
+$ Sneeze            &lt;fct&gt; No, No, Yes, Yes, No, Yes, No, Yes, No, No, No, No, …
+$ Fatigue           &lt;fct&gt; Yes, Yes, Yes, Yes, Yes, Yes, Yes, Yes, Yes, Yes, Ye…
+$ SubjectiveFever   &lt;fct&gt; Yes, Yes, Yes, Yes, Yes, Yes, Yes, Yes, Yes, No, Yes…
+$ Headache          &lt;fct&gt; Yes, Yes, Yes, Yes, Yes, Yes, No, Yes, Yes, Yes, Yes…
+$ Weakness          &lt;fct&gt; Mild, Severe, Severe, Severe, Moderate, Moderate, Mi…
+$ WeaknessYN        &lt;fct&gt; Yes, Yes, Yes, Yes, Yes, Yes, Yes, Yes, Yes, Yes, Ye…
+$ CoughIntensity    &lt;fct&gt; Severe, Severe, Mild, Moderate, None, Moderate, Seve…
+$ CoughYN2          &lt;fct&gt; Yes, Yes, Yes, Yes, No, Yes, Yes, Yes, Yes, Yes, Yes…
+$ Myalgia           &lt;fct&gt; Mild, Severe, Severe, Severe, Mild, Moderate, Mild, …
+$ MyalgiaYN         &lt;fct&gt; Yes, Yes, Yes, Yes, Yes, Yes, Yes, Yes, Yes, Yes, Ye…
+$ RunnyNose         &lt;fct&gt; No, No, Yes, Yes, No, No, Yes, Yes, Yes, Yes, No, No…
+$ AbPain            &lt;fct&gt; No, No, Yes, No, No, No, No, No, No, No, Yes, Yes, N…
+$ ChestPain         &lt;fct&gt; No, No, Yes, No, No, Yes, Yes, No, No, No, No, Yes, …
+$ Diarrhea          &lt;fct&gt; No, No, No, No, No, Yes, No, No, No, No, No, No, No,…
+$ EyePn             &lt;fct&gt; No, No, No, No, Yes, No, No, No, No, No, Yes, No, Ye…
+$ Insomnia          &lt;fct&gt; No, No, Yes, Yes, Yes, No, No, Yes, Yes, Yes, Yes, Y…
+$ ItchyEye          &lt;fct&gt; No, No, No, No, No, No, No, No, No, No, No, No, Yes,…
+$ Nausea            &lt;fct&gt; No, No, Yes, Yes, Yes, Yes, No, No, Yes, Yes, Yes, Y…
+$ EarPn             &lt;fct&gt; No, Yes, No, Yes, No, No, No, No, No, No, No, Yes, Y…
+$ Hearing           &lt;fct&gt; No, Yes, No, No, No, No, No, No, No, No, No, No, No,…
+$ Pharyngitis       &lt;fct&gt; Yes, Yes, Yes, Yes, Yes, Yes, Yes, No, No, No, Yes, …
+$ Breathless        &lt;fct&gt; No, No, Yes, No, No, Yes, No, No, No, Yes, No, Yes, …
+$ ToothPn           &lt;fct&gt; No, No, Yes, No, No, No, No, No, Yes, No, No, Yes, N…
+$ Vision            &lt;fct&gt; No, No, No, No, No, No, No, No, No, No, No, No, No, …
+$ Vomit             &lt;fct&gt; No, No, No, No, No, No, Yes, No, No, No, Yes, Yes, N…
+$ Wheeze            &lt;fct&gt; No, No, No, Yes, No, Yes, No, No, No, No, No, Yes, N…
+$ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98.4, …</code></pre>
+</div>
+</div>
+</section>
+<section id="fitting-a-linear-model-to-body-temperature-continuous-outcome-using-the-main-predictor-runny-nose" class="level1">
+<h1><strong>2. Fitting a Linear Model to Body Temperature (Continuous Outcome) using the Main Predictor (Runny Nose)</strong></h1>
+<p><strong>Let’s begin…</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>lmog<span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="co">#We need to set the engine commands for this to work</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Now let’s train it to the data</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>lmfit<span class="ot">&lt;-</span> lmog <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(BodyTemp<span class="sc">~</span>RunnyNose, <span class="at">data=</span>flu)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>lmfit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>parsnip model object
+
+
+Call:
+stats::lm(formula = BodyTemp ~ RunnyNose, data = data)
+
+Coefficients:
+ (Intercept)  RunnyNoseYes  
+     99.1431       -0.2926  </code></pre>
+</div>
+</div>
+<p><strong>Now that training is complete, let’s check-out what we have so far (summary statistics) a couple of different ways…</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(lmfit) <span class="co">#not glimpse for this...use glance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 5
+ $ lvl    : NULL
+ $ spec   :List of 7
+  ..$ args                 :List of 2
+  .. ..$ penalty: language ~NULL
+  .. .. ..- attr(*, ".Environment")=&lt;environment: R_EmptyEnv&gt; 
+  .. ..$ mixture: language ~NULL
+  .. .. ..- attr(*, ".Environment")=&lt;environment: R_EmptyEnv&gt; 
+  ..$ eng_args             : Named list()
+  .. ..- attr(*, "class")= chr [1:2] "quosures" "list"
+  ..$ mode                 : chr "regression"
+  ..$ user_specified_mode  : logi FALSE
+  ..$ method               :List of 3
+  .. ..$ libs: chr "stats"
+  .. ..$ fit :List of 5
+  .. ..$ pred:List of 4
+  ..$ engine               : chr "lm"
+  ..$ user_specified_engine: logi TRUE
+  ..- attr(*, "class")= chr [1:2] "linear_reg" "model_spec"
+ $ fit    :List of 13
+  ..$ coefficients : Named num [1:2] 99.143 -0.293
+  .. ..- attr(*, "names")= chr [1:2] "(Intercept)" "RunnyNoseYes"
+  ..$ residuals    : Named num [1:730] -0.8431 1.2569 1.9495 -0.0505 1.3569 ...
+  .. ..- attr(*, "names")= chr [1:730] "1" "2" "3" "4" ...
+  ..$ effects      : Named num [1:730] -2.67e+03 -3.58 2.01 1.09e-02 1.32 ...
+  .. ..- attr(*, "names")= chr [1:730] "(Intercept)" "RunnyNoseYes" "" "" ...
+  ..$ rank         : int 2
+  ..$ fitted.values: Named num [1:730] 99.1 99.1 98.9 98.9 99.1 ...
+  .. ..- attr(*, "names")= chr [1:730] "1" "2" "3" "4" ...
+  ..$ assign       : int [1:2] 0 1
+  ..$ qr           :List of 5
+  .. ..$ qr   : num [1:730, 1:2] -27.019 0.037 0.037 0.037 0.037 ...
+  .. .. ..- attr(*, "dimnames")=List of 2
+  .. .. ..- attr(*, "assign")= int [1:2] 0 1
+  .. .. ..- attr(*, "contrasts")=List of 1
+  .. ..$ qraux: num [1:2] 1.04 1.06
+  .. ..$ pivot: int [1:2] 1 2
+  .. ..$ tol  : num 1e-07
+  .. ..$ rank : int 2
+  .. ..- attr(*, "class")= chr "qr"
+  ..$ df.residual  : int 728
+  ..$ contrasts    :List of 1
+  .. ..$ RunnyNose: chr "contr.treatment"
+  ..$ xlevels      :List of 1
+  .. ..$ RunnyNose: chr [1:2] "No" "Yes"
+  ..$ call         : language stats::lm(formula = BodyTemp ~ RunnyNose, data = data)
+  ..$ terms        :Classes 'terms', 'formula'  language BodyTemp ~ RunnyNose
+  .. .. ..- attr(*, "variables")= language list(BodyTemp, RunnyNose)
+  .. .. ..- attr(*, "factors")= int [1:2, 1] 0 1
+  .. .. .. ..- attr(*, "dimnames")=List of 2
+  .. .. ..- attr(*, "term.labels")= chr "RunnyNose"
+  .. .. ..- attr(*, "order")= int 1
+  .. .. ..- attr(*, "intercept")= int 1
+  .. .. ..- attr(*, "response")= int 1
+  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x000001f6bb706338&gt; 
+  .. .. ..- attr(*, "predvars")= language list(BodyTemp, RunnyNose)
+  .. .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "factor"
+  .. .. .. ..- attr(*, "names")= chr [1:2] "BodyTemp" "RunnyNose"
+  ..$ model        :'data.frame':   730 obs. of  2 variables:
+  .. ..$ BodyTemp : num [1:730] 98.3 100.4 100.8 98.8 100.5 ...
+  .. ..$ RunnyNose: Factor w/ 2 levels "No","Yes": 1 1 2 2 1 1 2 2 2 2 ...
+  .. .. ..- attr(*, "label")= chr "Runny Nose"
+  .. ..- attr(*, "terms")=Classes 'terms', 'formula'  language BodyTemp ~ RunnyNose
+  .. .. .. ..- attr(*, "variables")= language list(BodyTemp, RunnyNose)
+  .. .. .. ..- attr(*, "factors")= int [1:2, 1] 0 1
+  .. .. .. .. ..- attr(*, "dimnames")=List of 2
+  .. .. .. ..- attr(*, "term.labels")= chr "RunnyNose"
+  .. .. .. ..- attr(*, "order")= int 1
+  .. .. .. ..- attr(*, "intercept")= int 1
+  .. .. .. ..- attr(*, "response")= int 1
+  .. .. .. ..- attr(*, ".Environment")=&lt;environment: 0x000001f6bb706338&gt; 
+  .. .. .. ..- attr(*, "predvars")= language list(BodyTemp, RunnyNose)
+  .. .. .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "factor"
+  .. .. .. .. ..- attr(*, "names")= chr [1:2] "BodyTemp" "RunnyNose"
+  ..- attr(*, "class")= chr "lm"
+ $ preproc:List of 1
+  ..$ y_var: chr "BodyTemp"
+ $ elapsed:List of 1
+  ..$ elapsed: num NA
+ - attr(*, "class")= chr [1:2] "_lm" "model_fit"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(lmfit) <span class="co">#Way 1; multiple ways to skin a cat</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  r.squ…¹ adj.r…² sigma stati…³ p.value    df logLik   AIC   BIC devia…⁴ df.re…⁵
+    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;
+1  0.0123  0.0110  1.19    9.08 0.00268     1 -1162. 2329. 2343.   1031.     728
+# … with 1 more variable: nobs &lt;int&gt;, and abbreviated variable names
+#   ¹​r.squared, ²​adj.r.squared, ³​statistic, ⁴​deviance, ⁵​df.residual</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lmfit) <span class="co">#Way 2; just presented slightly different</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term         estimate std.error statistic p.value
+  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+1 (Intercept)    99.1      0.0819   1210.   0      
+2 RunnyNoseYes   -0.293    0.0971     -3.01 0.00268</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_summs</span>(lmfit) <span class="co">#https://jtools.jacob-long.com/articles/summ.html</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required namespace: broom.mixed</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="fitting_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="fitting-another-linear-model-to-body-temperature-continuous-outcome-using-all-important-predictors" class="level1">
+<h1><strong>3. Fitting Another Linear Model to Body Temperature (Continuous Outcome) using ALL Important Predictors</strong></h1>
+<p><strong>Let’s follow the same process as above but make a few alterations</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>lmog<span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="co">#Same as above-we need to set the engine commands for this to work</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Now let’s train it to the data</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>lmall<span class="ot">&lt;-</span> lmog <span class="sc">%&gt;%</span> <span class="co">#Here we are going to omit the RunnyNose variable and replace it with . to select all for important predictors</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(BodyTemp<span class="sc">~</span>., <span class="at">data=</span>flu)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>lmall</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>parsnip model object
+
+
+Call:
+stats::lm(formula = BodyTemp ~ ., data = data)
+
+Coefficients:
+           (Intercept)    SwollenLymphNodesYes      ChestCongestionYes  
+             97.925243               -0.165302                0.087326  
+       ChillsSweatsYes      NasalCongestionYes              CoughYNYes  
+              0.201266               -0.215771                0.313893  
+             SneezeYes              FatigueYes      SubjectiveFeverYes  
+             -0.361924                0.264762                0.436837  
+           HeadacheYes            WeaknessMild        WeaknessModerate  
+              0.011453                0.018229                0.098944  
+        WeaknessSevere           WeaknessYNYes      CoughIntensityMild  
+              0.373435                      NA                0.084881  
+CoughIntensityModerate    CoughIntensitySevere             CoughYN2Yes  
+             -0.061384               -0.037272                      NA  
+           MyalgiaMild         MyalgiaModerate           MyalgiaSevere  
+              0.164242               -0.024064               -0.129263  
+          MyalgiaYNYes            RunnyNoseYes               AbPainYes  
+                    NA               -0.080485                0.031574  
+          ChestPainYes             DiarrheaYes                EyePnYes  
+              0.105071               -0.156806                0.131544  
+           InsomniaYes             ItchyEyeYes               NauseaYes  
+             -0.006824               -0.008016               -0.034066  
+              EarPnYes              HearingYes          PharyngitisYes  
+              0.093790                0.232203                0.317581  
+         BreathlessYes              ToothPnYes               VisionYes  
+              0.090526               -0.022876               -0.274625  
+              VomitYes               WheezeYes  
+              0.165272               -0.046665  </code></pre>
+</div>
+</div>
+<p><strong>Now that training is complete, let’s check-out what we have so far (summary statistics) a couple of different ways…</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(lmall) <span class="co">#Way 1; multiple ways to skin a cat</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  r.squ…¹ adj.r…² sigma stati…³ p.value    df logLik   AIC   BIC devia…⁴ df.re…⁵
+    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;
+1   0.129  0.0860  1.14    3.02 4.20e-8    34 -1116. 2304. 2469.    909.     695
+# … with 1 more variable: nobs &lt;int&gt;, and abbreviated variable names
+#   ¹​r.squared, ²​adj.r.squared, ³​statistic, ⁴​deviance, ⁵​df.residual</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lmall) <span class="co">#Way 2; just presented slightly different</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 38 × 5
+   term                 estimate std.error statistic   p.value
+   &lt;chr&gt;                   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+ 1 (Intercept)           97.9       0.304   322.     0        
+ 2 SwollenLymphNodesYes  -0.165     0.0920   -1.80   0.0727   
+ 3 ChestCongestionYes     0.0873    0.0975    0.895  0.371    
+ 4 ChillsSweatsYes        0.201     0.127     1.58   0.114    
+ 5 NasalCongestionYes    -0.216     0.114    -1.90   0.0584   
+ 6 CoughYNYes             0.314     0.241     1.30   0.193    
+ 7 SneezeYes             -0.362     0.0983   -3.68   0.000249 
+ 8 FatigueYes             0.265     0.161     1.65   0.0996   
+ 9 SubjectiveFeverYes     0.437     0.103     4.22   0.0000271
+10 HeadacheYes            0.0115    0.125     0.0913 0.927    
+# … with 28 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_summs</span>(lmall, <span class="at">robust=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required namespace: broom.mixed</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="fitting_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="comparing-the-models-created-above-with-the-main-predictor-runny-nose-and-all-important-predictors" class="level1">
+<h1><strong>4. Comparing the Models Created Above with the Main Predictor (Runny Nose) and all Important Predictors</strong></h1>
+<p><strong>Let’s first check the performance…there is a package for that.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">compare_performance</span>(lmfit, lmall)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Comparison of Model Performance Indices
+
+Name  | Model |  AIC (weights) | AICc (weights) |  BIC (weights) |    R2 | R2 (adj.) |  RMSE | Sigma
+----------------------------------------------------------------------------------------------------
+lmfit |   _lm | 2329.3 (&lt;.001) | 2329.4 (&lt;.001) | 2343.1 (&gt;.999) | 0.012 |     0.011 | 1.188 | 1.190
+lmall |   _lm | 2303.8 (&gt;.999) | 2307.7 (&gt;.999) | 2469.2 (&lt;.001) | 0.129 |     0.086 | 1.116 | 1.144</code></pre>
+</div>
+</div>
+<p><strong>Now let’s check the performance of the models.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(lmfit<span class="sc">$</span>fit) <span class="co">#1st Model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="fitting_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(lmall<span class="sc">$</span>fit) <span class="co">#2nd Model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Variable `Component` is not in your data frame :/</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="fitting_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="fitting-a-logistic-model-to-the-categorical-outcome-nausea-using-only-the-main-predictor-runny-nose-of-interest" class="level1">
+<h1><strong>5. Fitting a Logistic Model to the Categorical Outcome (Nausea) using ONLY the Main Predictor (Runny Nose) of Interest</strong></h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>logog<span class="ot">&lt;-</span> <span class="fu">logistic_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>) <span class="co">#Same as above-we need to set the engine commands for this to work</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>logfit<span class="ot">&lt;-</span> logog <span class="sc">%&gt;%</span> </span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(Nausea<span class="sc">~</span>RunnyNose, <span class="at">data=</span>flu)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>logfit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>parsnip model object
+
+
+Call:  stats::glm(formula = Nausea ~ RunnyNose, family = stats::binomial, 
+    data = data)
+
+Coefficients:
+ (Intercept)  RunnyNoseYes  
+    -0.65781       0.05018  
+
+Degrees of Freedom: 729 Total (i.e. Null);  728 Residual
+Null Deviance:      944.7 
+Residual Deviance: 944.6    AIC: 948.6</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(logfit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term         estimate std.error statistic    p.value
+  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1 (Intercept)   -0.658      0.145    -4.53  0.00000589
+2 RunnyNoseYes   0.0502     0.172     0.292 0.770     </code></pre>
+</div>
+</div>
+<p>Let’s Plot</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_summs</span>(lmfit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required namespace: broom.mixed</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="fitting_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="fitting-a-logistic-model-to-the-categorical-outcome-nausea-using-all-important-predictors-of-interest" class="level1">
+<h1><strong>6. Fitting a Logistic Model to the Categorical Outcome (Nausea) using ALL Important Predictors of Interest</strong></h1>
+<p><strong>Let’s follow the same process as above but make a few alterations</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>logallog<span class="ot">&lt;-</span> <span class="fu">logistic_reg</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>) <span class="co">#Same as above-we need to set the engine commands for this to work</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Again, let’s train it to the data</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>logall<span class="ot">&lt;-</span> logallog <span class="sc">%&gt;%</span> <span class="co">#Here we are going to omit the RunnyNose variable and replace it with . to select all for important predictors</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(Nausea<span class="sc">~</span>., <span class="at">data=</span>flu)</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>logall</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>parsnip model object
+
+
+Call:  stats::glm(formula = Nausea ~ ., family = stats::binomial, data = data)
+
+Coefficients:
+           (Intercept)    SwollenLymphNodesYes      ChestCongestionYes  
+              0.222870               -0.251083                0.275554  
+       ChillsSweatsYes      NasalCongestionYes              CoughYNYes  
+              0.274097                0.425817               -0.140423  
+             SneezeYes              FatigueYes      SubjectiveFeverYes  
+              0.176724                0.229062                0.277741  
+           HeadacheYes            WeaknessMild        WeaknessModerate  
+              0.331259               -0.121606                0.310849  
+        WeaknessSevere           WeaknessYNYes      CoughIntensityMild  
+              0.823187                      NA               -0.220794  
+CoughIntensityModerate    CoughIntensitySevere             CoughYN2Yes  
+             -0.362678               -0.950544                      NA  
+           MyalgiaMild         MyalgiaModerate           MyalgiaSevere  
+             -0.004146                0.204743                0.120758  
+          MyalgiaYNYes            RunnyNoseYes               AbPainYes  
+                    NA                0.045324                0.939304  
+          ChestPainYes             DiarrheaYes                EyePnYes  
+              0.070777                1.063934               -0.341991  
+           InsomniaYes             ItchyEyeYes                EarPnYes  
+              0.084175               -0.063364               -0.181719  
+            HearingYes          PharyngitisYes           BreathlessYes  
+              0.323052                0.275364                0.526801  
+            ToothPnYes               VisionYes                VomitYes  
+              0.480649                0.125498                2.458466  
+             WheezeYes                BodyTemp  
+             -0.304435               -0.031246  
+
+Degrees of Freedom: 729 Total (i.e. Null);  695 Residual
+Null Deviance:      944.7 
+Residual Deviance: 751.5    AIC: 821.5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(logall)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 38 × 5
+   term                 estimate std.error statistic p.value
+   &lt;chr&gt;                   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+ 1 (Intercept)             0.223     7.83     0.0285  0.977 
+ 2 SwollenLymphNodesYes   -0.251     0.196   -1.28    0.200 
+ 3 ChestCongestionYes      0.276     0.213    1.30    0.195 
+ 4 ChillsSweatsYes         0.274     0.288    0.952   0.341 
+ 5 NasalCongestionYes      0.426     0.255    1.67    0.0944
+ 6 CoughYNYes             -0.140     0.519   -0.271   0.787 
+ 7 SneezeYes               0.177     0.210    0.840   0.401 
+ 8 FatigueYes              0.229     0.372    0.616   0.538 
+ 9 SubjectiveFeverYes      0.278     0.225    1.23    0.218 
+10 HeadacheYes             0.331     0.285    1.16    0.245 
+# … with 28 more rows</code></pre>
+</div>
+</div>
+<p><strong>Let’s Plot</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_summs</span>(logall, <span class="at">robust=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required namespace: broom.mixed</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="fitting_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="compares-model-results-for-the-categorical-model-with-the-main-predictor-runny-nose-and-all-predictors" class="level1">
+<h1><strong>7. Compares Model Results for the Categorical Model with the Main Predictor (Runny Nose) and ALL Predictors</strong></h1>
+<p><strong>Comparing</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">compare_performance</span>(logfit, logall)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in predict.lm(object, newdata, se.fit, scale = 1, type = if (type == :
+prediction from a rank-deficient fit may be misleading
+
+Warning in predict.lm(object, newdata, se.fit, scale = 1, type = if (type == :
+prediction from a rank-deficient fit may be misleading
+
+Warning in predict.lm(object, newdata, se.fit, scale = 1, type = if (type == :
+prediction from a rank-deficient fit may be misleading
+
+Warning in predict.lm(object, newdata, se.fit, scale = 1, type = if (type == :
+prediction from a rank-deficient fit may be misleading</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Comparison of Model Performance Indices
+
+Name   | Model | AIC (weights) | AICc (weights) | BIC (weights) | Tjur's R2 |  RMSE | Sigma | Log_loss | Score_log | Score_spherical |   PCP
+--------------------------------------------------------------------------------------------------------------------------------------------
+logfit |  _glm | 948.6 (&lt;.001) |  948.6 (&lt;.001) | 957.8 (&gt;.999) | 1.169e-04 | 0.477 | 1.139 |    0.647 |  -107.871 |           0.012 | 0.545
+logall |  _glm | 821.5 (&gt;.999) |  825.1 (&gt;.999) | 982.2 (&lt;.001) |     0.247 | 0.414 | 1.040 |    0.515 |      -Inf |           0.002 | 0.658</code></pre>
+</div>
+</div>
+<p><strong>Let’s Visualize these Comparisons</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(logfit<span class="sc">$</span>fit) <span class="co">#Model 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="fitting_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(logall<span class="sc">$</span>fit) <span class="co">#Model 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Variable `Component` is not in your data frame :/</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="fitting_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
