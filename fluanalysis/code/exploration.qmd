@@ -1,6 +1,8 @@
 ---
 title: "Brian McKay's Flu Analysis Data: Exploration"
-editor: visual
+output: 
+  html_document:
+    toc: FALSE
 ---
 
 # Let's Begin with some Data Exploration

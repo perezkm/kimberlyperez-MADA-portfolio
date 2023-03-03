@@ -1,6 +1,8 @@
 ---
 title: "Brian McKay's Flu Analysis Data: Wrangling"
-editor: visual
+output: 
+  html_document:
+    toc: FALSE
 ---
 
 # Let's Begin with some Data Wrangling
