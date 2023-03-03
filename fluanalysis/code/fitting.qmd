@@ -21,6 +21,7 @@ library(ggplot2) #Graphs/Visualization
 library(tidymodels) #For modeling
 library(jtools)
 library(broom)
+library(broom.mixed)
 ```
 
 # **1. Loading Cleaned Data**
