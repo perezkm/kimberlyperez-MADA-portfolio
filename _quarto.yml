@@ -8,14 +8,6 @@ website:
     left:
       - text: "About Me"
         href: ./aboutme.html
-      - text: "Flu Analysis"
-        menu:
-          - text: "Wrangling"
-            href: ./fluanalysis/code/wrangling.html
-          - text: "Exploration"
-            href: ./fluanalysis/code/exploration.html
-          - text: "Fitting"
-            href: ./fluanalysis/code/fitting.html
       - text: "Projects"
         menu:
           - text: "R Coding Exercise"
@@ -26,6 +18,14 @@ website:
             href: ./tidytuesday_exercise.html
           - text: "Data Analysis Exercise"
             href: ./dataanalysis_exercise.html
+      - text: "Flu Analysis"
+        menu:
+          - text: "Wrangling"
+            href: ./fluanalysis/code/wrangling.html
+          - text: "Exploration"
+            href: ./fluanalysis/code/exploration.html
+          - text: "Fitting"
+            href: ./fluanalysis/code/fitting.html
     right:
       - icon: github 
         href: https://github.com/perezkm/kimberlyperez-MADA-portfolio        
