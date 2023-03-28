@@ -284,3 +284,117 @@ pred_RNfitTest %>%
 pred_RNfitTest %>% #Let's check the performance <0.5= not useful, ~0.7= useful, 1= perfect
   roc_auc(truth= Nausea, .pred_No) #Sitting at 0.52 ROC-AUC is not useful
 ```
+
+
+# This section added by SARA BENIST
+
+Now, we will be fitting models and predicting `BodyTemp` from all symptoms.
+
+## Create recipe with all symptoms
+
+Following the same steps as above:
+
+```{r}
+#create recipe using all symptoms as predictors of body temp
+flu_recBTAS <- 
+  recipe(BodyTemp ~ ., data = train_data_flu)
+
+#set model
+ln_mod <- linear_reg() %>% 
+  set_engine("glm")
+
+#create work flow
+flu_wflowBTAS <-
+  workflow() %>% 
+  add_model(ln_mod) %>% 
+  add_recipe(flu_recBTAS)
+
+#create fitted model
+flu_fitBTAS <-
+  flu_wflowBTAS %>% 
+  fit(data = train_data_flu)
+
+#check fitted model
+flu_fitBTAS %>% 
+  extract_fit_parsnip() %>% 
+  tidy()
+```
+Here, we can see the fitted model predicts Body Temperature from all symptoms with most predictors not being statistically significant. Estimates cannot be directly compared without standardizing the variables. 
+
+## Predictions from trained model
+
+We can also make predictions using the `flu_fitBTAS` model and the `test_data_flu`.
+
+```{r}
+#create predictions
+flu_augBTAS <- augment(flu_fitBTAS, test_data_flu)
+
+#check RMSE as metric for model performance
+flu_augBTAS %>% 
+  rmse(truth = BodyTemp, estimate = .pred)
+
+```
+The root mean square error has an estimate of 1.230, indicating this would not be a good model for the data. 
+
+We can also use the `train_data_flu` data to make predictions. 
+```{r}
+#predict from training data
+flu_augRN2 <- augment(flu_fitBTAS, train_data_flu)
+
+#generate RMSE for model performance
+flu_augRN2 %>% 
+  rmse(truth = BodyTemp, estimate = .pred)
+```
+The RMSE is lower for the train data, but still not an ideal value.
+
+## Create recipe with Runny Nose 
+Follow the same steps with RunnyNose as the predictor.
+
+```{r}
+#create recipe using RunnyNose as predictor of body temp
+flu_recBTRN <- 
+  recipe(BodyTemp ~ RunnyNose, data = train_data_flu)
+
+#set model
+ln_mod <- linear_reg() %>% 
+  set_engine("glm")
+
+#create work flow
+flu_wflowBTRN <-
+  workflow() %>% 
+  add_model(ln_mod) %>% 
+  add_recipe(flu_recBTRN)
+
+#create fitted model
+flu_fitBTRN <-
+  flu_wflowBTRN %>% 
+  fit(data = train_data_flu)
+
+#check fitted model
+flu_fitBTRN %>% 
+  extract_fit_parsnip() %>% 
+  tidy()
+```
+Here, the model predicts Body Temperature from Runny Nose. Having a runny nose appears to predict a lower body temperature by 0.246 degrees. 
+
+## Predictions from trained model
+```{r}
+#create predictions
+flu_augBTRN <- augment(flu_fitBTRN, test_data_flu)
+
+#check RMSE as metric for model performance
+flu_augBTRN %>% 
+  rmse(truth = BodyTemp, estimate = .pred)
+
+```
+The RMSE is similar to the all symptoms model with an estimate of 1.299.
+
+```{r}
+#predict from training data
+flu_augRN3 <- augment(flu_fitBTRN, train_data_flu)
+
+#generate RMSE for model performance
+flu_augRN3 %>% 
+  rmse(truth = BodyTemp, estimate = .pred)
+```
+Using the `train_data_flu` dataset to predict, the RMSE is lower at 1.149. None of these models appear to be productive at predicting body temperature. 
