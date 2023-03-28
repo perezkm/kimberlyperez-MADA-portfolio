@@ -1,0 +1,286 @@
+---
+title: "Flu Analysis Data: Model Evaluation"
+editor: visual
+---
+
+**Let's Begin with Model Evaluation**
+
+## **But first, let's load some packages...**
+
+```{r}
+library(dplyr) #Data wrangling 
+library(tidyr) #Helps with data wrangling
+library(here) #Setting paths
+library(tidyverse) #Data transformation
+library(ggplot2) #Graphs/Visualization
+library(tidymodels) #For modeling
+```
+
+# **1. Reading in my Cleaned Data**
+
+```{r}
+flu_ME<-readRDS(here("fluanalysis","processed_data", "SympAct_cleaned.rds")) #Loading in the data
+
+glimpse(flu_ME) #Looking at the Data 
+```
+
+# **2. Splitting the Data**
+
+```{r}
+set.seed(321)
+data_split_ME<- initial_split(flu_ME, prop=3/4)
+
+train_data_flu<- training(data_split_ME)
+test_data_flu<- testing(data_split_ME)
+```
+
+# **3. Fitting a Model with a Recipe \[Trained Data\]**
+
+```{r}
+#Creating the recipe 
+flu_recipe<- recipe(Nausea ~ ., data=train_data_flu)
+```
+
+# **4. Workflow Creation \[Trained Data\]**
+
+```{r}
+#Now Let's set a model
+log_flu<- logistic_reg() %>%
+  set_engine("glm")
+
+#Creating Workflow
+flu_WF<- workflow() %>% 
+  add_model (log_flu) %>%
+  add_recipe(flu_recipe)
+
+#Creation of Single Function
+flu_fit<- 
+  flu_WF %>% 
+  fit(data= train_data_flu)
+
+#Extracting 
+flu_fit %>%
+  extract_fit_parsnip() %>%
+  tidy()
+
+#Predicting 
+predict(flu_fit, train_data_flu)
+
+pred_flufit<- augment(flu_fit, train_data_flu)
+
+pred_flufit %>% 
+  select(Nausea, .pred_No, .pred_Yes)
+```
+
+# **5. ROC Curve (1) \[Trained Data\]**
+
+```{r}
+pred_flufit %>% #Cool!
+  roc_curve(truth= Nausea, .pred_No) %>%
+  autoplot()
+```
+
+**Let's check the ROC Curve (1) performance**
+
+```{r}
+pred_flufit %>%
+  roc_auc(truth= Nausea, .pred_No) #Sitting at 0.78 ROC-AUC seems to be useful 
+```
+
+**ROC Curve (2) \[Trained Data\]**
+
+```{r}
+pred_flufit %>% 
+  roc_curve(truth= Nausea, .pred_Yes) %>%
+  autoplot()
+```
+
+**Let's check the ROC Curve (2) performance**
+
+```{r}
+pred_flufit %>%
+  roc_auc(truth= Nausea, .pred_Yes) #Please note the PREDICTOR- Sitting at 0.22 ROC-AUC seems to be no good.
+```
+
+# **6. Let's Do it Again with the Test Data!**
+
+```{r}
+#Creating the recipe 
+flu_recipe_test<- recipe(Nausea ~ ., data=test_data_flu)
+```
+
+**Workflow Creation \[Test Data\]**
+
+```{r}
+#Now Let's set a model
+log_flu_test<- logistic_reg() %>%
+  set_engine("glm")
+
+#Creating Workflow
+flu_WF_test<- workflow() %>% 
+  add_model (log_flu_test) %>%
+  add_recipe(flu_recipe_test)
+
+#Creation of Single Function
+flu_fit_test<- 
+  flu_WF_test %>% 
+  fit(data= test_data_flu)
+
+#Extracting 
+flu_fit_test %>%
+  extract_fit_parsnip() %>%
+  tidy()
+
+#Predicting 
+predict(flu_fit_test, test_data_flu)
+
+pred_flufit_test<- augment(flu_fit_test, test_data_flu)
+
+pred_flufit_test %>% 
+  select(Nausea, .pred_No, .pred_Yes)
+```
+
+**ROC Curve (1) \[Test Data\]**
+
+```{r}
+pred_flufit_test %>% #Let's make the curve
+  roc_curve(truth= Nausea, .pred_No) %>%
+  autoplot()
+```
+
+**Let's check the ROC Curve (1) performance**
+
+```{r}
+pred_flufit_test %>% #Let's check the performance <0.5= not useful, ~0.7= useful, 1= perfect
+  roc_auc(truth= Nausea, .pred_No) #Sitting at 0.86 ROC-AUC is useful and the test data performers better than the trained.
+```
+
+**ROC Curve (2) \[Test Data\]**
+
+```{r}
+pred_flufit_test %>% 
+  roc_curve(truth= Nausea, .pred_Yes) %>%
+  autoplot()
+```
+
+**Let's check the ROC Curve (2) performance**
+
+```{r}
+pred_flufit_test %>%
+  roc_auc(truth= Nausea, .pred_Yes) #Please note the PREDICTOR- Sitting at 0.14 ROC-AUC seems to be no good.
+```
+
+**7. Alternative Model with Categorical Outcome**
+
+**I. Splitting the Data**
+
+```{r}
+set.seed(321)
+data_split_RN<- initial_split(flu_ME, prop=3/4)
+
+train_data_RN<- training(data_split_RN)
+test_data_RN<- testing(data_split_RN)
+```
+
+**II. Fitting a Model with a Recipe \[Trained Data\]**
+
+```{r}
+#Creating the recipe 
+flu_recipe_RN<- recipe(Nausea ~ RunnyNose, data=train_data_RN)
+```
+
+**III. Workflow Creation \[Trained Data\]**
+
+```{r}
+#Now Let's set a model
+log_RN<- logistic_reg() %>%
+  set_engine("glm")
+
+#Creating Workflow
+flu_WF_RN<- workflow() %>% 
+  add_model (log_RN) %>%
+  add_recipe(flu_recipe_RN)
+
+#Creation of Single Function
+flu_fit_RN<- 
+  flu_WF_RN %>% 
+  fit(data= train_data_RN)
+
+#Extracting 
+flu_fit_RN %>%
+  extract_fit_parsnip() %>%
+  tidy()
+```
+
+```{r}
+#Predicting 
+predict(flu_fit_RN, train_data_RN)
+
+pred_RNfit<- augment(flu_fit_RN, train_data_RN)
+
+pred_RNfit %>% 
+  select(Nausea, .pred_No, .pred_Yes)
+```
+
+**IV. ROC Curve (1) \[Runny Nose: Trained Data\]**
+
+```{r}
+pred_RNfit %>% 
+  roc_curve(truth= Nausea, .pred_No) %>%
+  autoplot()
+```
+
+**V. ROC Curve Performance \[Runny Nose: Trained Data\]**
+
+```{r}
+pred_RNfit %>% #Let's check the performance <0.5= not useful, ~0.7= useful, 1= perfect
+  roc_auc(truth= Nausea, .pred_No) #Sitting at 0.51 ROC-AUC is not useful, performers worse than the above.
+```
+
+**IIIa. Workflow Creation \[Test Data\]**
+
+```{r}
+#Now Let's set a model
+log_RNTest<- logistic_reg() %>%
+  set_engine("glm")
+
+#Creating Workflow
+flu_WF_RNTest<- workflow() %>% 
+  add_model (log_RNTest) %>%
+  add_recipe(flu_recipe_RN)
+
+#Creation of Single Function
+flu_fit_RNTest<- 
+  flu_WF_RNTest %>% 
+  fit(data= test_data_RN)
+
+#Extracting 
+flu_fit_RNTest %>%
+  extract_fit_parsnip() %>%
+  tidy()
+```
+
+```{r}
+#Predicting 
+predict(flu_fit_RNTest, test_data_RN)
+
+pred_RNfitTest<- augment(flu_fit_RNTest, test_data_RN)
+
+pred_RNfitTest %>% 
+  select(Nausea, .pred_No, .pred_Yes)
+```
+
+**IVa. ROC Curve \[Runny Nose: Test Data\]**
+
+```{r}
+pred_RNfitTest %>% 
+  roc_curve(truth= Nausea, .pred_No) %>%
+  autoplot()
+```
+
+**Va. ROC Curve Performance \[Runny Nose: Test Data\]**
+
+```{r}
+pred_RNfitTest %>% #Let's check the performance <0.5= not useful, ~0.7= useful, 1= perfect
+  roc_auc(truth= Nausea, .pred_No) #Sitting at 0.52 ROC-AUC is not useful
+```

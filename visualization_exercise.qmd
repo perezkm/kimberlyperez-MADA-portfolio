@@ -55,7 +55,7 @@ nps5<- nps4 %>% #Converting dataset from wide to long
 
 nps_clean<- nps5 %>% #Ranking the parks 
     group_by(year) %>%
-    mutate(Rank = order(order(visitors, decreasing=FALSE))) %>%
+    mutate(Rank = order(order(visitors, decreasing=TRUE))) %>%
     ungroup() %>%
   rename(park_name = `Park Name`)
 ```
@@ -66,15 +66,69 @@ library(ggthemes)
 
 nps_clean$year<-as.numeric(as.character(nps_clean$year)) #Making year numeric
 
-nps_clean %>% ggplot() +geom_line( #
+#Creating df for each of the top parks to overlay on nps_g1
+GSM<- nps_clean [which (nps_clean$park_name=='Great Smoky Mountains NP'),]  
+
+GC<- nps_clean [which (nps_clean$park_name=='Grand Canyon NP'),] 
+
+RMNP<- nps_clean [which (nps_clean$park_name=='Rocky Mountain NP'),] 
+
+YNP<- nps_clean [which (nps_clean$park_name=='Yosemite NP'),]
+
+YSNP<- nps_clean [which (nps_clean$park_name=='Yellowstone NP'),] 
+
+ZNP<- nps_clean [which (nps_clean$park_name=='Zion NP'),] 
+
+ANP<- nps_clean [which (nps_clean$park_name=='Acadia NP'),] 
+	
+HSNP<- nps_clean [which (nps_clean$park_name=='Hot Springs NP'),]
+
+DNP<- nps_clean [which (nps_clean$park_name=='Denali NP & PRES'),]
+
+CCNP<- nps_clean [which (nps_clean$park_name=='Carlsbad Caverns NP'),]
+
+GBNP<- nps_clean [which (nps_clean$park_name=='Great Basin NP'),]
+
+
+nps_g1<- nps_clean %>% ggplot() +geom_line( 
   aes(x = year, y = Rank, color = park_name, group = park_name), color="grey") +
   theme_fivethirtyeight() +
   theme(legend.position = "none") + 
-  scale_y_reverse(breaks=seq(50,1,-25), limits=c(62,0)) + #setting y axis
-  scale_x_continuous(breaks=seq(1925,2000,25),limits=c(1904,2016)) + #setting y axis 
+  scale_y_reverse(breaks=seq(50,1,-25), limits=c(62,-1)) + #setting y axis
+  scale_x_continuous(breaks=seq(1925,2000,25),limits=c(1904,2030)) + #setting y axis 
   xlab("Year") + 
   ylab("Rank") +
   labs(title= "The most popular national parks",
-       subtitle= "National parks ranked by number of visitors in a given year")
+       subtitle= "National parks ranked by number of visitors in a given year") + 
+  geom_line(data=GSM, 
+  aes(x = year, y = Rank, color = park_name, group = park_name), color="darkolivegreen") +
+    annotate("text", x = 2000, y =0, label = "Great Smoky Mountains", color = "darkolivegreen", fontface=2, size=3) +
+  geom_line(data=GC, 
+  aes(x = year, y = Rank, color = park_name, group = park_name), color="deepskyblue4") +
+    annotate("text", x = 2020, y =0.7, label = "Grand Canyon", color = "deepskyblue4", fontface=2, size=3) + 
+  geom_line(data=RMNP, 
+  aes(x = year, y = Rank, color = park_name, group = park_name), color="cyan4")+
+    annotate("text", x = 2021, y =2, label = "Rocky Mountain", color = "cyan4", fontface=2, size= 3) +
+  geom_line(data=YNP, 
+  aes(x = year, y = Rank, color = park_name, group = park_name), color="chartreuse4") +
+  annotate("text", x = 2020, y =3.1, label = "Yosemite", color = "chartreuse4", fontface=2, size= 3) +
+  geom_line(data=YSNP, 
+  aes(x = year, y = Rank, color = park_name, group = park_name), color="orange2") +
+  annotate("text", x = 2019, y =4.1, label = "Yellowstone", color = "orange2", fontface=2, size= 3) +
+  geom_line(data=ZNP, 
+  aes(x = year, y = Rank, color = park_name, group = park_name), color="tomato") +
+  geom_line(data=ANP, 
+  aes(x = year, y = Rank, color = park_name, group = park_name), color="gold1") +
+  geom_line(data=HSNP, 
+  aes(x = year, y = Rank, color = park_name, group = park_name), color="plum3") +
+  geom_line(data=DNP, 
+  aes(x = year, y = Rank, color = park_name, group = park_name), color="mediumpurple1") +
+  geom_line(data=CCNP, 
+  aes(x = year, y = Rank, color = park_name, group = park_name), color="lightskyblue2") +
+  geom_line(data=GBNP, 
+  aes(x = year, y = Rank, color = park_name, group = park_name), color="maroon2")
+  
+
+nps_g1
 ```
 I think I bit off a bit more than I could chew with this graph. But, I am pretty proud of how far I got with it. To make things a little more cohesive, I overrode the color to grey. I plan on continuing work on it tonight with the hopes of adding the 11 parks in color. It is definitely a work in progress!
