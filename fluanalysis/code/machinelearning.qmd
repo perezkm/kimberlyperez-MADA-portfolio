@@ -381,7 +381,7 @@ rf_residuals <- rf_final_fit %>%
 rf_residuals
 ```
 
-# **Predictions (Tuned v. Actual)
+# **Predictions (Tuned v. Actual)**
 ```{r}
 rf_pred_plot <- ggplot(rf_residuals, 
                           aes(x = BodyTemp, 
