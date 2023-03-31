@@ -26,6 +26,11 @@ website:
             href: ./fluanalysis/code/exploration.html
           - text: "Fitting"
             href: ./fluanalysis/code/fitting.html
+          - text: "Model Evaluation"
+            href: ./fluanalysis/code/modeleval.html
+          - text: "Machine Learning"
+            href: ./fluanalysis/code/machinelearning.html
+            
     right:
       - icon: github 
         href: https://github.com/perezkm/kimberlyperez-MADA-portfolio        
