@@ -239,6 +239,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>But first let’s load some packages…</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<<<<<<< Updated upstream
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'gtsummary' was built under R version 4.2.2</code></pre>
 </div>
@@ -247,6 +248,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>Warning: package 'here' was built under R version 4.2.2</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
+=======
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'gtsummary' was built under R version 4.2.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'here' was built under R version 4.2.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+>>>>>>> Stashed changes
 <pre><code>here() starts at C:/Users/Sara/Documents/Documents/Current Classes/MADA/kimberlyperez-MADA-portfolio</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -300,6 +311,9 @@ tidyverse 1.3.2 ──</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'stringr' was built under R version 4.2.2</code></pre>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 </div>
 <div class="cell-output cell-output-stderr">
@@ -307,6 +321,7 @@ tidyverse 1.3.2 ──</code></pre>
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 </div>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -316,6 +331,8 @@ tidyverse 1.3.2 ──</code></pre>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(flu) <span class="co">#Looking at the Data </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 =======
+=======
+>>>>>>> Stashed changes
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>And Load the Data…</strong></p>
@@ -323,6 +340,9 @@ tidyverse 1.3.2 ──</code></pre>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>flu<span class="ot">&lt;-</span><span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"fluanalysis"</span>,<span class="st">"processed_data"</span>, <span class="st">"SympAct_cleaned.rds"</span>)) <span class="co">#Loading in the data</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(flu) <span class="co">#Looking at the Data </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 730
@@ -367,6 +387,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 <p>Here I will create summary statistic tables starting with the dataset as a whole and then the important variables</p>
 <div class="cell">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fulldat<span class="ot">&lt;-</span> <span class="fu">tbl_summary</span>(flu) <span class="co">#Prefer gtsummary to create summary tables over rstatix so i use the tbl_summary function for the whole dataset</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>fulldat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -379,12 +400,23 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 
 <div id="kxowsbseki" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 >>>>>>> Stashed changes
+=======
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>fulldat<span class="ot">&lt;-</span> <span class="fu">tbl_summary</span>(flu) <span class="co">#Prefer gtsummary to create summary tables over rstatix so i use the tbl_summary function for the whole dataset</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>fulldat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="kxowsbseki" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+>>>>>>> Stashed changes
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_table {
+=======
+:where(#kxowsbseki) .gt_table {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_table {
 >>>>>>> Stashed changes
@@ -413,7 +445,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_heading {
+=======
+:where(#kxowsbseki) .gt_heading {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_heading {
 >>>>>>> Stashed changes
@@ -429,7 +465,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_caption {
+=======
+:where(#kxowsbseki) .gt_caption {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_caption {
 >>>>>>> Stashed changes
@@ -438,7 +478,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_title {
+=======
+:where(#kxowsbseki) .gt_title {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_title {
 >>>>>>> Stashed changes
@@ -454,7 +498,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_subtitle {
+=======
+:where(#kxowsbseki) .gt_subtitle {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_subtitle {
 >>>>>>> Stashed changes
@@ -470,7 +518,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_bottom_border {
+=======
+:where(#kxowsbseki) .gt_bottom_border {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_bottom_border {
 >>>>>>> Stashed changes
@@ -480,7 +532,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_col_headings {
+=======
+:where(#kxowsbseki) .gt_col_headings {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_col_headings {
 >>>>>>> Stashed changes
@@ -499,7 +555,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_col_heading {
+=======
+:where(#kxowsbseki) .gt_col_heading {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_col_heading {
 >>>>>>> Stashed changes
@@ -523,7 +583,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_column_spanner_outer {
+=======
+:where(#kxowsbseki) .gt_column_spanner_outer {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_column_spanner_outer {
 >>>>>>> Stashed changes
@@ -539,6 +603,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
@@ -548,6 +613,17 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 :where(#hqspwhidct) .gt_column_spanner {
+=======
+:where(#kxowsbseki) .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+:where(#kxowsbseki) .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+:where(#kxowsbseki) .gt_column_spanner {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_column_spanner_outer:first-child {
   padding-left: 0;
@@ -571,7 +647,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_group_heading {
+=======
+:where(#kxowsbseki) .gt_group_heading {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_group_heading {
 >>>>>>> Stashed changes
@@ -601,7 +681,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_empty_group_heading {
+=======
+:where(#kxowsbseki) .gt_empty_group_heading {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_empty_group_heading {
 >>>>>>> Stashed changes
@@ -620,6 +704,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_from_md > :first-child {
   margin-top: 0;
 }
@@ -629,6 +714,17 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 :where(#hqspwhidct) .gt_row {
+=======
+:where(#kxowsbseki) .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+:where(#kxowsbseki) .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+:where(#kxowsbseki) .gt_row {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_from_md > :first-child {
   margin-top: 0;
@@ -659,7 +755,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_stub {
+=======
+:where(#kxowsbseki) .gt_stub {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_stub {
 >>>>>>> Stashed changes
@@ -676,7 +776,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_stub_row_group {
+=======
+:where(#kxowsbseki) .gt_stub_row_group {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_stub_row_group {
 >>>>>>> Stashed changes
@@ -694,11 +798,19 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
 :where(#hqspwhidct) .gt_summary_row {
+=======
+:where(#kxowsbseki) .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+:where(#kxowsbseki) .gt_summary_row {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_row_group_first td {
   border-top-width: 2px;
@@ -716,7 +828,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_first_summary_row {
+=======
+:where(#kxowsbseki) .gt_first_summary_row {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_first_summary_row {
 >>>>>>> Stashed changes
@@ -725,11 +841,19 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
 :where(#hqspwhidct) .gt_last_summary_row {
+=======
+:where(#kxowsbseki) .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+:where(#kxowsbseki) .gt_last_summary_row {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_first_summary_row.thick {
   border-top-width: 2px;
@@ -747,7 +871,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_grand_summary_row {
+=======
+:where(#kxowsbseki) .gt_grand_summary_row {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_grand_summary_row {
 >>>>>>> Stashed changes
@@ -761,7 +889,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_first_grand_summary_row {
+=======
+:where(#kxowsbseki) .gt_first_grand_summary_row {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_first_grand_summary_row {
 >>>>>>> Stashed changes
@@ -775,11 +907,19 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
 :where(#hqspwhidct) .gt_table_body {
+=======
+:where(#kxowsbseki) .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+:where(#kxowsbseki) .gt_table_body {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
@@ -796,7 +936,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_footnotes {
+=======
+:where(#kxowsbseki) .gt_footnotes {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_footnotes {
 >>>>>>> Stashed changes
@@ -814,7 +958,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_footnote {
+=======
+:where(#kxowsbseki) .gt_footnote {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_footnote {
 >>>>>>> Stashed changes
@@ -827,7 +975,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_sourcenotes {
+=======
+:where(#kxowsbseki) .gt_sourcenotes {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_sourcenotes {
 >>>>>>> Stashed changes
@@ -845,7 +997,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_sourcenote {
+=======
+:where(#kxowsbseki) .gt_sourcenote {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_sourcenote {
 >>>>>>> Stashed changes
@@ -857,6 +1013,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_left {
   text-align: left;
 }
@@ -867,6 +1024,8 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 
 :where(#hqspwhidct) .gt_right {
 =======
+=======
+>>>>>>> Stashed changes
 :where(#kxowsbseki) .gt_left {
   text-align: left;
 }
@@ -876,11 +1035,15 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 :where(#kxowsbseki) .gt_right {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_font_normal {
   font-weight: normal;
@@ -900,6 +1063,8 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 
 :where(#hqspwhidct) .gt_footnote_marks {
 =======
+=======
+>>>>>>> Stashed changes
 :where(#kxowsbseki) .gt_font_normal {
   font-weight: normal;
 }
@@ -917,6 +1082,9 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 :where(#kxowsbseki) .gt_footnote_marks {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   font-style: italic;
   font-weight: normal;
@@ -925,7 +1093,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_asterisk {
+=======
+:where(#kxowsbseki) .gt_asterisk {
+>>>>>>> Stashed changes
 =======
 :where(#kxowsbseki) .gt_asterisk {
 >>>>>>> Stashed changes
@@ -933,6 +1105,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   vertical-align: 0;
 }
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 :where(#hqspwhidct) .gt_indent_1 {
   text-indent: 5px;
@@ -952,6 +1125,8 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 
 :where(#hqspwhidct) .gt_indent_5 {
 =======
+=======
+>>>>>>> Stashed changes
 :where(#kxowsbseki) .gt_indent_1 {
   text-indent: 5px;
 }
@@ -969,6 +1144,9 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 :where(#kxowsbseki) .gt_indent_5 {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   text-indent: 25px;
 }
@@ -1081,6 +1259,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 </div>
 </div>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#NOTE for KP: Use flextable for customization epiRhandbook</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Summary Tables for Body Temperature</strong></p>
@@ -1093,10 +1272,18 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span> (flu<span class="sc">$</span>BodyTemp) <span class="co">#Quick and basic overview </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 >>>>>>> Stashed changes
+=======
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#NOTE for KP: Use flextable for customization epiRhandbook</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Summary Tables for Body Temperature</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span> (flu<span class="sc">$</span>BodyTemp) <span class="co">#Quick and basic overview </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+>>>>>>> Stashed changes
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   97.20   98.20   98.50   98.94   99.30  103.10 </code></pre>
 </div>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>bodtemp<span class="ot">&lt;-</span> flu <span class="sc">%&gt;%</span> <span class="fu">tbl_summary</span>(BodyTemp) <span class="co">#Breaking things down a bit more- interesting when broken down by temp group </span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>bodtemp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1104,18 +1291,27 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 
 <div id="txvjzhnyks" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 =======
+=======
+>>>>>>> Stashed changes
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>bodtemp<span class="ot">&lt;-</span> flu <span class="sc">%&gt;%</span> <span class="fu">tbl_summary</span>(BodyTemp) <span class="co">#Breaking things down a bit more- interesting when broken down by temp group </span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>bodtemp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div id="jusumrbwcz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_table {
+=======
+:where(#jusumrbwcz) .gt_table {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_table {
 >>>>>>> Stashed changes
@@ -1144,7 +1340,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_heading {
+=======
+:where(#jusumrbwcz) .gt_heading {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_heading {
 >>>>>>> Stashed changes
@@ -1160,7 +1360,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_caption {
+=======
+:where(#jusumrbwcz) .gt_caption {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_caption {
 >>>>>>> Stashed changes
@@ -1169,7 +1373,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_title {
+=======
+:where(#jusumrbwcz) .gt_title {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_title {
 >>>>>>> Stashed changes
@@ -1185,7 +1393,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_subtitle {
+=======
+:where(#jusumrbwcz) .gt_subtitle {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_subtitle {
 >>>>>>> Stashed changes
@@ -1201,7 +1413,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_bottom_border {
+=======
+:where(#jusumrbwcz) .gt_bottom_border {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_bottom_border {
 >>>>>>> Stashed changes
@@ -1211,7 +1427,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_col_headings {
+=======
+:where(#jusumrbwcz) .gt_col_headings {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_col_headings {
 >>>>>>> Stashed changes
@@ -1230,7 +1450,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_col_heading {
+=======
+:where(#jusumrbwcz) .gt_col_heading {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_col_heading {
 >>>>>>> Stashed changes
@@ -1254,7 +1478,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_column_spanner_outer {
+=======
+:where(#jusumrbwcz) .gt_column_spanner_outer {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_column_spanner_outer {
 >>>>>>> Stashed changes
@@ -1270,6 +1498,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
@@ -1279,6 +1508,17 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 :where(#txvjzhnyks) .gt_column_spanner {
+=======
+:where(#jusumrbwcz) .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+:where(#jusumrbwcz) .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+:where(#jusumrbwcz) .gt_column_spanner {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_column_spanner_outer:first-child {
   padding-left: 0;
@@ -1302,7 +1542,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_group_heading {
+=======
+:where(#jusumrbwcz) .gt_group_heading {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_group_heading {
 >>>>>>> Stashed changes
@@ -1332,7 +1576,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_empty_group_heading {
+=======
+:where(#jusumrbwcz) .gt_empty_group_heading {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_empty_group_heading {
 >>>>>>> Stashed changes
@@ -1351,6 +1599,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_from_md > :first-child {
   margin-top: 0;
 }
@@ -1361,6 +1610,8 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 
 :where(#txvjzhnyks) .gt_row {
 =======
+=======
+>>>>>>> Stashed changes
 :where(#jusumrbwcz) .gt_from_md > :first-child {
   margin-top: 0;
 }
@@ -1370,6 +1621,9 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 :where(#jusumrbwcz) .gt_row {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   padding-top: 8px;
   padding-bottom: 8px;
@@ -1390,7 +1644,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_stub {
+=======
+:where(#jusumrbwcz) .gt_stub {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_stub {
 >>>>>>> Stashed changes
@@ -1407,7 +1665,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_stub_row_group {
+=======
+:where(#jusumrbwcz) .gt_stub_row_group {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_stub_row_group {
 >>>>>>> Stashed changes
@@ -1425,11 +1687,19 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
 :where(#txvjzhnyks) .gt_summary_row {
+=======
+:where(#jusumrbwcz) .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+:where(#jusumrbwcz) .gt_summary_row {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_row_group_first td {
   border-top-width: 2px;
@@ -1447,7 +1717,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_first_summary_row {
+=======
+:where(#jusumrbwcz) .gt_first_summary_row {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_first_summary_row {
 >>>>>>> Stashed changes
@@ -1456,11 +1730,19 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
 :where(#txvjzhnyks) .gt_last_summary_row {
+=======
+:where(#jusumrbwcz) .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+:where(#jusumrbwcz) .gt_last_summary_row {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_first_summary_row.thick {
   border-top-width: 2px;
@@ -1478,7 +1760,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_grand_summary_row {
+=======
+:where(#jusumrbwcz) .gt_grand_summary_row {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_grand_summary_row {
 >>>>>>> Stashed changes
@@ -1492,7 +1778,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_first_grand_summary_row {
+=======
+:where(#jusumrbwcz) .gt_first_grand_summary_row {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_first_grand_summary_row {
 >>>>>>> Stashed changes
@@ -1506,11 +1796,19 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
 :where(#txvjzhnyks) .gt_table_body {
+=======
+:where(#jusumrbwcz) .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+:where(#jusumrbwcz) .gt_table_body {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
@@ -1527,7 +1825,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_footnotes {
+=======
+:where(#jusumrbwcz) .gt_footnotes {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_footnotes {
 >>>>>>> Stashed changes
@@ -1545,7 +1847,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_footnote {
+=======
+:where(#jusumrbwcz) .gt_footnote {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_footnote {
 >>>>>>> Stashed changes
@@ -1558,7 +1864,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_sourcenotes {
+=======
+:where(#jusumrbwcz) .gt_sourcenotes {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_sourcenotes {
 >>>>>>> Stashed changes
@@ -1576,7 +1886,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_sourcenote {
+=======
+:where(#jusumrbwcz) .gt_sourcenote {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_sourcenote {
 >>>>>>> Stashed changes
@@ -1588,6 +1902,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_left {
   text-align: left;
 }
@@ -1598,6 +1913,8 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 
 :where(#txvjzhnyks) .gt_right {
 =======
+=======
+>>>>>>> Stashed changes
 :where(#jusumrbwcz) .gt_left {
   text-align: left;
 }
@@ -1607,11 +1924,15 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 :where(#jusumrbwcz) .gt_right {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_font_normal {
   font-weight: normal;
@@ -1631,6 +1952,8 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 
 :where(#txvjzhnyks) .gt_footnote_marks {
 =======
+=======
+>>>>>>> Stashed changes
 :where(#jusumrbwcz) .gt_font_normal {
   font-weight: normal;
 }
@@ -1648,6 +1971,9 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 :where(#jusumrbwcz) .gt_footnote_marks {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   font-style: italic;
   font-weight: normal;
@@ -1656,7 +1982,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_asterisk {
+=======
+:where(#jusumrbwcz) .gt_asterisk {
+>>>>>>> Stashed changes
 =======
 :where(#jusumrbwcz) .gt_asterisk {
 >>>>>>> Stashed changes
@@ -1664,6 +1994,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   vertical-align: 0;
 }
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 :where(#txvjzhnyks) .gt_indent_1 {
   text-indent: 5px;
@@ -1683,6 +2014,8 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 
 :where(#txvjzhnyks) .gt_indent_5 {
 =======
+=======
+>>>>>>> Stashed changes
 :where(#jusumrbwcz) .gt_indent_1 {
   text-indent: 5px;
 }
@@ -1700,6 +2033,9 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 :where(#jusumrbwcz) .gt_indent_5 {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   text-indent: 25px;
 }
@@ -4277,7 +4613,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 <p><strong>Summary Tables for Nausea</strong></p>
 <div class="cell">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span> (flu<span class="sc">$</span>Nausea) <span class="co">#Quick and basic overview </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+=======
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span> (flu<span class="sc">$</span>Nausea) <span class="co">#Quick and basic overview </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+>>>>>>> Stashed changes
 =======
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span> (flu<span class="sc">$</span>Nausea) <span class="co">#Quick and basic overview </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 >>>>>>> Stashed changes
@@ -4286,24 +4626,34 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 475 255 </code></pre>
 </div>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>naus<span class="ot">&lt;-</span> flu <span class="sc">%&gt;%</span> <span class="fu">tbl_summary</span>(Nausea) <span class="co">#Breaking things down a bit more</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>naus</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div id="jbcvfimgko" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 =======
+=======
+>>>>>>> Stashed changes
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>naus<span class="ot">&lt;-</span> flu <span class="sc">%&gt;%</span> <span class="fu">tbl_summary</span>(Nausea) <span class="co">#Breaking things down a bit more</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>naus</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div id="wsdfhodrol" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_table {
+=======
+:where(#wsdfhodrol) .gt_table {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_table {
 >>>>>>> Stashed changes
@@ -4332,7 +4682,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_heading {
+=======
+:where(#wsdfhodrol) .gt_heading {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_heading {
 >>>>>>> Stashed changes
@@ -4348,7 +4702,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_caption {
+=======
+:where(#wsdfhodrol) .gt_caption {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_caption {
 >>>>>>> Stashed changes
@@ -4357,7 +4715,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_title {
+=======
+:where(#wsdfhodrol) .gt_title {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_title {
 >>>>>>> Stashed changes
@@ -4373,7 +4735,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_subtitle {
+=======
+:where(#wsdfhodrol) .gt_subtitle {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_subtitle {
 >>>>>>> Stashed changes
@@ -4389,7 +4755,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_bottom_border {
+=======
+:where(#wsdfhodrol) .gt_bottom_border {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_bottom_border {
 >>>>>>> Stashed changes
@@ -4399,7 +4769,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_col_headings {
+=======
+:where(#wsdfhodrol) .gt_col_headings {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_col_headings {
 >>>>>>> Stashed changes
@@ -4418,7 +4792,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_col_heading {
+=======
+:where(#wsdfhodrol) .gt_col_heading {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_col_heading {
 >>>>>>> Stashed changes
@@ -4442,7 +4820,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_column_spanner_outer {
+=======
+:where(#wsdfhodrol) .gt_column_spanner_outer {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_column_spanner_outer {
 >>>>>>> Stashed changes
@@ -4458,6 +4840,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
@@ -4467,6 +4850,17 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 :where(#jbcvfimgko) .gt_column_spanner {
+=======
+:where(#wsdfhodrol) .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+:where(#wsdfhodrol) .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+:where(#wsdfhodrol) .gt_column_spanner {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_column_spanner_outer:first-child {
   padding-left: 0;
@@ -4490,7 +4884,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_group_heading {
+=======
+:where(#wsdfhodrol) .gt_group_heading {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_group_heading {
 >>>>>>> Stashed changes
@@ -4520,7 +4918,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_empty_group_heading {
+=======
+:where(#wsdfhodrol) .gt_empty_group_heading {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_empty_group_heading {
 >>>>>>> Stashed changes
@@ -4539,6 +4941,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_from_md > :first-child {
   margin-top: 0;
 }
@@ -4548,6 +4951,17 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 :where(#jbcvfimgko) .gt_row {
+=======
+:where(#wsdfhodrol) .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+:where(#wsdfhodrol) .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+:where(#wsdfhodrol) .gt_row {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_from_md > :first-child {
   margin-top: 0;
@@ -4578,7 +4992,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_stub {
+=======
+:where(#wsdfhodrol) .gt_stub {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_stub {
 >>>>>>> Stashed changes
@@ -4595,7 +5013,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_stub_row_group {
+=======
+:where(#wsdfhodrol) .gt_stub_row_group {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_stub_row_group {
 >>>>>>> Stashed changes
@@ -4613,17 +5035,23 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
 :where(#jbcvfimgko) .gt_summary_row {
 =======
+=======
+>>>>>>> Stashed changes
 :where(#wsdfhodrol) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
 :where(#wsdfhodrol) .gt_summary_row {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   color: #333333;
   background-color: #FFFFFF;
@@ -4635,7 +5063,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_first_summary_row {
+=======
+:where(#wsdfhodrol) .gt_first_summary_row {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_first_summary_row {
 >>>>>>> Stashed changes
@@ -4644,17 +5076,23 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
 :where(#jbcvfimgko) .gt_last_summary_row {
 =======
+=======
+>>>>>>> Stashed changes
 :where(#wsdfhodrol) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
 :where(#wsdfhodrol) .gt_last_summary_row {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   padding-top: 8px;
   padding-bottom: 8px;
@@ -4666,7 +5104,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_grand_summary_row {
+=======
+:where(#wsdfhodrol) .gt_grand_summary_row {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_grand_summary_row {
 >>>>>>> Stashed changes
@@ -4680,7 +5122,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_first_grand_summary_row {
+=======
+:where(#wsdfhodrol) .gt_first_grand_summary_row {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_first_grand_summary_row {
 >>>>>>> Stashed changes
@@ -4694,11 +5140,19 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
 :where(#jbcvfimgko) .gt_table_body {
+=======
+:where(#wsdfhodrol) .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+:where(#wsdfhodrol) .gt_table_body {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
@@ -4715,7 +5169,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_footnotes {
+=======
+:where(#wsdfhodrol) .gt_footnotes {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_footnotes {
 >>>>>>> Stashed changes
@@ -4733,7 +5191,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_footnote {
+=======
+:where(#wsdfhodrol) .gt_footnote {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_footnote {
 >>>>>>> Stashed changes
@@ -4746,7 +5208,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_sourcenotes {
+=======
+:where(#wsdfhodrol) .gt_sourcenotes {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_sourcenotes {
 >>>>>>> Stashed changes
@@ -4764,7 +5230,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_sourcenote {
+=======
+:where(#wsdfhodrol) .gt_sourcenote {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_sourcenote {
 >>>>>>> Stashed changes
@@ -4775,6 +5245,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   padding-right: 5px;
 }
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_left {
   text-align: left;
@@ -4796,10 +5267,22 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 
 :where(#wsdfhodrol) .gt_right {
 >>>>>>> Stashed changes
+=======
+:where(#wsdfhodrol) .gt_left {
+  text-align: left;
+}
+
+:where(#wsdfhodrol) .gt_center {
+  text-align: center;
+}
+
+:where(#wsdfhodrol) .gt_right {
+>>>>>>> Stashed changes
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_font_normal {
   font-weight: normal;
@@ -4819,6 +5302,8 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 
 :where(#jbcvfimgko) .gt_footnote_marks {
 =======
+=======
+>>>>>>> Stashed changes
 :where(#wsdfhodrol) .gt_font_normal {
   font-weight: normal;
 }
@@ -4836,6 +5321,9 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 :where(#wsdfhodrol) .gt_footnote_marks {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   font-style: italic;
   font-weight: normal;
@@ -4844,7 +5332,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_asterisk {
+=======
+:where(#wsdfhodrol) .gt_asterisk {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_asterisk {
 >>>>>>> Stashed changes
@@ -4852,6 +5344,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   vertical-align: 0;
 }
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 :where(#jbcvfimgko) .gt_indent_1 {
   text-indent: 5px;
@@ -4870,6 +5363,25 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 }
 
 :where(#jbcvfimgko) .gt_indent_5 {
+=======
+:where(#wsdfhodrol) .gt_indent_1 {
+  text-indent: 5px;
+}
+
+:where(#wsdfhodrol) .gt_indent_2 {
+  text-indent: 10px;
+}
+
+:where(#wsdfhodrol) .gt_indent_3 {
+  text-indent: 15px;
+}
+
+:where(#wsdfhodrol) .gt_indent_4 {
+  text-indent: 20px;
+}
+
+:where(#wsdfhodrol) .gt_indent_5 {
+>>>>>>> Stashed changes
 =======
 :where(#wsdfhodrol) .gt_indent_1 {
   text-indent: 5px;
@@ -5047,6 +5559,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 <h1><strong>Histogram/Density Plot for our Continuous Variable- Body Temperature</strong></h1>
 <div class="cell">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Basic histogram</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>cv<span class="ot">&lt;-</span> <span class="fu">ggplot</span>(flu, <span class="fu">aes</span>(<span class="at">x=</span>BodyTemp)) <span class="sc">+</span><span class="fu">geom_histogram</span>() <span class="co">#Basic histogram</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -5071,6 +5584,8 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 <span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>cvd </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 =======
+=======
+>>>>>>> Stashed changes
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Basic histogram</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>cv<span class="ot">&lt;-</span> <span class="fu">ggplot</span>(flu, <span class="fu">aes</span>(<span class="at">x=</span>BodyTemp)) <span class="sc">+</span><span class="fu">geom_histogram</span>() <span class="co">#Basic histogram</span></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -5094,6 +5609,9 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 <span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Number of Individuals"</span>)</span>
 <span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>cvd </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid" width="672"></p>
@@ -5103,6 +5621,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 <section id="predictor-variables-and-continuous-outcome-of-interest" class="level1">
 <h1><strong>Predictor Variables and Continuous Outcome of Interest</strong></h1>
 <div class="cell">
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Subjective Fever and Body Temperature</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>pvoi0<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
@@ -5192,6 +5711,48 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-7-4.png" class="img-fluid" width="672"></p>
 </div>
+=======
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Subjective Fever and Body Temperature</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>pvoi0<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>SubjectiveFever,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>BodyTemp)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Subjective Fever"</span>, <span class="at">y=</span><span class="st">"Body Temperature (in *F)"</span>, <span class="at">title=</span><span class="st">"Subjective Fever and Body Temperature"</span>)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>pvoi0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="exploration_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Swollen Lymph Nodes and Body Temperature</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>pvoi1<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>SwollenLymphNodes,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>BodyTemp)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Swollen Lymph Nodes Present"</span>, <span class="at">y=</span><span class="st">"Body Temperature (in *F)"</span>, <span class="at">title=</span><span class="st">"Swollen Lymph Nodes and Body Temperature"</span>)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>pvoi1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="exploration_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Myalgia and Body Temperature </span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>pvoi2<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>Myalgia,</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>BodyTemp)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Severity of Myalgia"</span>, <span class="at">y=</span><span class="st">"Body Temperature (in *F)"</span>, <span class="at">title=</span><span class="st">"Myalgia and Body Temperature"</span>)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>pvoi2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="exploration_files/figure-html/unnamed-chunk-7-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pharyngitis and Body Temperature</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>pvoi3<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>Pharyngitis,</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>BodyTemp)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Pharyngitis"</span>, <span class="at">y=</span><span class="st">"Body Temperature (in *F)"</span>, <span class="at">title=</span><span class="st">"Pharyngitis and Body Temperature"</span>)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>pvoi3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="exploration_files/figure-html/unnamed-chunk-7-4.png" class="img-fluid" width="672"></p>
+</div>
+>>>>>>> Stashed changes
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Diarrhea and Body Temperature</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>pvoi4<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(</span>
@@ -5199,6 +5760,9 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 <span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>BodyTemp)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Diarrhea"</span>, <span class="at">y=</span><span class="st">"Body Temperature (in *F)"</span>, <span class="at">title=</span><span class="st">"Diarrhea and Body Temperature"</span>)</span>
 <span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>pvoi4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-7-5.png" class="img-fluid" width="672"></p>
@@ -5210,6 +5774,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 <h1><strong>Predictor Variables and Categorical Outcome of Interest</strong></h1>
 <div class="cell">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Myalgia and Nausea </span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>pvoi5<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_count</span>(<span class="fu">aes</span>(</span>
@@ -5218,6 +5783,8 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 <span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>pvoi5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 =======
+=======
+>>>>>>> Stashed changes
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Myalgia and Nausea </span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>pvoi5<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_count</span>(<span class="fu">aes</span>(</span>
@@ -5245,10 +5812,14 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 <span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>SwollenLymphNodes)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Nausea"</span>, <span class="at">y=</span><span class="st">"Swollen Lymph Nodes"</span>, <span class="at">title=</span><span class="st">"Swollen Lymph Nodes and Nausea"</span>)</span>
 <span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>pvoi7</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diarrhea and Nausea</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>pvoi6<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
@@ -5258,6 +5829,8 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 <span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>pvoi6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 =======
+=======
+>>>>>>> Stashed changes
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cough Intensity and Nausea</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>pvoi8<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_count</span>(<span class="fu">aes</span>(</span>
@@ -5265,10 +5838,14 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 <span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>CoughIntensity)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Nausea"</span>, <span class="at">y=</span><span class="st">"Cough Intensity"</span>, <span class="at">title=</span><span class="st">"Cough Intensity and Nausea"</span>)</span>
 <span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>pvoi8</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid" width="672"></p>
 </div>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Swollen Lymph Nodes and Nausea</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>pvoi7<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
@@ -5298,6 +5875,8 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 <span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>pvoi10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 =======
+=======
+>>>>>>> Stashed changes
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Subjective Fever and Nauesea</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>pvoi10<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_count</span>(<span class="fu">aes</span>(</span>
@@ -5305,6 +5884,9 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 <span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>SubjectiveFever)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Nausea"</span>, <span class="at">y=</span><span class="st">"Subjective Fever"</span>, <span class="at">title=</span><span class="st">"Subjective Fever and Nausea"</span>)</span>
 <span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>pvoi10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-8-5.png" class="img-fluid" width="672"></p>
