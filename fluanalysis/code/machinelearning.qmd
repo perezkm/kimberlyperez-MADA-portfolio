@@ -2,7 +2,9 @@
 title: "Flu Analysis: Machine Learning"
 editor: visual
 ---
+
 # **Loading in Necessary Libraries**
+
 ```{r}
 library(dplyr)
 library(ggplot2)
@@ -15,6 +17,7 @@ library(tidymodels)
 library(tidyverse)
 library(vip)
 ```
+
 ## **Reading in my Cleaned Data**
 
 ```{r}
@@ -22,7 +25,9 @@ flu<-readRDS(here("fluanalysis","processed_data", "SympAct_cleaned.rds")) #Loadi
 
 glimpse(flu) #Looking at the Data 
 ```
+
 # **Let's Split the Data**
+
 ```{r}
 set.seed(321) #Makes analysis reproducible when using randomization
 
@@ -35,6 +40,7 @@ test_data<- testing(data_split)
 ```
 
 # **Null Model: Cross Validation**
+
 ```{r}
 #5 Fold Cross Validation
 f_data_train<- vfold_cv(train_data, v=5, repeats= 5, strata= BodyTemp)
@@ -43,6 +49,7 @@ f_data_test<- vfold_cv(test_data, v=5, repeats= 5, strata= BodyTemp)
 ```
 
 # **Train the Data**
+
 ```{r}
 rec_train<- 
   recipe(BodyTemp~., data=train_data) %>%
@@ -58,7 +65,9 @@ rec_test<-
 
 rec_test
 ```
+
 # **Setting the Model: Train Data**
+
 ```{r}
 lm_model1<- linear_reg() %>% #Let's define the model
   set_engine("lm") %>%
@@ -69,7 +78,9 @@ null_rec_tr<- recipe(BodyTemp ~1, data= train_data)
 
 null_rec_tr
 ```
+
 # **Workflow & Fit: Train Data**
+
 ```{r}
 null_tr_wf<- 
   workflow () %>%
@@ -81,6 +92,7 @@ train_lm_n<- fit_resamples(null_tr_wf, resamples= f_data_train)
 ```
 
 # **Calculating RMSE: Train Data**
+
 ```{r}
 null_metric_tr<- collect_metrics(train_lm_n)
 
@@ -88,7 +100,9 @@ null_metric_tr #By calculating RMSE and gathering mean (1.2) and standard deviat
 ```
 
 # **Creating the Recipe: Test Data**
+
 Now, let's do the same for our test data! We already created our recipe for the test data above. I will start with setting the model
+
 ```{r}
 
 lm_model1<- linear_reg() %>% #Let's define the model
@@ -100,6 +114,7 @@ null_rec_test<- recipe(BodyTemp ~1, data= test_data)
 ```
 
 # **Workflow and Fit: Test Data**
+
 ```{r}
 #Now we can move to workflow
 null_test_wf<- 
@@ -112,13 +127,17 @@ test_lm_n<- fit_resamples(null_test_wf, resamples= f_data_test)
 ```
 
 # **Calculating RMSE: Test Data**
+
 ```{r}
 null_metric_test<- collect_metrics(test_lm_n)
 
 null_metric_test #By calculating RMSE and gathering mean (1.2) and standard deviation (0.03), we can utilize this information 
 ```
+
 # **Tuning & Fitting: Tree Model**
+
 Let's try to identify parameters
+
 ```{r}
 tunespec_dtree <- 
   decision_tree(
@@ -134,7 +153,9 @@ dtree_wf <- workflow() %>%
   add_model(tunespec_dtree) %>%
   add_recipe(rec_train)
 ```
+
 Now let's tune grid specs
+
 ```{r}
 tree_grid_dtree <-
   dials::grid_regular(
@@ -144,7 +165,9 @@ tree_grid_dtree <-
 
 tree_grid_dtree
 ```
+
 Now, as we have done above, let's create a workflow for the decision tree
+
 ```{r}
 dt_wf <- workflow() %>%
   add_model(tunespec_dtree) %>%
@@ -172,7 +195,9 @@ dt_resample %>%
 dt_resample %>%
   show_best(n=1) #This will show us top 5
 ```
+
 # **Selecting the Best Performing Model**
+
 ```{r}
 best<- dt_resample %>%
   select_best() #This function will retrieve one set of hyperparameters for the 
@@ -181,7 +206,9 @@ best
 ```
 
 # **Final Fit**
+
 Now that we have done the leg work, we can create the final fit
+
 ```{r}
 dtfinal_wf <- 
   dt_wf %>% 
@@ -195,6 +222,7 @@ dt_final_fit <-
 ```
 
 # **Residuals and Plotting**
+
 ```{r}
 dt_res <- dt_final_fit %>%
   augment(train_data) %>% 
@@ -205,6 +233,7 @@ dt_res
 ```
 
 # **Predictions v. Actual**
+
 ```{r}
 dt_pred_plot <- ggplot(dt_res, 
                           aes(x = BodyTemp, 
@@ -217,6 +246,7 @@ dt_pred_plot
 ```
 
 # **Predictions v. Residuals**
+
 ```{r}
 dt_resplot <- ggplot(dt_res, 
                               aes(y = .resid, 
@@ -229,6 +259,7 @@ plot(dt_resplot)
 ```
 
 # **Lasso**
+
 ```{r}
 #Specifying Model
 lasso_mod <- 
@@ -257,6 +288,7 @@ lasso_resample %>%
 ```
 
 # **Model Plotting**
+
 ```{r}
 lr_plot <- 
   lasso_resample %>% 
@@ -270,6 +302,7 @@ lr_plot
 ```
 
 # **Again, let's Select the Best Performing Model**
+
 ```{r}
 lasso_resample %>%
   show_best(n=1)
@@ -291,6 +324,7 @@ lasso_final_fit <-
 ```
 
 # **Residuals**
+
 ```{r}
 lasso_residuals <- lasso_final_fit %>%
   augment(train_data) %>% #use augment() to make predictions from train data
@@ -301,6 +335,7 @@ lasso_residuals
 ```
 
 # **Model Predictions**
+
 ```{r}
 lasso_pred_plot <- ggplot(lasso_residuals, 
                           aes(x = BodyTemp, 
@@ -322,6 +357,7 @@ plot(lasso_residual_plot)
 ```
 
 # **Random Forest**
+
 ```{r}
 cores <- parallel::detectCores()
 cores
@@ -364,6 +400,7 @@ best_rf <- rf_resample %>%
 ```
 
 # **Final Fit & Residuals**
+
 ```{r}
 rf_final_wf <- 
   rf_wf %>% 
@@ -382,6 +419,7 @@ rf_residuals
 ```
 
 # **Predictions (Tuned v. Actual)**
+
 ```{r}
 rf_pred_plot <- ggplot(rf_residuals, 
                           aes(x = BodyTemp, 
@@ -401,10 +439,13 @@ rf_residual_plot <- ggplot(rf_residuals,
        y = "Residuals")
 plot(rf_residual_plot)
 ```
+
 # **Model Selection**
+
 Overall, the majority of the RMSE models performed similarly. Overall, Lasso and RF models seemed to display a relationship between actual and predicted body temperature.Given what we know, I would select the Lasso model as it is more accurate.
 
 # **Final Evaluation**
+
 ```{r}
 lasso_last_fit <- 
   lasso_final_wf %>% 
@@ -413,4 +454,3 @@ lasso_last_fit <-
 lasso_last_fit %>% 
   collect_metrics()
 ```
-

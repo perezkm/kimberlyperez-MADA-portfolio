@@ -41,13 +41,14 @@ age_gaps_2_yr<- age_gaps1 %>% filter(   #Selecting the years I want to keep in m
 ```
 
 # Data Visualization
+
 ```{r}
 library(plotly)
 
 #Utilizing Plotly for interaction: Age Difference of Lead Actors in movies by year between 1960-1979 and post Me too Movement 2018-2022
 gaps <- plot_ly(
-  type='scatter', 
-  mode='markers',
+  type="scatter", 
+  mode="markers",
   age_gaps_2_yr, 
   x=~release_year, 
   y=~age_difference,
@@ -63,6 +64,7 @@ gaps
 The largest age difference in actors occurred in the 1970 in the movie *Harold and Maude*.The age difference for actors looks to be similar in the years visualized for this exercise.
 
 # More Data Visualization by director
+
 ```{r}
 age_gaps3dir<-age_gaps[-c(5:13)] #Here I will remove columns I do not need
 
@@ -77,4 +79,5 @@ dad + labs( x= "Movie Release Year",
     color= "Director",
     title= "Actor Age Difference in Alfred Hitchcock and Wes Anderson Films")
 ```
+
 From the graph, it looks like Alfred Hitchcock had more actors with larger age differences than Wes Anderson.

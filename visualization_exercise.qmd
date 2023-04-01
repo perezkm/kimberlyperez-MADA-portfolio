@@ -67,27 +67,27 @@ library(ggthemes)
 nps_clean$year<-as.numeric(as.character(nps_clean$year)) #Making year numeric
 
 #Creating df for each of the top parks to overlay on nps_g1
-GSM<- nps_clean [which (nps_clean$park_name=='Great Smoky Mountains NP'),]  
+GSM<- nps_clean [which (nps_clean$park_name=="Great Smoky Mountains NP"),]  
 
-GC<- nps_clean [which (nps_clean$park_name=='Grand Canyon NP'),] 
+GC<- nps_clean [which (nps_clean$park_name=="Grand Canyon NP"),] 
 
-RMNP<- nps_clean [which (nps_clean$park_name=='Rocky Mountain NP'),] 
+RMNP<- nps_clean [which (nps_clean$park_name=="Rocky Mountain NP"),] 
 
-YNP<- nps_clean [which (nps_clean$park_name=='Yosemite NP'),]
+YNP<- nps_clean [which (nps_clean$park_name=="Yosemite NP"),]
 
-YSNP<- nps_clean [which (nps_clean$park_name=='Yellowstone NP'),] 
+YSNP<- nps_clean [which (nps_clean$park_name=="Yellowstone NP"),] 
 
-ZNP<- nps_clean [which (nps_clean$park_name=='Zion NP'),] 
+ZNP<- nps_clean [which (nps_clean$park_name=="Zion NP"),] 
 
-ANP<- nps_clean [which (nps_clean$park_name=='Acadia NP'),] 
+ANP<- nps_clean [which (nps_clean$park_name=="Acadia NP"),] 
 	
-HSNP<- nps_clean [which (nps_clean$park_name=='Hot Springs NP'),]
+HSNP<- nps_clean [which (nps_clean$park_name=="Hot Springs NP"),]
 
-DNP<- nps_clean [which (nps_clean$park_name=='Denali NP & PRES'),]
+DNP<- nps_clean [which (nps_clean$park_name=="Denali NP & PRES"),]
 
-CCNP<- nps_clean [which (nps_clean$park_name=='Carlsbad Caverns NP'),]
+CCNP<- nps_clean [which (nps_clean$park_name=="Carlsbad Caverns NP"),]
 
-GBNP<- nps_clean [which (nps_clean$park_name=='Great Basin NP'),]
+GBNP<- nps_clean [which (nps_clean$park_name=="Great Basin NP"),]
 
 
 nps_g1<- nps_clean %>% ggplot() +geom_line( 
@@ -131,4 +131,5 @@ nps_g1<- nps_clean %>% ggplot() +geom_line(
 
 nps_g1
 ```
+Here is an update on my data visualization! 3/10/2023
 I think I bit off a bit more than I could chew with this graph. But, I am pretty proud of how far I got with it. To make things a little more cohesive, I overrode the color to grey. I plan on continuing work on it tonight with the hopes of adding the 11 parks in color. It is definitely a work in progress!
