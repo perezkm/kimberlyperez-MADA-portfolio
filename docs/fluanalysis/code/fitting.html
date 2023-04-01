@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
-<head>
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.313">
 
-<meta charset="utf-8" />
-<meta name="generator" content="quarto-1.2.313" />
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>My Data Analysis Portfolio – Brian McKay’s Flu Analysis Data: Fitting</title>
+<title>My Data Analysis Portfolio - Brian McKay’s Flu Analysis Data: Fitting</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -87,7 +85,23 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<!-- htmldependencies:E3FAD763 -->
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -109,29 +123,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 }</script>
 
 
-<link rel="stylesheet" href="../../styles.css" />
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body>
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="/index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">My Data Analysis Portfolio</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-  aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"
-  onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="/./aboutme.html">
+    <a class="nav-link" href="../.././aboutme.html">
  <span class="menu-text">About Me</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -140,19 +152,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
         <li>
-    <a class="dropdown-item" href="/./coding_exercise.html">
+    <a class="dropdown-item" href="../.././coding_exercise.html">
  <span class="dropdown-text">R Coding Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/./visualization_exercise.html">
+    <a class="dropdown-item" href="../.././visualization_exercise.html">
  <span class="dropdown-text">Visualization Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/./tidytuesday_exercise.html">
+    <a class="dropdown-item" href="../.././tidytuesday_exercise.html">
  <span class="dropdown-text">Tidy Tuesday Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/./dataanalysis_exercise.html">
+    <a class="dropdown-item" href="../.././dataanalysis_exercise.html">
  <span class="dropdown-text">Data Analysis Exercise</span></a>
   </li>  
     </ul>
@@ -163,26 +175,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-flu-analysis">    
         <li>
-    <a class="dropdown-item" href="/./fluanalysis/code/wrangling.html">
+    <a class="dropdown-item" href="../.././fluanalysis/code/wrangling.html">
  <span class="dropdown-text">Wrangling</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/./fluanalysis/code/exploration.html">
+    <a class="dropdown-item" href="../.././fluanalysis/code/exploration.html">
  <span class="dropdown-text">Exploration</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/./fluanalysis/code/fitting.html">
+    <a class="dropdown-item" href="../.././fluanalysis/code/fitting.html">
  <span class="dropdown-text">Fitting</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../.././fluanalysis/code/modeleval.html">
+ <span class="dropdown-text">Model Evaluation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../.././fluanalysis/code/machinelearning.html">
+ <span class="dropdown-text">Machine Learning</span></a>
   </li>  
     </ul>
   </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/perezkm/kimberlyperez-MADA-portfolio"><i 
-  class="bi bi-github" 
-  role="img" 
->
+    <a class="nav-link" href="https://github.com/perezkm/kimberlyperez-MADA-portfolio"><i class="bi bi-github" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -196,8 +213,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -222,32 +238,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><strong>Let’s Begin with some Fitting</strong></h1>
 <p><strong>But first let’s load some packages…</strong></p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary) <span class="co">#To create tables will include</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary) <span class="co">#To create tables will include</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr) <span class="co">#Helps with data wrangling</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: package &#39;gtsummary&#39; was built under R version 4.2.2</code></pre>
+<pre><code>Warning: package 'tidyr' was built under R version 4.2.3</code></pre>
 </div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr) <span class="co">#Helps with data wrangling</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here) <span class="co">#Setting paths</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: package &#39;tidyr&#39; was built under R version 4.2.2</code></pre>
-</div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here) <span class="co">#Setting paths</span></span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package &#39;here&#39; was built under R version 4.2.2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>here() starts at C:/Users/Sara/Documents/Documents/Current Classes/MADA/kimberlyperez-MADA-portfolio</code></pre>
+<pre><code>here() starts at C:/GitHub/MADA/kimberlyperez-MADA-portfolio</code></pre>
 </div>
 </div>
-<div id="quarto-navigation-envelope" class="hidden">
-<p><span class="hidden" data-render-id="quarto-int-sidebar-title">My Data Analysis Portfolio</span> <span class="hidden" data-render-id="quarto-int-navbar-title">My Data Analysis Portfolio</span> <span class="hidden" data-render-id="quarto-int-navbar:About Me">About Me</span> <span class="hidden" data-render-id="quarto-int-navbar:Projects">Projects</span> <span class="hidden" data-render-id="quarto-int-navbar:R Coding Exercise">R Coding Exercise</span> <span class="hidden" data-render-id="quarto-int-navbar:Visualization Exercise">Visualization Exercise</span> <span class="hidden" data-render-id="quarto-int-navbar:Tidy Tuesday Exercise">Tidy Tuesday Exercise</span> <span class="hidden" data-render-id="quarto-int-navbar:Data Analysis Exercise">Data Analysis Exercise</span> <span class="hidden" data-render-id="quarto-int-navbar:Flu Analysis">Flu Analysis</span> <span class="hidden" data-render-id="quarto-int-navbar:Wrangling">Wrangling</span> <span class="hidden" data-render-id="quarto-int-navbar:Exploration">Exploration</span> <span class="hidden" data-render-id="quarto-int-navbar:Fitting">Fitting</span></p>
-</div>
-<div id="quarto-meta-markdown" class="hidden">
-<p><span class="hidden" data-render-id="quarto-metatitle">My Data Analysis Portfolio - Brian McKay’s Flu Analysis Data: Fitting</span> <span class="hidden" data-render-id="quarto-twittercardtitle">My Data Analysis Portfolio - Brian McKay’s Flu Analysis Data: Fitting</span> <span class="hidden" data-render-id="quarto-ogcardtitle">My Data Analysis Portfolio - Brian McKay’s Flu Analysis Data: Fitting</span> <span class="hidden" data-render-id="quarto-metasitename">My Data Analysis Portfolio</span></p>
-</div>
+
+
 </section>
 
 </main> <!-- /main -->
-<script id = "quarto-html-after-body" type="application/javascript">
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -382,6 +388,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 </div> <!-- /content -->
 
-</body>
 
-</html>
+
+</body></html>
