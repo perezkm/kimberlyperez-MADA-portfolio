@@ -167,6 +167,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <a class="dropdown-item" href="../.././dataanalysis_exercise.html">
  <span class="dropdown-text">Data Analysis Exercise</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../.././tidytuesday_exercise2.html">
+ <span class="dropdown-text">Tidy Tuesday 2 Exercise</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -238,12 +242,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>Let’s Begin with some Data Exploration</h1>
 <p><strong>But first let’s load some packages…</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>#BlackLivesMatter</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>here() starts at C:/GitHub/MADA/kimberlyperez-MADA-portfolio</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'dplyr'</code></pre>
@@ -258,7 +265,7 @@ Attaching package: 'dplyr'</code></pre>
 
     intersect, setdiff, setequal, union</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching packages
 ───────────────────────────────────────
@@ -278,13 +285,13 @@ tidyverse 1.3.2 ──</code></pre>
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>And Load the Data…</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>flu<span class="ot">&lt;-</span><span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"fluanalysis"</span>,<span class="st">"processed_data"</span>, <span class="st">"SympAct_cleaned.rds"</span>)) <span class="co">#Loading in the data</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(flu) <span class="co">#Looking at the Data </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>flu<span class="ot">&lt;-</span><span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"fluanalysis"</span>,<span class="st">"processed_data"</span>, <span class="st">"SympAct_cleaned.rds"</span>)) <span class="co">#Loading in the data</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(flu) <span class="co">#Looking at the Data </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 730
 Columns: 32
@@ -327,16 +334,16 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 <h1>Let’s Begin Data Exploration by Creating Summary Tables</h1>
 <p>Here I will create summary statistic tables starting with the dataset as a whole and then the important variables</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fulldat<span class="ot">&lt;-</span> <span class="fu">tbl_summary</span>(flu) <span class="co">#Prefer gtsummary to create summary tables over rstatix so i use the tbl_summary function for the whole dataset</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>fulldat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>fulldat<span class="ot">&lt;-</span> <span class="fu">tbl_summary</span>(flu) <span class="co">#Prefer gtsummary to create summary tables over rstatix so i use the tbl_summary function for the whole dataset</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>fulldat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="gusrjorcrx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="vtliovtxnh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#gusrjorcrx) .gt_table {
+:where(#vtliovtxnh) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -361,7 +368,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-left-color: #D3D3D3;
 }
 
-:where(#gusrjorcrx) .gt_heading {
+:where(#vtliovtxnh) .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -373,12 +380,12 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-right-color: #D3D3D3;
 }
 
-:where(#gusrjorcrx) .gt_caption {
+:where(#vtliovtxnh) .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-:where(#gusrjorcrx) .gt_title {
+:where(#vtliovtxnh) .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -390,7 +397,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-bottom-width: 0;
 }
 
-:where(#gusrjorcrx) .gt_subtitle {
+:where(#vtliovtxnh) .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -402,13 +409,13 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-top-width: 0;
 }
 
-:where(#gusrjorcrx) .gt_bottom_border {
+:where(#vtliovtxnh) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#gusrjorcrx) .gt_col_headings {
+:where(#vtliovtxnh) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -423,7 +430,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-right-color: #D3D3D3;
 }
 
-:where(#gusrjorcrx) .gt_col_heading {
+:where(#vtliovtxnh) .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -443,7 +450,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   overflow-x: hidden;
 }
 
-:where(#gusrjorcrx) .gt_column_spanner_outer {
+:where(#vtliovtxnh) .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -455,15 +462,15 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   padding-right: 4px;
 }
 
-:where(#gusrjorcrx) .gt_column_spanner_outer:first-child {
+:where(#vtliovtxnh) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#gusrjorcrx) .gt_column_spanner_outer:last-child {
+:where(#vtliovtxnh) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#gusrjorcrx) .gt_column_spanner {
+:where(#vtliovtxnh) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -475,7 +482,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   width: 100%;
 }
 
-:where(#gusrjorcrx) .gt_group_heading {
+:where(#vtliovtxnh) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -501,7 +508,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   text-align: left;
 }
 
-:where(#gusrjorcrx) .gt_empty_group_heading {
+:where(#vtliovtxnh) .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -516,15 +523,15 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   vertical-align: middle;
 }
 
-:where(#gusrjorcrx) .gt_from_md > :first-child {
+:where(#vtliovtxnh) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#gusrjorcrx) .gt_from_md > :last-child {
+:where(#vtliovtxnh) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#gusrjorcrx) .gt_row {
+:where(#vtliovtxnh) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -543,7 +550,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   overflow-x: hidden;
 }
 
-:where(#gusrjorcrx) .gt_stub {
+:where(#vtliovtxnh) .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -556,7 +563,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   padding-right: 5px;
 }
 
-:where(#gusrjorcrx) .gt_stub_row_group {
+:where(#vtliovtxnh) .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -570,11 +577,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   vertical-align: top;
 }
 
-:where(#gusrjorcrx) .gt_row_group_first td {
+:where(#vtliovtxnh) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#gusrjorcrx) .gt_summary_row {
+:where(#vtliovtxnh) .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -584,16 +591,16 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   padding-right: 5px;
 }
 
-:where(#gusrjorcrx) .gt_first_summary_row {
+:where(#vtliovtxnh) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#gusrjorcrx) .gt_first_summary_row.thick {
+:where(#vtliovtxnh) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#gusrjorcrx) .gt_last_summary_row {
+:where(#vtliovtxnh) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -603,7 +610,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-bottom-color: #D3D3D3;
 }
 
-:where(#gusrjorcrx) .gt_grand_summary_row {
+:where(#vtliovtxnh) .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -613,7 +620,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   padding-right: 5px;
 }
 
-:where(#gusrjorcrx) .gt_first_grand_summary_row {
+:where(#vtliovtxnh) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -623,11 +630,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-top-color: #D3D3D3;
 }
 
-:where(#gusrjorcrx) .gt_striped {
+:where(#vtliovtxnh) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#gusrjorcrx) .gt_table_body {
+:where(#vtliovtxnh) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -636,7 +643,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-bottom-color: #D3D3D3;
 }
 
-:where(#gusrjorcrx) .gt_footnotes {
+:where(#vtliovtxnh) .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -650,7 +657,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-right-color: #D3D3D3;
 }
 
-:where(#gusrjorcrx) .gt_footnote {
+:where(#vtliovtxnh) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -659,7 +666,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   padding-right: 5px;
 }
 
-:where(#gusrjorcrx) .gt_sourcenotes {
+:where(#vtliovtxnh) .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -673,7 +680,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-right-color: #D3D3D3;
 }
 
-:where(#gusrjorcrx) .gt_sourcenote {
+:where(#vtliovtxnh) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -681,64 +688,64 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   padding-right: 5px;
 }
 
-:where(#gusrjorcrx) .gt_left {
+:where(#vtliovtxnh) .gt_left {
   text-align: left;
 }
 
-:where(#gusrjorcrx) .gt_center {
+:where(#vtliovtxnh) .gt_center {
   text-align: center;
 }
 
-:where(#gusrjorcrx) .gt_right {
+:where(#vtliovtxnh) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#gusrjorcrx) .gt_font_normal {
+:where(#vtliovtxnh) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#gusrjorcrx) .gt_font_bold {
+:where(#vtliovtxnh) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#gusrjorcrx) .gt_font_italic {
+:where(#vtliovtxnh) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#gusrjorcrx) .gt_super {
+:where(#vtliovtxnh) .gt_super {
   font-size: 65%;
 }
 
-:where(#gusrjorcrx) .gt_footnote_marks {
+:where(#vtliovtxnh) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#gusrjorcrx) .gt_asterisk {
+:where(#vtliovtxnh) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#gusrjorcrx) .gt_indent_1 {
+:where(#vtliovtxnh) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#gusrjorcrx) .gt_indent_2 {
+:where(#vtliovtxnh) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#gusrjorcrx) .gt_indent_3 {
+:where(#vtliovtxnh) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#gusrjorcrx) .gt_indent_4 {
+:where(#vtliovtxnh) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#gusrjorcrx) .gt_indent_5 {
+:where(#vtliovtxnh) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -849,25 +856,25 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 </table>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#NOTE for KP: Use flextable for customization epiRhandbook</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#NOTE for KP: Use flextable for customization epiRhandbook</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Summary Tables for Body Temperature</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span> (flu<span class="sc">$</span>BodyTemp) <span class="co">#Quick and basic overview </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span> (flu<span class="sc">$</span>BodyTemp) <span class="co">#Quick and basic overview </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   97.20   98.20   98.50   98.94   99.30  103.10 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>bodtemp<span class="ot">&lt;-</span> flu <span class="sc">%&gt;%</span> <span class="fu">tbl_summary</span>(BodyTemp) <span class="co">#Breaking things down a bit more- interesting when broken down by temp group </span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>bodtemp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>bodtemp<span class="ot">&lt;-</span> flu <span class="sc">%&gt;%</span> <span class="fu">tbl_summary</span>(BodyTemp) <span class="co">#Breaking things down a bit more- interesting when broken down by temp group </span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>bodtemp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="yghbgjtwme" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="lovvwgznzo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#yghbgjtwme) .gt_table {
+:where(#lovvwgznzo) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -892,7 +899,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-left-color: #D3D3D3;
 }
 
-:where(#yghbgjtwme) .gt_heading {
+:where(#lovvwgznzo) .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -904,12 +911,12 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-right-color: #D3D3D3;
 }
 
-:where(#yghbgjtwme) .gt_caption {
+:where(#lovvwgznzo) .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-:where(#yghbgjtwme) .gt_title {
+:where(#lovvwgznzo) .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -921,7 +928,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-bottom-width: 0;
 }
 
-:where(#yghbgjtwme) .gt_subtitle {
+:where(#lovvwgznzo) .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -933,13 +940,13 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-top-width: 0;
 }
 
-:where(#yghbgjtwme) .gt_bottom_border {
+:where(#lovvwgznzo) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#yghbgjtwme) .gt_col_headings {
+:where(#lovvwgznzo) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -954,7 +961,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-right-color: #D3D3D3;
 }
 
-:where(#yghbgjtwme) .gt_col_heading {
+:where(#lovvwgznzo) .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -974,7 +981,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   overflow-x: hidden;
 }
 
-:where(#yghbgjtwme) .gt_column_spanner_outer {
+:where(#lovvwgznzo) .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -986,15 +993,15 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   padding-right: 4px;
 }
 
-:where(#yghbgjtwme) .gt_column_spanner_outer:first-child {
+:where(#lovvwgznzo) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#yghbgjtwme) .gt_column_spanner_outer:last-child {
+:where(#lovvwgznzo) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#yghbgjtwme) .gt_column_spanner {
+:where(#lovvwgznzo) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1006,7 +1013,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   width: 100%;
 }
 
-:where(#yghbgjtwme) .gt_group_heading {
+:where(#lovvwgznzo) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1032,7 +1039,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   text-align: left;
 }
 
-:where(#yghbgjtwme) .gt_empty_group_heading {
+:where(#lovvwgznzo) .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1047,15 +1054,15 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   vertical-align: middle;
 }
 
-:where(#yghbgjtwme) .gt_from_md > :first-child {
+:where(#lovvwgznzo) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#yghbgjtwme) .gt_from_md > :last-child {
+:where(#lovvwgznzo) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#yghbgjtwme) .gt_row {
+:where(#lovvwgznzo) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1074,7 +1081,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   overflow-x: hidden;
 }
 
-:where(#yghbgjtwme) .gt_stub {
+:where(#lovvwgznzo) .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1087,7 +1094,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   padding-right: 5px;
 }
 
-:where(#yghbgjtwme) .gt_stub_row_group {
+:where(#lovvwgznzo) .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1101,11 +1108,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   vertical-align: top;
 }
 
-:where(#yghbgjtwme) .gt_row_group_first td {
+:where(#lovvwgznzo) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#yghbgjtwme) .gt_summary_row {
+:where(#lovvwgznzo) .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1115,16 +1122,16 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   padding-right: 5px;
 }
 
-:where(#yghbgjtwme) .gt_first_summary_row {
+:where(#lovvwgznzo) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#yghbgjtwme) .gt_first_summary_row.thick {
+:where(#lovvwgznzo) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#yghbgjtwme) .gt_last_summary_row {
+:where(#lovvwgznzo) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1134,7 +1141,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-bottom-color: #D3D3D3;
 }
 
-:where(#yghbgjtwme) .gt_grand_summary_row {
+:where(#lovvwgznzo) .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1144,7 +1151,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   padding-right: 5px;
 }
 
-:where(#yghbgjtwme) .gt_first_grand_summary_row {
+:where(#lovvwgznzo) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1154,11 +1161,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-top-color: #D3D3D3;
 }
 
-:where(#yghbgjtwme) .gt_striped {
+:where(#lovvwgznzo) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#yghbgjtwme) .gt_table_body {
+:where(#lovvwgznzo) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1167,7 +1174,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-bottom-color: #D3D3D3;
 }
 
-:where(#yghbgjtwme) .gt_footnotes {
+:where(#lovvwgznzo) .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1181,7 +1188,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-right-color: #D3D3D3;
 }
 
-:where(#yghbgjtwme) .gt_footnote {
+:where(#lovvwgznzo) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1190,7 +1197,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   padding-right: 5px;
 }
 
-:where(#yghbgjtwme) .gt_sourcenotes {
+:where(#lovvwgznzo) .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1204,7 +1211,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-right-color: #D3D3D3;
 }
 
-:where(#yghbgjtwme) .gt_sourcenote {
+:where(#lovvwgznzo) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1212,64 +1219,64 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   padding-right: 5px;
 }
 
-:where(#yghbgjtwme) .gt_left {
+:where(#lovvwgznzo) .gt_left {
   text-align: left;
 }
 
-:where(#yghbgjtwme) .gt_center {
+:where(#lovvwgznzo) .gt_center {
   text-align: center;
 }
 
-:where(#yghbgjtwme) .gt_right {
+:where(#lovvwgznzo) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#yghbgjtwme) .gt_font_normal {
+:where(#lovvwgznzo) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#yghbgjtwme) .gt_font_bold {
+:where(#lovvwgznzo) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#yghbgjtwme) .gt_font_italic {
+:where(#lovvwgznzo) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#yghbgjtwme) .gt_super {
+:where(#lovvwgznzo) .gt_super {
   font-size: 65%;
 }
 
-:where(#yghbgjtwme) .gt_footnote_marks {
+:where(#lovvwgznzo) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#yghbgjtwme) .gt_asterisk {
+:where(#lovvwgznzo) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#yghbgjtwme) .gt_indent_1 {
+:where(#lovvwgznzo) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#yghbgjtwme) .gt_indent_2 {
+:where(#lovvwgznzo) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#yghbgjtwme) .gt_indent_3 {
+:where(#lovvwgznzo) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#yghbgjtwme) .gt_indent_4 {
+:where(#lovvwgznzo) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#yghbgjtwme) .gt_indent_5 {
+:where(#lovvwgznzo) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3845,21 +3852,21 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 </div>
 <p><strong>Summary Tables for Nausea</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span> (flu<span class="sc">$</span>Nausea) <span class="co">#Quick and basic overview </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span> (flu<span class="sc">$</span>Nausea) <span class="co">#Quick and basic overview </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> No Yes 
 475 255 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>naus<span class="ot">&lt;-</span> flu <span class="sc">%&gt;%</span> <span class="fu">tbl_summary</span>(Nausea) <span class="co">#Breaking things down a bit more</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>naus</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>naus<span class="ot">&lt;-</span> flu <span class="sc">%&gt;%</span> <span class="fu">tbl_summary</span>(Nausea) <span class="co">#Breaking things down a bit more</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>naus</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="thqseyvukh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="zvurtgdomc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#thqseyvukh) .gt_table {
+:where(#zvurtgdomc) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -3884,7 +3891,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-left-color: #D3D3D3;
 }
 
-:where(#thqseyvukh) .gt_heading {
+:where(#zvurtgdomc) .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3896,12 +3903,12 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-right-color: #D3D3D3;
 }
 
-:where(#thqseyvukh) .gt_caption {
+:where(#zvurtgdomc) .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-:where(#thqseyvukh) .gt_title {
+:where(#zvurtgdomc) .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3913,7 +3920,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-bottom-width: 0;
 }
 
-:where(#thqseyvukh) .gt_subtitle {
+:where(#zvurtgdomc) .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3925,13 +3932,13 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-top-width: 0;
 }
 
-:where(#thqseyvukh) .gt_bottom_border {
+:where(#zvurtgdomc) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#thqseyvukh) .gt_col_headings {
+:where(#zvurtgdomc) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3946,7 +3953,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-right-color: #D3D3D3;
 }
 
-:where(#thqseyvukh) .gt_col_heading {
+:where(#zvurtgdomc) .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3966,7 +3973,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   overflow-x: hidden;
 }
 
-:where(#thqseyvukh) .gt_column_spanner_outer {
+:where(#zvurtgdomc) .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3978,15 +3985,15 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   padding-right: 4px;
 }
 
-:where(#thqseyvukh) .gt_column_spanner_outer:first-child {
+:where(#zvurtgdomc) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#thqseyvukh) .gt_column_spanner_outer:last-child {
+:where(#zvurtgdomc) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#thqseyvukh) .gt_column_spanner {
+:where(#zvurtgdomc) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3998,7 +4005,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   width: 100%;
 }
 
-:where(#thqseyvukh) .gt_group_heading {
+:where(#zvurtgdomc) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4024,7 +4031,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   text-align: left;
 }
 
-:where(#thqseyvukh) .gt_empty_group_heading {
+:where(#zvurtgdomc) .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4039,15 +4046,15 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   vertical-align: middle;
 }
 
-:where(#thqseyvukh) .gt_from_md > :first-child {
+:where(#zvurtgdomc) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#thqseyvukh) .gt_from_md > :last-child {
+:where(#zvurtgdomc) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#thqseyvukh) .gt_row {
+:where(#zvurtgdomc) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4066,7 +4073,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   overflow-x: hidden;
 }
 
-:where(#thqseyvukh) .gt_stub {
+:where(#zvurtgdomc) .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4079,7 +4086,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   padding-right: 5px;
 }
 
-:where(#thqseyvukh) .gt_stub_row_group {
+:where(#zvurtgdomc) .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4093,11 +4100,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   vertical-align: top;
 }
 
-:where(#thqseyvukh) .gt_row_group_first td {
+:where(#zvurtgdomc) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#thqseyvukh) .gt_summary_row {
+:where(#zvurtgdomc) .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4107,16 +4114,16 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   padding-right: 5px;
 }
 
-:where(#thqseyvukh) .gt_first_summary_row {
+:where(#zvurtgdomc) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#thqseyvukh) .gt_first_summary_row.thick {
+:where(#zvurtgdomc) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#thqseyvukh) .gt_last_summary_row {
+:where(#zvurtgdomc) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4126,7 +4133,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-bottom-color: #D3D3D3;
 }
 
-:where(#thqseyvukh) .gt_grand_summary_row {
+:where(#zvurtgdomc) .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4136,7 +4143,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   padding-right: 5px;
 }
 
-:where(#thqseyvukh) .gt_first_grand_summary_row {
+:where(#zvurtgdomc) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4146,11 +4153,11 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-top-color: #D3D3D3;
 }
 
-:where(#thqseyvukh) .gt_striped {
+:where(#zvurtgdomc) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#thqseyvukh) .gt_table_body {
+:where(#zvurtgdomc) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4159,7 +4166,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-bottom-color: #D3D3D3;
 }
 
-:where(#thqseyvukh) .gt_footnotes {
+:where(#zvurtgdomc) .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4173,7 +4180,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-right-color: #D3D3D3;
 }
 
-:where(#thqseyvukh) .gt_footnote {
+:where(#zvurtgdomc) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -4182,7 +4189,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   padding-right: 5px;
 }
 
-:where(#thqseyvukh) .gt_sourcenotes {
+:where(#zvurtgdomc) .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4196,7 +4203,7 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   border-right-color: #D3D3D3;
 }
 
-:where(#thqseyvukh) .gt_sourcenote {
+:where(#zvurtgdomc) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4204,64 +4211,64 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
   padding-right: 5px;
 }
 
-:where(#thqseyvukh) .gt_left {
+:where(#zvurtgdomc) .gt_left {
   text-align: left;
 }
 
-:where(#thqseyvukh) .gt_center {
+:where(#zvurtgdomc) .gt_center {
   text-align: center;
 }
 
-:where(#thqseyvukh) .gt_right {
+:where(#zvurtgdomc) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#thqseyvukh) .gt_font_normal {
+:where(#zvurtgdomc) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#thqseyvukh) .gt_font_bold {
+:where(#zvurtgdomc) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#thqseyvukh) .gt_font_italic {
+:where(#zvurtgdomc) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#thqseyvukh) .gt_super {
+:where(#zvurtgdomc) .gt_super {
   font-size: 65%;
 }
 
-:where(#thqseyvukh) .gt_footnote_marks {
+:where(#zvurtgdomc) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#thqseyvukh) .gt_asterisk {
+:where(#zvurtgdomc) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#thqseyvukh) .gt_indent_1 {
+:where(#zvurtgdomc) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#thqseyvukh) .gt_indent_2 {
+:where(#zvurtgdomc) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#thqseyvukh) .gt_indent_3 {
+:where(#zvurtgdomc) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#thqseyvukh) .gt_indent_4 {
+:where(#zvurtgdomc) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#thqseyvukh) .gt_indent_5 {
+:where(#zvurtgdomc) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -4419,29 +4426,29 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 <section id="histogramdensity-plot-for-our-continuous-variable--body-temperature" class="level1">
 <h1><strong>Histogram/Density Plot for our Continuous Variable- Body Temperature</strong></h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Basic histogram</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>cv<span class="ot">&lt;-</span> <span class="fu">ggplot</span>(flu, <span class="fu">aes</span>(<span class="at">x=</span>BodyTemp)) <span class="sc">+</span><span class="fu">geom_histogram</span>() <span class="co">#Basic histogram</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Updated histogram</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>cvup<span class="ot">&lt;-</span> flu <span class="sc">%&gt;%</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>BodyTemp)) <span class="sc">+</span>     <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">0.5</span>, <span class="at">fill=</span><span class="st">"#F08080"</span>,<span class="at">color=</span> <span class="st">"#FAF0E6"</span>, <span class="at">alpha=</span><span class="fl">0.9</span>) <span class="sc">+</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Body Temperature Histogram"</span>) <span class="sc">+</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Body Temperature (in *F)"</span>) <span class="sc">+</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Number of Individuals"</span>)</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>cvup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Basic histogram</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>cv<span class="ot">&lt;-</span> <span class="fu">ggplot</span>(flu, <span class="fu">aes</span>(<span class="at">x=</span>BodyTemp)) <span class="sc">+</span><span class="fu">geom_histogram</span>() <span class="co">#Basic histogram</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Updated histogram</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>cvup<span class="ot">&lt;-</span> flu <span class="sc">%&gt;%</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>BodyTemp)) <span class="sc">+</span>     <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">0.5</span>, <span class="at">fill=</span><span class="st">"#F08080"</span>,<span class="at">color=</span> <span class="st">"#FAF0E6"</span>, <span class="at">alpha=</span><span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Body Temperature Histogram"</span>) <span class="sc">+</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Body Temperature (in *F)"</span>) <span class="sc">+</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Number of Individuals"</span>)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>cvup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>cvd<span class="ot">&lt;-</span> flu <span class="sc">%&gt;%</span> <span class="co">#Density plot</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>BodyTemp)) <span class="sc">+</span>   </span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill=</span><span class="st">"#808000"</span>,<span class="at">color=</span> <span class="st">"#FAF0E6"</span>,</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha=</span><span class="fl">0.9</span>) <span class="sc">+</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Body Temperature Histogram"</span>) <span class="sc">+</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Body Temperature (in *F)"</span>) <span class="sc">+</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Number of Individuals"</span>)</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>cvd </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>cvd<span class="ot">&lt;-</span> flu <span class="sc">%&gt;%</span> <span class="co">#Density plot</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>BodyTemp)) <span class="sc">+</span>   </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill=</span><span class="st">"#808000"</span>,<span class="at">color=</span> <span class="st">"#FAF0E6"</span>,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha=</span><span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Body Temperature Histogram"</span>) <span class="sc">+</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Body Temperature (in *F)"</span>) <span class="sc">+</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Number of Individuals"</span>)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>cvd </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid" width="672"></p>
 </div>
@@ -4450,53 +4457,53 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 <section id="predictor-variables-and-continuous-outcome-of-interest" class="level1">
 <h1><strong>Predictor Variables and Continuous Outcome of Interest</strong></h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Subjective Fever and Body Temperature</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>pvoi0<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>SubjectiveFever,</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>BodyTemp)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Subjective Fever"</span>, <span class="at">y=</span><span class="st">"Body Temperature (in *F)"</span>, <span class="at">title=</span><span class="st">"Subjective Fever and Body Temperature"</span>)</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>pvoi0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Subjective Fever and Body Temperature</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>pvoi0<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>SubjectiveFever,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>BodyTemp)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Subjective Fever"</span>, <span class="at">y=</span><span class="st">"Body Temperature (in *F)"</span>, <span class="at">title=</span><span class="st">"Subjective Fever and Body Temperature"</span>)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>pvoi0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Swollen Lymph Nodes and Body Temperature</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>pvoi1<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>SwollenLymphNodes,</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>BodyTemp)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Swollen Lymph Nodes Present"</span>, <span class="at">y=</span><span class="st">"Body Temperature (in *F)"</span>, <span class="at">title=</span><span class="st">"Swollen Lymph Nodes and Body Temperature"</span>)</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>pvoi1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Swollen Lymph Nodes and Body Temperature</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>pvoi1<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>SwollenLymphNodes,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>BodyTemp)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Swollen Lymph Nodes Present"</span>, <span class="at">y=</span><span class="st">"Body Temperature (in *F)"</span>, <span class="at">title=</span><span class="st">"Swollen Lymph Nodes and Body Temperature"</span>)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>pvoi1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Myalgia and Body Temperature </span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>pvoi2<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>Myalgia,</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>BodyTemp)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Severity of Myalgia"</span>, <span class="at">y=</span><span class="st">"Body Temperature (in *F)"</span>, <span class="at">title=</span><span class="st">"Myalgia and Body Temperature"</span>)</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>pvoi2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Myalgia and Body Temperature </span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>pvoi2<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>Myalgia,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>BodyTemp)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Severity of Myalgia"</span>, <span class="at">y=</span><span class="st">"Body Temperature (in *F)"</span>, <span class="at">title=</span><span class="st">"Myalgia and Body Temperature"</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>pvoi2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-7-3.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pharyngitis and Body Temperature</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>pvoi3<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>Pharyngitis,</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>BodyTemp)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Pharyngitis"</span>, <span class="at">y=</span><span class="st">"Body Temperature (in *F)"</span>, <span class="at">title=</span><span class="st">"Pharyngitis and Body Temperature"</span>)</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>pvoi3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pharyngitis and Body Temperature</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>pvoi3<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>Pharyngitis,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>BodyTemp)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Pharyngitis"</span>, <span class="at">y=</span><span class="st">"Body Temperature (in *F)"</span>, <span class="at">title=</span><span class="st">"Pharyngitis and Body Temperature"</span>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>pvoi3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-7-4.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Diarrhea and Body Temperature</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>pvoi4<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>Diarrhea,</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>BodyTemp)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Diarrhea"</span>, <span class="at">y=</span><span class="st">"Body Temperature (in *F)"</span>, <span class="at">title=</span><span class="st">"Diarrhea and Body Temperature"</span>)</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>pvoi4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Diarrhea and Body Temperature</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>pvoi4<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>Diarrhea,</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>BodyTemp)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Diarrhea"</span>, <span class="at">y=</span><span class="st">"Body Temperature (in *F)"</span>, <span class="at">title=</span><span class="st">"Diarrhea and Body Temperature"</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>pvoi4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-7-5.png" class="img-fluid" width="672"></p>
 </div>
@@ -4506,53 +4513,53 @@ $ BodyTemp          &lt;dbl&gt; 98.3, 100.4, 100.8, 98.8, 100.5, 98.4, 102.5, 98
 <section id="predictor-variables-and-categorical-outcome-of-interest" class="level1">
 <h1><strong>Predictor Variables and Categorical Outcome of Interest</strong></h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Myalgia and Nausea </span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>pvoi5<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_count</span>(<span class="fu">aes</span>(</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>Nausea,</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>Myalgia)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Nausea"</span>, <span class="at">y=</span><span class="st">"Myalgia"</span>, <span class="at">title=</span><span class="st">"Myalgia and Nausea"</span>)</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>pvoi5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Myalgia and Nausea </span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>pvoi5<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_count</span>(<span class="fu">aes</span>(</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>Nausea,</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>Myalgia)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Nausea"</span>, <span class="at">y=</span><span class="st">"Myalgia"</span>, <span class="at">title=</span><span class="st">"Myalgia and Nausea"</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>pvoi5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diarrhea and Nausea</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>pvoi6<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_count</span>(<span class="fu">aes</span>(</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>Nausea,</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>Diarrhea)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Nausea"</span>, <span class="at">y=</span><span class="st">"Diarrhea"</span>, <span class="at">title=</span><span class="st">"Diarrhea and Nausea"</span>)</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>pvoi6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diarrhea and Nausea</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>pvoi6<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_count</span>(<span class="fu">aes</span>(</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>Nausea,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>Diarrhea)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Nausea"</span>, <span class="at">y=</span><span class="st">"Diarrhea"</span>, <span class="at">title=</span><span class="st">"Diarrhea and Nausea"</span>)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>pvoi6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Swollen Lymph Nodes and Nausea</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>pvoi7<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_count</span>(<span class="fu">aes</span>(</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>Nausea,</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>SwollenLymphNodes)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Nausea"</span>, <span class="at">y=</span><span class="st">"Swollen Lymph Nodes"</span>, <span class="at">title=</span><span class="st">"Swollen Lymph Nodes and Nausea"</span>)</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>pvoi7</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Swollen Lymph Nodes and Nausea</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>pvoi7<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_count</span>(<span class="fu">aes</span>(</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>Nausea,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>SwollenLymphNodes)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Nausea"</span>, <span class="at">y=</span><span class="st">"Swollen Lymph Nodes"</span>, <span class="at">title=</span><span class="st">"Swollen Lymph Nodes and Nausea"</span>)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>pvoi7</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-8-3.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cough Intensity and Nausea</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>pvoi8<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_count</span>(<span class="fu">aes</span>(</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>Nausea,</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>CoughIntensity)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Nausea"</span>, <span class="at">y=</span><span class="st">"Cough Intensity"</span>, <span class="at">title=</span><span class="st">"Cough Intensity and Nausea"</span>)</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>pvoi8</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cough Intensity and Nausea</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>pvoi8<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_count</span>(<span class="fu">aes</span>(</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>Nausea,</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>CoughIntensity)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Nausea"</span>, <span class="at">y=</span><span class="st">"Cough Intensity"</span>, <span class="at">title=</span><span class="st">"Cough Intensity and Nausea"</span>)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>pvoi8</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-8-4.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Subjective Fever and Nauesea</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>pvoi10<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_count</span>(<span class="fu">aes</span>(</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>Nausea,</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>SubjectiveFever)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Nausea"</span>, <span class="at">y=</span><span class="st">"Subjective Fever"</span>, <span class="at">title=</span><span class="st">"Subjective Fever and Nausea"</span>)</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>pvoi10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Subjective Fever and Nauesea</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>pvoi10<span class="ot">&lt;-</span>flu <span class="sc">%&gt;%</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_count</span>(<span class="fu">aes</span>(</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x=</span>Nausea,</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y=</span>SubjectiveFever)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Nausea"</span>, <span class="at">y=</span><span class="st">"Subjective Fever"</span>, <span class="at">title=</span><span class="st">"Subjective Fever and Nausea"</span>)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>pvoi10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-8-5.png" class="img-fluid" width="672"></p>
 </div>
