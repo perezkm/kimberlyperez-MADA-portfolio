@@ -102,34 +102,41 @@ nps_g1<- nps_clean %>% ggplot() +geom_line(
        subtitle= "National parks ranked by number of visitors in a given year") + 
   geom_line(data=GSM, 
   aes(x = year, y = Rank, color = park_name, group = park_name), color="darkolivegreen") +
-    annotate("text", x = 2000, y =0, label = "Great Smoky Mountains", color = "darkolivegreen", fontface=2, size=3) +
+    annotate("text", x = 2007, y =0, label = "Great Smoky Mountains", color = "darkolivegreen", fontface=2, size=2) +
   geom_line(data=GC, 
   aes(x = year, y = Rank, color = park_name, group = park_name), color="deepskyblue4") +
-    annotate("text", x = 2020, y =0.7, label = "Grand Canyon", color = "deepskyblue4", fontface=2, size=3) + 
+    annotate("text", x = 2022, y =1.6, label = "Grand Canyon", color = "deepskyblue4", fontface=2, size=2) + 
   geom_line(data=RMNP, 
   aes(x = year, y = Rank, color = park_name, group = park_name), color="cyan4")+
-    annotate("text", x = 2021, y =2, label = "Rocky Mountain", color = "cyan4", fontface=2, size= 3) +
+    annotate("text", x = 2022, y =2.6, label = "Rocky Mountain", color = "cyan4", fontface=2, size= 2) +
   geom_line(data=YNP, 
   aes(x = year, y = Rank, color = park_name, group = park_name), color="chartreuse4") +
-  annotate("text", x = 2020, y =3.1, label = "Yosemite", color = "chartreuse4", fontface=2, size= 3) +
+  annotate("text", x = 2021, y =3.6, label = "Yosemite", color = "chartreuse4", fontface=2, size= 2) +
   geom_line(data=YSNP, 
   aes(x = year, y = Rank, color = park_name, group = park_name), color="orange2") +
-  annotate("text", x = 2019, y =4.1, label = "Yellowstone", color = "orange2", fontface=2, size= 3) +
+  annotate("text", x = 2021, y =4.7, label = "Yellowstone", color = "orange2", fontface=2, size= 2) +
   geom_line(data=ZNP, 
   aes(x = year, y = Rank, color = park_name, group = park_name), color="tomato") +
+  annotate("text", x = 2018.3, y =5.8, label = "Zion", color = "tomato", fontface=2, size= 2) +
   geom_line(data=ANP, 
   aes(x = year, y = Rank, color = park_name, group = park_name), color="gold1") +
+  annotate("text", x = 2018.9, y =8.2, label = "Acadia", color = "gold1", fontface=2, size= 2) +
   geom_line(data=HSNP, 
   aes(x = year, y = Rank, color = park_name, group = park_name), color="plum3") +
+  annotate("text", x = 2020.8, y =16.8, label = "Hot Springs", color = "plum3", fontface=2, size= 2) +
   geom_line(data=DNP, 
   aes(x = year, y = Rank, color = park_name, group = park_name), color="mediumpurple1") +
+   annotate("text", x = 2019, y =34.7, label = "Denali", color = "mediumpurple", fontface=2, size= 2) +
   geom_line(data=CCNP, 
   aes(x = year, y = Rank, color = park_name, group = park_name), color="lightskyblue2") +
+   annotate("text", x = 2023.3, y =42, label = "Carlsbad Caverns", color = "lightskyblue2", fontface=2, size= 2) +
   geom_line(data=GBNP, 
-  aes(x = year, y = Rank, color = park_name, group = park_name), color="maroon2")
+  aes(x = year, y = Rank, color = park_name, group = park_name), color="maroon2") + 
+   annotate("text", x = 2020.8, y =52, label = "Great Basin", color = "maroon2", fontface=2, size= 2)
   
 
 nps_g1
 ```
+
 Here is an update on my data visualization! 3/10/2023
 I think I bit off a bit more than I could chew with this graph. But, I am pretty proud of how far I got with it. To make things a little more cohesive, I overrode the color to grey. I plan on continuing work on it tonight with the hopes of adding the 11 parks in color. It is definitely a work in progress!

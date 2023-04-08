@@ -6,11 +6,134 @@ editor: visual
 # **Let's Begin with some Fitting**
 
 **But first let's load some packages...**
-
 ```{r}
 library(gtsummary) #To create tables will include
 library(tidyr) #Helps with data wrangling
+library(performance) #Model evaluation
 library(here) #Setting paths
+library(broom.mixed) #Converts Bayesian to tibbles 
+library(tidymodels) #Great package for models and other resources used for fitting
+library(ggplot2) #Great for data vis.
+library(dotwhisker) #Visualization for regression outputs
 ```
 
+# **Data Loading**
 
+**Now that the packages we need are loaded, let's read in and view our cleaned data**
+```{r}
+data_flu<- readRDS(here("fluanalysis", "processed_data", "SympAct_cleaned.rds")) #Reading in cleaned data
+glimpse(data_flu) #Let's reacquaint ourselves with the cleaned data
+```
+# **Fitting a Linear Model: Continuous Outcome and Main Predictor of Interest**
+**To begin fitting, we will first need to define the linear regression** 
+```{r}
+linear_reg() %>%
+  set_engine("lm") #Setting 
+
+model_lm<- linear_reg()
+```
+
+**Now that we have defined our LR, we will have to train the model to our given data**
+```{r}
+fit_lm <- 
+  model_lm %>%
+  fit(BodyTemp~SwollenLymphNodes, data_flu)
+
+fit_lm #Let's view what we just did
+
+#We can use the tidy() function to produce the output/ summary statistics 
+tidy(fit_lm)
+```
+# **Plotting Linear Regression Model**
+```{r}
+tidy(fit_lm) %>%
+    dwplot(dot_args = list(size = 2, color = "coral1"),
+         whisker_args = list(color = "coral1"),
+         vline = geom_vline(xintercept = 0, color = "darkred", linetype = 4))
+```
+# **Fitting More Linear Models**
+**Wonderful! Now, let's do the same thing with all predictors of interest.**
+```{r}
+all_lm<- linear_reg() #Defining the model
+
+fit_all<- #Since we defined the model, we can now train the model to the data!
+  all_lm %>%
+  fit(BodyTemp~., data= data_flu)
+
+fit_all
+
+#We can use the tidy() function to produce the output/ summary statistics 
+tidy(fit_all)
+```
+# **Plotting Linear Regression Model Using All Predictors of Interest**
+```{r}
+tidy(fit_all) %>%
+    dwplot(dot_args = list(size = 2, color = "coral1"),
+         whisker_args = list(color = "coral1"),
+         vline = geom_vline(xintercept = 0, color = "darkred", linetype = 4))
+```
+**Now, let's check the model performance for a single predictor of interest (Swollen Lymph Nodes**
+```{r}
+check_model(fit_lm$fit) #single predictor of interest swollen lymph nodes
+```
+**We will now do the same for all predictors of interest**
+```{r}
+check_model(fit_all$fit)
+```
+```{r}
+glm_mod<- logistic_reg() %>%
+  set_engine("glm")
+
+fit_glm<- 
+  glm_mod %>%
+  fit(Nausea~BodyTemp, data= data_flu)
+
+fit_glm
+
+tidy(fit_glm) #Like we did above, let's utilize the same process and examine the model using tidy()
+```
+**We will now plot the output**
+```{r}
+tidy(fit_glm) %>%
+    dwplot(dot_args = list(size = 2, color = "coral1"),
+         whisker_args = list(color = "coral1"),
+         vline = geom_vline(xintercept = 0, color = "darkred", linetype = 4))
+```
+# **Plotting Logistic Model Using All Predictors of Interest**
+```{r}
+glm_all<- logistic_reg() %>% #Setting 
+  set_engine ("glm")
+
+all_glm_fit<- glm_all %>% #Training Model 
+  fit(Nausea~., data= data_flu)
+
+all_glm_fit
+
+tidy(all_glm_fit)
+```
+```{r}
+tidy(all_glm_fit) %>%
+    dwplot(dot_args = list(size = 2, color = "coral1"),
+         whisker_args = list(color = "coral1"),
+         vline = geom_vline(xintercept = 0, color = "darkred", linetype = 4))
+```
+# **Comparing Performance (Body Temp & Nausea)**
+```{r}
+check_model(fit_glm$fit)
+```
+# **Comparing Performance (Nausea & All Predictors of Interest)**
+```{r}
+check_model(all_glm_fit$fit)
+```
+# **Exercise Wrap Up**
+
+Let us finally compare the performance of these models using compare_performance
+```{r}
+compare_performance(fit_glm,all_glm_fit)
+```
+
+And wrap this up by exploring another model...specifically ANOVA!
+```{r}
+#r makes this fairly seamless to do utilizing the anova() function
+anova(fit_glm$fit, all_glm_fit$fit)
+```
