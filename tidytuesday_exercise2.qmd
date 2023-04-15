@@ -1,8 +1,539 @@
 ---
-title: "Tidy Tuesday Exercise"
+title: "Tidy Tuesday Exercise 2"
 output: 
   html_document:
     toc: FALSE
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
-To be filled the week of April 10th. 
+# **Data Dictionary**
+
+This data dictionary will provide insight into the dataset we will be
+working on today.
+
+# `egg-production.csv`
+
+| variable       | class     | description                                                                                                                                             |
+|-----------|-----------|---------------------------------------------------|
+| observed_month | double    | Month in which report observations are collected,Dates are recorded in ISO 8601 format YYYY-MM-DD                                                       |
+| prod_type      | character | type of egg product: hatching, table eggs                                                                                                               |
+| prod_process   | character | type of production process and housing: cage-free (organic), cage-free (non-organic), all. The value 'all' includes cage-free and conventional housing. |
+| n_hens         | double    | number of hens produced by hens for a given month-type-process combo                                                                                    |
+| n_eggs         | double    | number of eggs producing eggs for a given month-type-process combo                                                                                      |
+| source         | character | Original USDA report from which data are sourced. Values correspond to titles of PDF reports. Date of report is included in title.                      |
+
+# `cage-free-percentages.csv`
+
+| variable       | class     | description                                                                                                                                           |
+|-----------|-----------|---------------------------------------------------|
+| observed_month | double    | Month in which report observations are collected,Dates are recorded in ISO 8601 format YYYY-MM-DD                                                     |
+| percent_hens   | double    | observed or computed percentage of cage-free hens relative to all table-egg-laying hens                                                               |
+| percent_eggs   | double    | computed percentage of cage-free eggs relative to all table eggs,This variable is not available for data sourced from the Egg Markets Overview report |
+| source         | character | Original USDA report from which data are sourced. Values correspond to titles of PDF reports. Date of report is included in title.                    |
+
+# **1. Loading in Necessary Libraries**
+
+```{r}
+library(tidyverse) #Working with multiple Tidy packages
+library(tidymodels) #Model building
+library(dplyr) #Data wrangling
+library(here) #setting pathways
+library(rpart) #Model fitting
+library(ranger) #Model fitting
+library(glmnet) #Model fitting
+library(purrr)
+library(stacks)
+```
+
+# **2. Loading Data**
+
+Let's try a different way to load the data in
+
+```{r}
+tuesdata <- tidytuesdayR::tt_load('2023-04-11')
+
+tuesdata <- tidytuesdayR::tt_load(2023, week = 15) #loading in datasets from github
+
+ep <- tuesdata$`egg-production` #dataset 1
+cf <- tuesdata$`cage-free-percentages` #dataset 2
+```
+
+Now, we will explore the egg production and cage free datasets
+
+## **Egg Production**
+
+```{r}
+glimpse(ep)
+
+summary(ep)
+```
+
+Based on the glimpse function there are 220 rows and six variables to
+explore. I see some variables that may not be necessary for this
+exercise and will thus remove them during the wrangling process.
+
+## **Cage-free**
+
+```{r}
+summary(cf)
+
+glimpse(cf)
+```
+
+Based on the glimpse function there are 96 rows and four variables to
+explore. I see one variables that may not be necessary for this exercise
+and will thus remove it during the wrangling process.
+
+# 2. **Data Wrangling**
+
+## **Egg Production**
+
+```{r}
+ep<- 
+  ep %>%
+  select(-c('source')) %>%
+  mutate(egg_hen = n_eggs / n_hens,
+         prod_process = recode(prod_process, "cage-free (non-organic)" = "CF_NO"),
+         prod_process = recode(prod_process, "cage-free (organic)" = "CF_O"))
+```
+
+## **Cage-Free**
+
+```{r}
+cf<- 
+  cf%>%
+  select(!source)
+```
+
+# **3.Data Visualization**
+
+## **Egg Production**
+```{r}
+ep_plot<- 
+  ep %>%
+  ggplot(aes(x=prod_type, y=egg_hen)) +
+  geom_col(aes(fill=prod_process)) +
+  xlab("Production Type") +
+  ylab("Average Egg Production Per Hen") +
+  ggtitle("Average Egg production Per Hen Given Production Type & Process")
+ 
+ep_plot + scale_fill_discrete(name="Production Process")     
+```
+There is not much variation in the production process when comparing cage-free organic, non-organic, or all (see above for what this encompasses), however, there is a difference in average egg production for hatching eggs versus table eggs. This is not surprising as the majority of hens produce table eggs which are sold for consumption, while a smaller majority are diverted to be reared on farms or backyards as production hens (e.g., egg or meat). Unlike other agricultural sectors, poultry sector is vertically integrated with minimal breed variation (e.g. Table eggs produced from hybrid White Leghorns v.hatching eggs from a variety of breeds including heritage), thus, a uniform distribution in production processes, across the various sectors, is expected.
+```{r}
+ep_time<- 
+  ep %>%
+  ggplot() +
+  geom_line(
+    aes(x=observed_month,
+        y=n_eggs, 
+        color=prod_process)) + 
+      theme_dark()+ 
+      labs ( x= "Year",
+             y= "Total Number of Eggs", 
+             title= "Number of Eggs Produced per Production Process Over a Five Year Period",
+             color= "Production Process")
+
+ep_time
+```
+Not an average so likely wont use this... 
+
+## **Cage-free**
+
+```{r}
+cf_plot<- 
+  cf %>%
+  ggplot () + geom_line(
+    aes(x= observed_month,
+         y=percent_hens)) +
+      theme_dark() +
+      labs(x="Year",
+           y= "Percent of hens (%)",
+           title= "Percentage of Cage-free Hens from 2007-2021")
+cf_plot
+```
+I think the vast increase after 2015 is interesting, however, likely increased because of industry cooperation and commitments as well as state legislature (i.e., Western states [Oregon] only selling products containing "cage-free" eggs in stores). 
+
+## **Hypothesis**
+
+Given the varying needs based on consumer demands, I would expect the majority of egg production to come from tabled eggs, as these are for consumption and hatched eggs are for production purposes. Thus:
+
+Predictor: Production Type 
+Outcome: Average Number of Eggs per Hen 
+
+# **4. Training: Splitting Data**
+
+Here I will utilize and recreate prior machine learning (ML) models
+utilized in previous exercises to assess this data.
+
+```{r}
+ep_split<- initial_split(ep, prop=3/4)
+
+train_data<- training(ep_split)
+test_data<- testing(ep_split)
+
+set.seed(321)
+
+ep_fold_train<-vfold_cv(train_data, v=5, repeats=5, strata=n_eggs)
+
+ep_fold_test<-vfold_cv(test_data, v=5, repeats=5, strata=n_eggs) 
+```
+
+## **Recipes for Train and Test Data plus Defining the Model**
+
+```{r}
+ep_recipe_train<- 
+  recipe(egg_hen~prod_type, data=train_data)
+
+ep_recipe_test<-
+   recipe(egg_hen~prod_type, data=test_data)
+
+lm_mod<- 
+  linear_reg() %>%
+  set_engine("lm") %>%
+  set_mode("regression")
+```
+
+Now, let's train the data...
+
+```{r}
+null_train_recipe<- recipe(egg_hen~1, data=train_data)
+null_train_recipe
+```
+We need a workflow. Again, I am following my process from previous
+exercises to walk me through this portion. I am tailoring the code to
+fit my dataset.
+
+```{r}
+train_wfn<- 
+  workflow() %>%
+  add_model(lm_mod) %>%
+  add_recipe(null_train_recipe)
+```
+
+Time to FIT!
+
+```{r}
+train_fit <-
+  fit_resamples(train_wfn, resamples= ep_fold_train)
+```
+
+Great, let's check out the RMSE
+
+```{r}
+train_rmse<- collect_metrics(train_fit)
+
+train_rmse
+```
+
+Doing the same for the test data
+
+```{r}
+null_test_recipe<- 
+  recipe(egg_hen~1, data=test_data)
+
+test_wfn<- workflow() %>%
+  add_model(lm_mod) %>%
+  add_recipe(null_test_recipe)
+
+test_fit<- 
+  fit_resamples(test_wfn, resamples = ep_fold_test)
+```
+
+```{r}
+test_rmse<- collect_metrics(test_fit)
+
+test_rmse
+```
+Let's move on from our null model to fitting some other models we have learned about (e.g., Tree,Linear Model, RF). We'll start with a Tree Model
+
+# **Tree Model**
+```{r}
+#Identifying HP
+tune_dtree <- 
+  decision_tree(
+    cost_complexity = tune(),
+    tree_depth = tune()) %>% 
+  set_engine("rpart") %>% 
+  set_mode("regression")
+
+tune_dtree
+```
+## **Tuning, Workflow Creation, and More Tuning using other methods
+```{r}
+#Tuning Grid
+grid_dt <-
+  dials::grid_regular(
+    cost_complexity(), 
+    tree_depth(), 
+    levels = 5)
+
+grid_dt
+
+#And now creating the workflow 
+dt_wf<-
+  workflow() %>%
+  add_model(tune_dtree) %>%
+  add_recipe(ep_recipe_train)
+
+#More Tuning 
+resamp<- 
+  dt_wf %>%
+  tune_grid(
+    resample= ep_fold_train,
+    grid= grid_dt)
+
+#Let's plot it!
+resamp %>%
+  autoplot()
+```
+## **Collect Metrics**
+```{r}
+resamp %>%
+  collect_metrics()
+
+resamp %>%
+  show_best(n=1)
+```
+The code produced the output: RMSE=0.83; standard error=0.02.
+
+Now let's look at the best performing model
+```{r}
+bt<- resamp %>%
+  select_best()
+
+bt
+```
+Nice! Now that we have that out of the way, we need to create a final fit.
+```{r}
+final_wf<- 
+  dt_wf %>%
+  finalize_workflow(bt)
+
+final_wf
+
+dt_fin_fit<- final_wf %>%
+  fit(train_data)
+```
+## **Residuals**
+```{r}
+#Piping several augment helps determine predictions from OG train data, while mutate will make a new row with calculated residuals
+dt_res<- dt_fin_fit %>%
+  augment(train_data) %>%
+  select(c(.pred, egg_hen)) %>%
+  mutate(.resid=egg_hen-.pred)
+
+dt_res
+```
+Great, let's do some plotting!
+```{r}
+#Pred v. Actual
+dtpred_plot<- ggplot(dt_res,
+                     aes(x=egg_hen,
+                         y=.pred)) +
+  geom_point()
+
+dtpred_plot
+```
+```{r}
+#Pred v. Res
+dtpredres_plot<- ggplot(dt_res,
+                     aes(x=.pred,
+                         y=.resid)) +
+  geom_point()
+
+dtpredres_plot
+```
+Nice! Let's move onto Linear Model! While this is a basic model to run, ML is broad! Including a simple model may provide good insight!
+
+# **Linear Model**
+We will follow a similar process as above [SWF]
+```{r}
+#Set
+lm<- linear_reg() %>%
+  set_engine("lm") %>%
+  set_mode("regression")
+
+#Workflow
+lm_wf<- 
+  workflow() %>%
+  add_model(lm) %>%
+  add_recipe(ep_recipe_train)
+
+#Fit
+epf<- lm_wf %>%
+  fit(data=train_data)
+```
+Now to assessing performance and Checking Out Residuals.
+```{r}
+aug_test <- augment(epf, train_data)
+
+rmse <- aug_test %>% rmse(truth = egg_hen, .pred)
+
+rsq <- aug_test %>% rsq(truth = egg_hen, .pred)
+
+metrics<- full_join(rmse, rsq)
+
+metrics
+
+#Residuals
+epm<- lm(egg_hen~prod_type, data = train_data)
+
+res<- resid(epm)
+
+plot(fitted(epm), res) +
+abline(0,0)
+```
+Quick and easy!
+
+# **Random Forest**
+I saved the best for last. Let's explore the Random Forest (RF) Model!
+```{r}
+cores <- parallel::detectCores()
+cores
+
+rf <- 
+  rand_forest(mtry = tune(), min_n = tune(), trees = 1000) %>% 
+  set_engine("ranger", num.threads = cores) %>% 
+  set_mode("regression")
+```
+Workflow and Tuning Grid Time
+```{r}
+rf_wf <- workflow() %>%
+  add_model(rf) %>%
+  add_recipe(ep_recipe_train)
+
+rfg  <- expand.grid(mtry = c(3, 4, 5, 6), min_n = c(40,50,60), trees = c(500,1000))
+
+rf_resamp <- 
+  rf_wf %>% 
+  tune_grid(ep_fold_train,
+            grid = 25,
+            control = control_grid(save_pred = TRUE),
+            metrics = metric_set(yardstick::rmse))
+
+rf_resamp %>%
+  collect_metrics()
+```
+Let's plot it
+```{r}
+rf_resamp %>%
+  autoplot()
+```
+
+Let's Check out the Metrics of this RF
+```{r}
+rf_resamp %>%
+  show_best(n=1)
+
+best<- rf_resamp %>%
+  select_best(method="rmse")
+
+```
+
+Final Fits- same process as we did above!
+```{r}
+wf_final<-
+  rf_wf %>%
+  finalize_workflow(best)
+
+rf_ff<-
+  wf_final %>%
+  fit(train_data)
+```
+Residuals
+```{r}
+rf_res<- rf_ff %>%
+  augment(train_data) %>%
+  select(c(.pred, egg_hen)) %>%
+  mutate(.resid = egg_hen - .pred)
+
+rf_res
+```
+Continue following workflow from above...visualize using ggplot 
+```{r}
+rf_predp<- ggplot(rf_res,
+                  aes(y=.pred,
+                      x=egg_hen)) +geom_point() 
+
+rf_predp
+
+rf_resp<- ggplot(rf_res,
+                  aes(x=.pred,
+                      y=.resid)) +geom_point() 
+rf_resp
+```
+For the final assessment with the test data, I will utilize the RF model, both RMSE for RF and our Tree model were nearly the same ~0.83 after rounding.
+
+# **Random Forest on Test Data**
+```{r}
+rf_wf_test <- workflow() %>%
+  add_model(rf) %>%
+  add_recipe(ep_recipe_test)
+
+rfgt  <- expand.grid(mtry = c(3, 4, 5, 6), min_n = c(40,50,60), trees = c(500,1000))
+
+rf_resamptest <- 
+  rf_wf_test %>% 
+  tune_grid(ep_fold_test,
+            grid = 25,
+            control = control_grid(save_pred = TRUE),
+            metrics = metric_set(yardstick::rmse))
+
+rf_resamptest %>%
+  collect_metrics()
+```
+Let's plot it
+```{r}
+rf_resamptest %>%
+  autoplot()
+```
+
+Let's Check out the Metrics of this RF
+```{r}
+rf_resamptest %>%
+  show_best(n=1)
+
+best<- rf_resamptest %>%
+  select_best(method="rmse")
+
+```
+Final Fits- same process as we did above!
+```{r}
+wf_finaltest<-
+  rf_wf_test %>%
+  finalize_workflow(best)
+
+rf_fftest<-
+  wf_finaltest%>%
+  fit(test_data)
+```
+Residuals
+```{r}
+rf_restest<- rf_ff %>%
+  augment(test_data) %>%
+  select(c(.pred, egg_hen)) %>%
+  mutate(.resid = egg_hen - .pred)
+
+rf_restest
+```
+Continue following workflow from above utilizing test...visualize using ggplot 
+```{r}
+rf_predptest<- ggplot(rf_restest,
+                  aes(y=.pred,
+                      x=egg_hen)) +geom_point()
+
+
+rf_predptest
+
+rf_resptest<- ggplot(rf_restest,
+                  aes(x=.pred,
+                      y=.resid)) +geom_point() 
+rf_resptest
+```
+## **Quick Discussion**
+This exercise contained a multistep process, from loading in the Tidy Tuesday data via a different method to data wrangling which allowed me to clean the data and remove any unnecessary columns/rows/variables. Because this Tidy Tuesday contained two data sets, I visualized both and ultimately decided to use the egg production data as the cage-free data had limited variables and would limit the hypothesis I could formulate.
+
+I love production animals and am an owner of hatch chickens so I decided to explore the hatch v. table egg and the production of eggs. I also visualized this and decided it would be interesting to explore. I ran several models and ultimately decided on the random forest model given its RMSE in comparison to the null model. I am also trying to become more proficient with ML so I did not want to select a simple model such as the LM I ran. I referred back to previous exercises to ensure my workflow and process was consistent. I began with my trained data and once I selected the final model, I went through the same process with the test data. RF performed better than the null model (first model ran) which is indicative of a relationship. The RMSE of the test data is a bit higher than the train data which would make me cautious in utilizing this to make predictions or for overall reproducibility. 
